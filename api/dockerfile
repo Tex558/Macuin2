@@ -1,19 +1,11 @@
-#importaciones
+FROM python:3.11-slim
 
-from fastapi import FastAPI
-from app.routers import usuarios, misc
-from app.data.db import engine
-from app.data import usuario
+WORKDIR /app
 
-#crear tabla de usuario
-usuario.Base.metadata.create_all(bind=engine)
+RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/lists/*
 
-#Iniciaclización o instancia de la API
-app = FastAPI(
-    title='Mi primer API',
-    description='Emiliano Jimenez Cantu',
-    version='1.0'
-)
+COPY ./api/requirements.txt /app/api/
+RUN pip install --no-cache-dir -r /app/api/requirements.txt
 
-app.include_router(usuarios.router)
-app.include_router(misc.router)
+# The application is executed by mapping the volume and running uvicorn on the api package
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "5000"]

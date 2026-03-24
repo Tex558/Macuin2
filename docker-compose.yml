@@ -1,8 +1,10 @@
 services:
 
   api:
-    build: .
-    container_name: Macuin
+    build:
+      context: .
+      dockerfile: ./api/dockerfile
+    container_name: Macuin_API
     ports:
       - "5000:5000"
     volumes:
@@ -25,12 +27,31 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U admin -d DB_macuin"]
       interval: 5s
       retries: 5
       timeout: 5s
+
+  laravel_front:
+    build: ./laravel
+    container_name: Macuin_Laravel
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./laravel:/var/www/html
+    depends_on:
+      - api
+
+  flask_front:
+    build: ./flask
+    container_name: Macuin_Flask
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./flask:/app
+    depends_on:
+      - api
 
 volumes:
   postgres_data:
