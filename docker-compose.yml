@@ -1,0 +1,36 @@
+services:
+
+  api:
+    build: .
+    container_name: Macuin
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://admin:12345@postgres:5432/DB_macuin
+
+  postgres:
+    image: postgres:15
+    container_name: MacuinSQL
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: DB_macuin
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d DB_macuin"]
+      interval: 5s
+      retries: 5
+      timeout: 5s
+
+volumes:
+  postgres_data:
