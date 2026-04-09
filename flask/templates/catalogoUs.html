@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   MACUIN INDUSTRIAL - Catalogo de productos
+  </title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <script src="/static/js/tailwind-config.js">
+  </script>
+  <link href="/static/css/styles.css" rel="stylesheet"/>
+  <script src="/static/js/api.js">
+  </script>
+ </head>
+ <body class="bg-surface selection:bg-primary-container selection:text-primary">
+  <!-- Top Navigation Bar -->
+  <header class="bg-[#041329] flex justify-between items-center w-full px-8 h-16 fixed top-0 z-50 font-['Inter'] text-[0.875rem] font-medium tracking-wide">
+   <div class="flex items-center gap-8">
+    <span class="text-lg font-black tracking-tighter text-[#ffb3b1]">
+     MACUIN INDUSTRIAL
+    </span>
+    <nav class="hidden md:flex items-center gap-6">
+     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="#">
+      Catalogo
+     </a>
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
+      Carrito
+     </a>
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
+      Pedidos en curso
+     </a>
+    </nav>
+   </div>
+   <div class="flex items-center gap-6">
+    <div class="hidden lg:flex items-center bg-surface-container-high px-3 py-1.5 border-b-2 border-outline-variant">
+     <span class="material-symbols-outlined text-secondary text-sm mr-2" data-icon="search">
+      search
+     </span>
+     <input class="bg-transparent border-none focus:ring-0 text-xs placeholder:text-outline p-0 w-48 uppercase tracking-widest" placeholder="BUSCAR SKU..." type="text"/>
+    </div>
+    <button class="bg-[#1c2a41] text-[#c2c6d3] px-4 py-2 text-xs font-bold uppercase hover:bg-surface-bright transition-all duration-150">
+     Cerrar Sesi&oacute;n
+    </button>
+   </div>
+  </header>
+  <main class="pt-24 pb-12 px-8 max-w-[1440px] mx-auto">
+   <!-- Header Section -->
+   <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <div>
+     <h1 class="text-[3.5rem] font-extrabold tracking-tighter leading-none text-on-surface uppercase mb-2">
+      Cat&aacute;logo
+     </h1>
+    </div>
+    <div class="flex items-center gap-4 bg-surface-container-low p-1">
+     <button class="px-6 py-2 bg-surface-container-highest text-primary font-bold text-[0.7rem] uppercase tracking-widest">
+      Todos
+     </button>
+     <button class="px-6 py-2 text-secondary font-bold text-[0.7rem] uppercase tracking-widest hover:text-on-surface transition-colors">
+      Maquinaria
+     </button>
+     <button class="px-6 py-2 text-secondary font-bold text-[0.7rem] uppercase tracking-widest hover:text-on-surface transition-colors">
+      Herramientas
+     </button>
+    </div>
+   </div>
+   <!-- Product Grid -->
+   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-0" id="catalogo_grid">
+   </div>
+   <!-- Footer Pagination / Technical Info -->
+  </main>
+  <!-- Bottom Navigation for Mobile -->
+  <script>
+   document.addEventListener("DOMContentLoaded", async () => {
+        const container = document.getElementById("catalogo_grid");
+        try {
+            const res = await window.Api.getProductos();
+            const productos = res.data || [];
+            container.innerHTML = productos.map(p => `
+            <div class="bg-surface-container-low group border-b border-r border-outline-variant/10 p-8 flex flex-col justify-between aspect-square transition-all duration-300 hover:bg-surface-container-high">
+             <div class="flex justify-between items-start">
+              <span class="text-[0.65rem] font-bold text-outline uppercase tracking-[0.2em]">MAC-${p.id}</span>
+              <span class="material-symbols-outlined text-primary text-xl">settings_input_component</span>
+             </div>
+             <div>
+              <h3 class="text-xl font-bold text-on-surface leading-tight uppercase mb-2 tracking-tight">${p.nombre}</h3>
+              <div class="flex items-baseline gap-2 mb-6">
+               <span class="text-2xl font-black text-on-surface tracking-tighter">$${p.precio}</span>
+               <span class="text-[0.65rem] text-secondary font-bold uppercase tracking-widest">USD / UNIT</span>
+              </div>
+              <button class="w-full bg-on-primary-container text-white py-3 font-black text-[0.75rem] uppercase tracking-widest transition-all active:scale-95 duration-100 flex items-center justify-center gap-2">
+               Ver detalles <span class="material-symbols-outlined text-sm">chevron_right</span>
+              </button>
+             </div>
+            </div>
+            `).join('');
+        } catch (e) {
+            container.innerHTML = '<p class="p-8 text-error">Error cargando catálogo.</p>';
+        }
+    });
+  </script>
+ </body>
+</html>

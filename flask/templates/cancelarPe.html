@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Cancelaci&oacute;n de pedido - MACUIN INDUSTRIAL
+  </title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <script src="/static/js/tailwind-config.js">
+  </script>
+  <link href="/static/css/styles.css" rel="stylesheet"/>
+  <script src="/static/js/api.js">
+  </script>
+ </head>
+ <body class="antialiased">
+  <!-- TopNavBar (Shared Component) -->
+  <header class="flex justify-between items-center w-full px-8 h-16 bg-[#041329] dark:bg-[#041329] docked full-width top-0 z-50">
+   <div class="flex items-center gap-8">
+    <span class="text-lg font-black tracking-tighter text-[#ffb3b1]">
+     MACUIN INDUSTRIAL
+    </span>
+    <nav class="hidden md:flex gap-6 items-center font-['Inter'] text-[0.875rem] font-medium tracking-wide">
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
+      Catalogo
+     </a>
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
+      Carrito
+     </a>
+     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="#">
+      Pedidos en curso
+     </a>
+    </nav>
+   </div>
+   <div class="flex items-center gap-4">
+    <div class="relative hidden lg:block">
+     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-sm">
+      search
+     </span>
+     <input class="bg-surface-container-highest border-none text-[0.75rem] pl-10 pr-4 py-2 w-64 focus:ring-0 border-b-2 border-transparent focus:border-[#ee3f4b]" placeholder="BUSCAR ORDEN..." type="text"/>
+    </div>
+    <button class="text-[#c2c6d3] hover:text-[#ffb3b1] font-['Inter'] text-[0.875rem] font-medium tracking-wide px-4 py-2 hover:bg-[#1c2a41] transition-all duration-150">
+     Cerrar Sesi&oacute;n
+    </button>
+   </div>
+  </header>
+  <main class="min-h-[calc(100vh-64px)] flex items-center justify-center p-6 bg-surface">
+   <!-- Cancellation Card: Industrial Plate Aesthetic -->
+   <div class="w-full max-w-2xl bg-surface-container-low p-1 relative overflow-hidden">
+    <!-- Decorative Accent Bar -->
+    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-on-primary-container to-primary-container">
+    </div>
+    <div class="bg-surface-container-high p-8 md:p-12 shadow-2xl">
+     <!-- Header Section -->
+     <div class="mb-10 flex items-start justify-between">
+      <div>
+       <h2 class="text-3xl font-black tracking-tighter text-on-surface uppercase leading-none">
+        Cancelaci&oacute;n de pedido
+       </h2>
+      </div>
+      <span class="material-symbols-outlined text-on-primary-container text-4xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">
+       warning
+      </span>
+     </div>
+     <!-- Order Brief (Asymmetric layout) -->
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 border-l-4 border-surface-container-highest pl-6">
+      <div class="col-span-1">
+       <p class="text-[0.7rem] uppercase text-secondary font-bold tracking-widest mb-1">
+        Orden ID
+       </p>
+       <p class="font-mono text-xl text-on-surface">
+        #MQ-99284-X
+       </p>
+      </div>
+      <div class="col-span-2">
+       <p class="text-[0.7rem] uppercase text-secondary font-bold tracking-widest mb-1">
+        Estado actual
+       </p>
+       <div class="flex items-center gap-2">
+        <span class="w-2 h-2 bg-tertiary">
+        </span>
+        <p class="text-on-surface font-medium">
+         EN PROCESAMIENTO T&Eacute;CNICO
+        </p>
+       </div>
+      </div>
+     </div>
+     <!-- Reason Form -->
+     <form action="#" class="space-y-8" onsubmit="return confirm('&iquest;Est&aacute;s seguro de que deseas cancelar este pedido?\n\nEsta acci&oacute;n no se puede deshacer.') &amp;&amp; confirm('&iquest;Totalmente seguro de cancelar el pedido definitivamente?');">
+      <div class="space-y-3">
+       <label class="block text-[0.75rem] font-bold tracking-[0.1em] text-secondary uppercase" for="reason">
+        Motivo de la cancelaci&oacute;n
+       </label>
+       <textarea class="w-full bg-surface-container-highest border-none text-on-surface font-['Inter'] text-[0.875rem] p-4 focus:ring-0 border-b-2 border-secondary-fixed-dim focus:border-on-primary-container transition-colors resize-none placeholder:text-outline/50" id="reason" name="reason" placeholder="ESPECIFIQUE LA RAZ&Oacute;N T&Eacute;CNICA O LOG&Iacute;STICA DE LA CANCELACI&Oacute;N..." rows="4"></textarea>
+      </div>
+      <!-- Action Buttons -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+       <button class="w-full bg-surface-container-highest text-secondary font-bold text-[0.875rem] uppercase py-4 border border-outline/20 hover:bg-surface-bright transition-colors tracking-widest" type="button">
+        Mantener pedido
+       </button>
+       <button class="w-full bg-on-primary-container text-white font-black text-[0.875rem] uppercase py-4 tracking-[0.15em] hover:bg-on-primary-fixed-variant active:scale-[0.98] transition-all shadow-[0_4px_20px_rgba(238,63,75,0.3)]" type="submit">
+        Confirmar Cancelaci&oacute;n
+       </button>
+      </div>
+     </form>
+    </div>
+   </div>
+  </main>
+  <!-- Visual Background Element (Subtle grid/texture) -->
+ </body>
+</html>

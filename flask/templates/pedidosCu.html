@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Pedidos en curso | MACUIN INDUSTRIAL
+  </title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <script src="/static/js/tailwind-config.js">
+  </script>
+  <link href="/static/css/styles.css" rel="stylesheet"/>
+  <script src="/static/js/api.js">
+  </script>
+ </head>
+ <body class="antialiased overflow-x-hidden">
+  <!-- TopNavBar -->
+  <nav class="bg-[#041329] dark:bg-[#041329] docked full-width top-0 z-50 flex justify-between items-center w-full px-8 h-16 sticky">
+   <div class="flex items-center gap-8">
+    <span class="text-lg font-black tracking-tighter text-[#ffb3b1]">
+     MACUIN INDUSTRIAL
+    </span>
+    <div class="hidden md:flex gap-6 font-['Inter'] text-[0.875rem] font-medium tracking-wide">
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
+      Catalogo
+     </a>
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
+      Carrito
+     </a>
+     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="#">
+      Pedidos en curso
+     </a>
+    </div>
+   </div>
+   <div class="flex items-center gap-6">
+    <div class="relative hidden sm:block">
+     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-sm">
+      search
+     </span>
+     <input class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:border-on-primary-container focus:ring-0 text-[0.75rem] pl-10 pr-4 py-2 w-64 uppercase tracking-widest" placeholder="BUSCAR PEDIDO..." type="text"/>
+    </div>
+    <button class="bg-[#ee3f4b] text-white px-4 py-2 text-[0.75rem] font-bold uppercase tracking-tighter hover:bg-[#ffb3b1] hover:text-[#680011] transition-all duration-150">
+     Cerrar Sesi&oacute;n
+    </button>
+   </div>
+  </nav>
+  <main class="max-w-7xl mx-auto px-8 py-12">
+   <!-- Header Section -->
+   <header class="mb-12">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+     <div>
+      <h1 class="text-[3.5rem] font-black tracking-tighter leading-none uppercase text-on-surface">
+       Monitor de
+       <span class="text-primary">
+        Pedidos
+       </span>
+      </h1>
+     </div>
+     <div class="flex gap-4">
+      <div class="bg-surface-container-low px-6 py-4 flex flex-col min-w-[140px]">
+       <span class="text-[0.65rem] text-secondary font-bold uppercase tracking-[0.2em]">
+        Activos
+       </span>
+       <span class="text-3xl font-black text-on-surface">
+        08
+       </span>
+      </div>
+      <div class="bg-surface-container-low px-6 py-4 flex flex-col min-w-[140px]">
+       <span class="text-[0.65rem] text-secondary font-bold uppercase tracking-[0.2em]">
+        Urgentes
+       </span>
+       <span class="text-3xl font-black text-primary">
+        02
+       </span>
+      </div>
+     </div>
+    </div>
+   </header>
+   <!-- Orders Grid -->
+   <div class="space-y-4">
+    <div class="grid grid-cols-12 gap-4 px-6 py-3 bg-surface-container-highest items-center">
+     <div class="col-span-2 text-[0.7rem] font-bold text-secondary uppercase tracking-widest">
+      ID Pedido
+     </div>
+     <div class="col-span-4 text-[0.7rem] font-bold text-secondary uppercase tracking-widest">
+      Descripci&oacute;n del Componente
+     </div>
+     <div class="col-span-2 text-[0.7rem] font-bold text-secondary uppercase tracking-widest">
+      Fecha Estimada
+     </div>
+     <div class="col-span-2 text-[0.7rem] font-bold text-secondary uppercase tracking-widest">
+      Estado
+     </div>
+     <div class="col-span-2 text-[0.7rem] font-bold text-secondary uppercase tracking-widest text-right">
+      Acciones
+     </div>
+    </div>
+    <div class="space-y-4 pt-4" id="pedidos_user_grid">
+    </div>
+   </div>
+   <!-- Footer Pagination / Actions -->
+  </main>
+  <!-- Contextual Decorative UI Element -->
+  <script>
+   document.addEventListener("DOMContentLoaded", async () => {
+        const container = document.getElementById("pedidos_user_grid");
+        try {
+            const res = await window.Api.getPedidos();
+            const pedidos = res.data || [];
+            if(pedidos.length === 0) {
+                container.innerHTML = '<p class="text-secondary p-8 text-center uppercase tracking-widest text-xs font-bold">No tienes pedidos en curso.</p>';
+                return;
+            }
+            container.innerHTML = pedidos.map(p => `
+            <div class="grid grid-cols-12 gap-4 px-6 py-6 bg-surface-container-low items-center hover:bg-surface-bright transition-colors duration-150 group">
+             <div class="col-span-2 font-black text-on-surface tracking-tighter">#MAC-${p.id}</div>
+             <div class="col-span-4"><div class="text-sm font-bold text-on-surface uppercase">Pedido Maestro</div><div class="text-[0.7rem] text-secondary mt-1 tracking-tight">Total: $${p.total} | Tipo: Envío</div></div>
+             <div class="col-span-2 text-sm font-mono text-secondary">---</div>
+             <div class="col-span-2"><span class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container text-on-secondary-container text-[0.65rem] font-black uppercase tracking-widest"><span class="material-symbols-outlined text-[1rem]">manufacturing</span>${p.estado}</span></div>
+             <div class="col-span-2 text-right"><button class="text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined">visibility</span></button></div>
+            </div>
+            `).join('');
+        } catch (e) {
+            container.innerHTML = '<p class="text-error p-8">Error cargando pedidos.</p>';
+        }
+    });
+  </script>
+ </body>
+</html>

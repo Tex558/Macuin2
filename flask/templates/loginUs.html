@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <script src="/static/js/tailwind-config.js">
+  </script>
+  <link href="/static/css/styles.css" rel="stylesheet"/>
+  <script src="/static/js/api.js">
+  </script>
+ </head>
+ <body class="bg-background text-on-background font-body antialiased flex items-center justify-center min-h-screen p-6">
+  <main class="w-full max-w-[440px] flex flex-col items-center">
+   <!-- Logo Header -->
+   <header class="mb-12 text-center">
+    <h1 class="text-primary font-black tracking-tighter text-3xl mb-1">
+     MACUIN
+    </h1>
+   </header>
+   <!-- Login Module -->
+   <section class="w-full bg-surface-container-low p-10 border-0">
+    <form class="space-y-8" onsubmit="event.preventDefault(); window.Api.login(this.email.value, this.password.value);">
+     <!-- Username Input -->
+     <div class="space-y-2">
+      <label class="text-secondary font-label text-[0.7rem] uppercase font-bold tracking-wider" for="username">
+       Identification / Username
+      </label>
+      <div class="relative group">
+       <div class="absolute left-0 top-1/2 -translate-y-1/2 pl-0 text-secondary-fixed-dim">
+        <span class="material-symbols-outlined text-[1.25rem]" data-icon="person">
+         person
+        </span>
+       </div>
+       <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 pl-8 text-on-surface font-label text-sm tracking-widest placeholder:text-secondary-fixed-dim/30 focus:border-on-primary-container transition-colors duration-150 rounded-none" id="username" placeholder="OPERATOR_ID" type="text"/>
+      </div>
+     </div>
+     <!-- Password Input -->
+     <div class="space-y-2">
+      <label class="text-secondary font-label text-[0.7rem] uppercase font-bold tracking-wider" for="password">
+       Access Protocol / Password
+      </label>
+      <div class="relative group">
+       <div class="absolute left-0 top-1/2 -translate-y-1/2 pl-0 text-secondary-fixed-dim">
+        <span class="material-symbols-outlined text-[1.25rem]" data-icon="lock">
+         lock
+        </span>
+       </div>
+       <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 pl-8 text-on-surface font-label text-sm tracking-widest placeholder:text-secondary-fixed-dim/30 focus:border-on-primary-container transition-colors duration-150 rounded-none" id="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"/>
+      </div>
+     </div>
+     <!-- Action Section -->
+     <div class="pt-4">
+      <button class="w-full bg-on-primary-container hover:bg-on-primary-container/90 text-on-primary font-black font-label text-[0.875rem] uppercase tracking-widest py-4 rounded-none transition-all duration-150 active:scale-[0.98] shadow-lg shadow-on-primary-container/10 flex items-center justify-center gap-2" type="submit">
+       Execute Login
+       <span class="material-symbols-outlined text-[1.25rem]" data-icon="terminal">
+        terminal
+       </span>
+      </button>
+     </div>
+    </form>
+    <!-- Technical Metadata Footer -->
+   </section>
+   <!-- Utility Links (Subtle) -->
+  </main>
+ </body>
+</html>

@@ -1,18 +1,12 @@
-from fastapi.security import HTTPBasic, HTTPBasicCredentials
-from fastapi import status,HTTPException,Depends
-import secrets
-#Seguridad de HTTPBasic
+from fastapi import HTTPException, Depends, Header
+from sqlalchemy.orm import Session
+from api.data.db import get_db
+from api.data.models import Usuario
 
-security= HTTPBasic()
-
-def verificar_Peticion(credentials: HTTPBasicCredentials=Depends(security)):
-    usuarioAuth = secrets.compare_digest(credentials.username,"emilianojc")
-    contraAuth = secrets.compare_digest(credentials.password,"12345")
-    
-    if not(usuarioAuth and contraAuth):
-        raise HTTPException(
-            status_code= status.HTTP_401_UNAUTHORIZED,
-            detail="Credenciales no validas"
-        )
-
-    return credentials.username
+def verificar_Peticion(x_user_email: str = Header(None), db: Session = Depends(get_db)):
+    if not x_user_email:
+        raise HTTPException(status_code=401, detail="Usuario no autenticado (Falta Header X-User-Email)")
+    usuario = db.query(Usuario).filter(Usuario.email == x_user_email).first()
+    if not usuario:
+        raise HTTPException(status_code=401, detail="Usuario no válido")
+    return usuario

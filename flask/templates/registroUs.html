@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Registrar Usuario | MACUIN INDUSTRIAL
+  </title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <script src="/static/js/tailwind-config.js">
+  </script>
+  <link href="/static/css/styles.css" rel="stylesheet"/>
+  <script src="/static/js/api.js">
+  </script>
+ </head>
+ <body class="bg-surface selection:bg-on-primary-container selection:text-white">
+  <!-- Auth Layout Wrapper -->
+  <main class="min-h-screen flex items-center justify-center p-4">
+   <!-- Registration Card -->
+   <div class="w-full max-w-[440px] flex flex-col">
+    <!-- Brand Header -->
+    <div class="mb-12 text-center">
+     <div class="inline-flex items-center justify-center mb-6">
+      <span class="material-symbols-outlined text-[48px] text-primary" data-icon="precision_manufacturing">
+       precision_manufacturing
+      </span>
+     </div>
+     <h1 class="text-3xl font-black tracking-tighter text-primary uppercase leading-none mb-2">
+      MACUIN INDUSTRIAL
+     </h1>
+    </div>
+    <!-- Form Container (Plate-on-Plate Stacking) -->
+    <div class="bg-surface-container-low p-8 lg:p-12 shadow-2xl border-t border-white/5">
+     <div class="mb-8">
+      <h2 class="text-xl font-bold text-on-surface tracking-tight">
+       REGISTRAR NUEVO USUARIO
+      </h2>
+     </div>
+     <form class="space-y-6">
+      <!-- Field: Name -->
+      <div class="space-y-1.5">
+       <label class="block text-[0.75rem] font-bold uppercase tracking-wider text-secondary" for="name">
+        NOMBRE COMPLETO
+       </label>
+       <div class="relative group">
+        <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-container text-on-surface py-3 px-4 focus:border-on-primary-container transition-colors duration-200 placeholder:text-secondary/30 text-[0.875rem]" id="name" placeholder="P. Ej. ING. ARTURO P&Eacute;REZ" type="text"/>
+       </div>
+      </div>
+      <!-- Field: Email -->
+      <div class="space-y-1.5">
+       <label class="block text-[0.75rem] font-bold uppercase tracking-wider text-secondary" for="email">
+        CORREO ELECTR&Oacute;NICO INSTITUCIONAL
+       </label>
+       <div class="relative group">
+        <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-container text-on-surface py-3 px-4 focus:border-on-primary-container transition-colors duration-200 placeholder:text-secondary/30 text-[0.875rem]" id="email" placeholder="usuario@macuin.com" type="email"/>
+       </div>
+      </div>
+      <!-- Field: Password -->
+      <div class="space-y-1.5">
+       <label class="block text-[0.75rem] font-bold uppercase tracking-wider text-secondary" for="password">
+        CONTRASE&Ntilde;A DEL SISTEMA
+       </label>
+       <div class="relative group">
+        <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-container text-on-surface py-3 px-4 focus:border-on-primary-container transition-colors duration-200 placeholder:text-secondary/30 text-[0.875rem]" id="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"/>
+       </div>
+      </div>
+      <!-- Action Area -->
+      <div class="pt-4">
+       <button class="w-full bg-on-primary-container hover:bg-on-primary-fixed-variant active:scale-[0.98] text-white py-4 font-black text-[0.875rem] uppercase tracking-[0.2em] transition-all duration-150 flex items-center justify-center gap-3 group" type="submit">
+        <span>
+         ALTA DE USUARIO
+        </span>
+        <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">
+         arrow_forward
+        </span>
+       </button>
+      </div>
+     </form>
+     <!-- Footer Link -->
+     <div class="mt-8 pt-8 border-t border-white/5 flex flex-col items-center gap-4">
+      <a class="text-[0.75rem] text-secondary hover:text-primary transition-colors duration-200 flex items-center gap-2 font-medium tracking-wide" href="#">
+       <span class="material-symbols-outlined text-[16px]" data-icon="login">
+        login
+       </span>
+       VOLVER AL INICIO DE SESI&Oacute;N
+      </a>
+     </div>
+    </div>
+    <!-- Terminal Decal -->
+   </div>
+  </main>
+  <!-- Background Decorative Elements (Precision Grid) -->
+  <div class="fixed inset-0 pointer-events-none -z-10 opacity-20" style="background-image: radial-gradient(#1c2a41 1px, transparent 1px); background-size: 32px 32px;">
+  </div>
+ </body>
+</html>

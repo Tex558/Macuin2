@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Confirmaci&oacute;n de Pedido - MACUIN INDUSTRIAL
+  </title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <script src="/static/js/tailwind-config.js">
+  </script>
+  <link href="/static/css/styles.css" rel="stylesheet"/>
+  <script src="/static/js/api.js">
+  </script>
+ </head>
+ <body class="bg-surface text-on-surface antialiased overflow-hidden">
+  <div class="min-h-screen w-full flex flex-col industrial-grid">
+   <header class="flex justify-between items-center w-full px-8 h-16 bg-surface-container-low">
+    <div class="text-lg font-black tracking-tighter text-primary">
+     MACUIN INDUSTRIAL
+    </div>
+    <div class="flex items-center gap-6">
+     <span class="text-secondary font-medium text-[0.875rem] tracking-wide uppercase">
+      Confirmaci&oacute;n de Orden
+     </span>
+     <button class="material-symbols-outlined text-secondary hover:text-primary transition-colors cursor-pointer">
+      close
+     </button>
+    </div>
+   </header>
+   <main class="flex-grow flex items-center justify-center p-6">
+    <div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-12 gap-0 bg-surface-container-high outline outline-1 outline-white/5 relative">
+     <div class="md:col-span-12 p-12 flex flex-col items-center text-center space-y-8">
+      <div class="w-20 h-20 bg-primary-container flex items-center justify-center border-2 border-on-primary-container mb-4">
+       <span class="material-symbols-outlined text-on-primary-container text-4xl" data-icon="check_circle">
+        check_circle
+       </span>
+      </div>
+      <div class="space-y-2">
+       <h1 class="text-on-surface text-4xl font-black tracking-tight uppercase">
+        Pedido Confirmado
+       </h1>
+      </div>
+      <div class="w-full max-w-md h-px bg-white/10 my-4">
+      </div>
+      <div class="grid grid-cols-2 gap-12 text-left w-full max-w-lg mx-auto">
+       <div class="space-y-1">
+        <span class="text-xs font-bold text-secondary uppercase tracking-tighter">
+         Estado del sistema
+        </span>
+        <p class="text-on-surface font-mono text-sm">
+         PROCESANDO
+        </p>
+       </div>
+       <div class="space-y-1">
+        <span class="text-xs font-bold text-secondary uppercase tracking-tighter">
+         Entrega estimada
+        </span>
+        <p class="text-on-surface font-mono text-sm">
+         24-48 HORAS
+        </p>
+       </div>
+       <div class="space-y-1">
+        <span class="text-xs font-bold text-secondary uppercase tracking-tighter">
+         Centro de origen
+        </span>
+        <p class="text-on-surface font-mono text-sm">
+         HUB-CENTRAL-01
+        </p>
+       </div>
+       <div class="space-y-1">
+        <span class="text-xs font-bold text-secondary uppercase tracking-tighter">
+         Tipo de env&iacute;o
+        </span>
+        <p class="text-on-surface font-mono text-sm">
+         INDUSTRIAL PRIORITARIO
+        </p>
+       </div>
+      </div>
+      <div class="pt-8 w-full max-w-md flex flex-col gap-4">
+       <button class="w-full bg-on-primary-container hover:bg-on-primary-container/90 text-on-primary font-black py-5 uppercase tracking-widest flex items-center justify-center gap-3 transition-all active:scale-95 shadow-[4px_4px_0px_0px_#3c0006]">
+        <span class="material-symbols-outlined" data-icon="confirmation_number">
+         confirmation_number
+        </span>
+        Ticket de Operaci&oacute;n
+       </button>
+       <button class="w-full bg-surface-container-highest border border-white/10 text-secondary hover:text-primary hover:border-primary/30 py-4 uppercase text-xs font-bold tracking-widest transition-colors">
+        Ver historial de pedidos
+       </button>
+      </div>
+     </div>
+    </div>
+   </main>
+  </div>
+ </body>
+</html>

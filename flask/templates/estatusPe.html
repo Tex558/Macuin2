@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Estatus de Pedido | MACUIN INDUSTRIAL
+  </title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <script src="/static/js/tailwind-config.js">
+  </script>
+  <link href="/static/css/styles.css" rel="stylesheet"/>
+  <script src="/static/js/api.js">
+  </script>
+ </head>
+ <body class="bg-background text-on-surface antialiased overflow-x-hidden">
+  <!-- Top Navigation Bar -->
+  <nav class="flex justify-between items-center w-full px-8 h-16 bg-[#041329] dark:bg-[#041329] fixed top-0 z-50">
+   <div class="text-lg font-black tracking-tighter text-[#ffb3b1]">
+    MACUIN INDUSTRIAL
+   </div>
+   <div class="hidden md:flex items-center space-x-8 font-['Inter'] text-[0.875rem] font-medium tracking-wide">
+    <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
+     Catalogo
+    </a>
+    <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
+     Carrito
+    </a>
+    <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="#">
+     Pedidos en curso
+    </a>
+   </div>
+   <div class="flex items-center gap-6">
+    <button class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150 font-['Inter'] text-[0.875rem] font-medium tracking-wide">
+     Cerrar Sesi&oacute;n
+    </button>
+    <div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center">
+     <span class="material-symbols-outlined text-secondary" data-icon="person">
+      person
+     </span>
+    </div>
+   </div>
+  </nav>
+  <main class="pt-24 pb-12 px-6 md:px-12 max-w-7xl mx-auto">
+   <!-- Header Section -->
+   <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <div>
+     <span class="text-primary font-bold tracking-widest text-xs uppercase mb-2 block">
+      Referencia de Seguimiento
+     </span>
+     <h1 class="text-4xl md:text-5xl font-black tracking-tighter text-on-surface leading-none uppercase">
+      ORD-88293-XP
+     </h1>
+    </div>
+    <div class="flex items-center gap-4">
+     <button class="bg-on-primary-container text-white font-bold text-sm tracking-widest px-8 py-4 uppercase hover:opacity-90 active:scale-95 transition-all">
+      Reportar Incidencia
+     </button>
+    </div>
+   </div>
+   <!-- Bento Grid Layout -->
+   <div class="grid grid-cols-1 md:grid-cols-12 gap-1 auto-rows-min bg-outline-variant/10">
+    <!-- Status Highlight -->
+    <div class="md:col-span-8 bg-surface-container-low p-8 flex flex-col justify-between min-h-[320px]">
+     <div>
+      <div class="flex items-center gap-3 mb-6">
+       <div class="w-3 h-3 bg-primary animate-pulse">
+       </div>
+       <span class="text-primary font-bold text-sm tracking-widest uppercase">
+        Estatus Actual
+       </span>
+      </div>
+      <div class="text-6xl md:text-8xl font-black tracking-tighter text-on-surface uppercase mb-4">
+       En Tr&aacute;nsito
+      </div>
+     </div>
+     <div class="mt-8 pt-8 border-t border-outline-variant/20 flex flex-wrap gap-12">
+      <div>
+       <div class="text-secondary text-xs font-bold uppercase tracking-widest mb-1">
+        Fecha Estimada
+       </div>
+       <div class="text-xl font-bold font-mono">
+        24 OCT 2023
+       </div>
+      </div>
+      <div>
+       <div class="text-secondary text-xs font-bold uppercase tracking-widest mb-1">
+        Operador Log&iacute;stico
+       </div>
+       <div class="text-xl font-bold font-mono">
+        MACUIN LOGISTICS
+       </div>
+      </div>
+     </div>
+    </div>
+    <!-- Side Metrics -->
+    <div class="md:col-span-4 flex flex-col gap-1">
+     <div class="bg-surface-container-high p-8 flex-1">
+      <span class="material-symbols-outlined text-primary mb-4" data-icon="inventory_2">
+       inventory_2
+      </span>
+      <div class="text-secondary text-xs font-bold uppercase tracking-widest mb-1">
+       Items Totales
+      </div>
+      <div class="text-4xl font-black tracking-tight text-on-surface">
+       12
+      </div>
+     </div>
+     <div class="bg-surface-container-high p-8 flex-1">
+      <span class="material-symbols-outlined text-primary mb-4" data-icon="scale">
+       scale
+      </span>
+      <div class="text-secondary text-xs font-bold uppercase tracking-widest mb-1">
+       Peso de Carga
+      </div>
+      <div class="text-4xl font-black tracking-tight text-on-surface">
+       450 KG
+      </div>
+     </div>
+    </div>
+    <!-- Progress Timeline -->
+    <!-- Detail Grid -->
+    <div class="md:col-span-12 bg-surface-container-lowest p-8">
+     <div class="flex justify-between items-center mb-8">
+      <div class="text-secondary text-xs font-bold uppercase tracking-widest">
+       Detalle de Productos
+      </div>
+      <div class="text-secondary text-xs font-mono">
+       ID ALMAC&Eacute;N: MX-S2
+      </div>
+     </div>
+     <div class="overflow-x-auto">
+      <table class="w-full text-left">
+       <thead>
+        <tr class="bg-surface-container-high border-b border-background/50">
+         <th class="p-4 text-xs font-bold uppercase tracking-widest text-secondary">
+          SKU / Identificador
+         </th>
+         <th class="p-4 text-xs font-bold uppercase tracking-widest text-secondary">
+          Descripci&oacute;n T&eacute;cnica
+         </th>
+         <th class="p-4 text-xs font-bold uppercase tracking-widest text-secondary text-right">
+          Cantidad
+         </th>
+         <th class="p-4 text-xs font-bold uppercase tracking-widest text-secondary text-right">
+          Estado
+         </th>
+        </tr>
+       </thead>
+       <tbody class="divide-y divide-surface-container-high">
+        <tr class="hover:bg-surface-container-high/50 transition-colors">
+         <td class="p-4 font-mono text-sm text-on-surface">
+          VAL-992-PX
+         </td>
+         <td class="p-4 text-sm text-secondary">
+          V&aacute;lvula de presi&oacute;n industrial - Acero reforzado
+         </td>
+         <td class="p-4 text-sm text-on-surface text-right font-mono">
+          04
+         </td>
+         <td class="p-4 text-right">
+          <span class="inline-block px-2 py-1 bg-surface-container-highest text-[10px] font-bold uppercase tracking-tighter text-primary">
+           Listo
+          </span>
+         </td>
+        </tr>
+        <tr class="hover:bg-surface-container-high/50 transition-colors">
+         <td class="p-4 font-mono text-sm text-on-surface">
+          TUB-041-ST
+         </td>
+         <td class="p-4 text-sm text-secondary">
+          Tuber&iacute;a sin costura 4" Schedule 80
+         </td>
+         <td class="p-4 text-sm text-on-surface text-right font-mono">
+          08
+         </td>
+         <td class="p-4 text-right">
+          <span class="inline-block px-2 py-1 bg-surface-container-highest text-[10px] font-bold uppercase tracking-tighter text-primary">
+           Listo
+          </span>
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <!-- Footer Meta -->
+   </div>
+  </main>
+  <!-- Navigation Shell Support (Mobile Only Bottom Nav) -->
+ </body>
+</html>
