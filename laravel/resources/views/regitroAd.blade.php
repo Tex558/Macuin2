@@ -30,7 +30,7 @@
    </div>
    <nav class="flex-1 space-y-1">
     <!-- Nav Item: General -->
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="#">
+    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="/dashboard">
      <span class="material-symbols-outlined text-lg" data-icon="dashboard">
       dashboard
      </span>
@@ -39,7 +39,7 @@
      </span>
     </a>
     <!-- Nav Item: Gestion de personal -->
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="#">
+    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="/personal">
      <span class="material-symbols-outlined text-lg" data-icon="badge">
       badge
      </span>
@@ -48,7 +48,7 @@
      </span>
     </a>
     <!-- Nav Item: Registrar administrador (ACTIVE) -->
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#ffb3b1] bg-[#1c2a41] border-l-4 border-[#ee3f4b] pl-3" href="#">
+    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#ffb3b1] bg-[#1c2a41] border-l-4 border-[#ee3f4b] pl-3" href="/registrar-admin">
      <span class="material-symbols-outlined text-lg" data-icon="person_add">
       person_add
      </span>
@@ -57,7 +57,7 @@
      </span>
     </a>
     <!-- Nav Item: Gestion de productos -->
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="#">
+    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="/productos">
      <span class="material-symbols-outlined text-lg" data-icon="inventory_2">
       inventory_2
      </span>
@@ -66,7 +66,7 @@
      </span>
     </a>
     <!-- Nav Item: Agregar producto -->
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="#">
+    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="/agregar-producto">
      <span class="material-symbols-outlined text-lg" data-icon="add_box">
       add_box
      </span>
@@ -75,16 +75,9 @@
      </span>
     </a>
     <!-- Nav Item: Editar producto -->
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="#">
-     <span class="material-symbols-outlined text-lg" data-icon="edit_note">
-      edit_note
-     </span>
-     <span>
-      Editar producto
-     </span>
-    </a>
+    
     <!-- Nav Item: Ver pedidos -->
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="#">
+    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="/pedidos">
      <span class="material-symbols-outlined text-lg" data-icon="list_alt">
       list_alt
      </span>
@@ -93,14 +86,7 @@
      </span>
     </a>
     <!-- Nav Item: Editar pedido -->
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="#">
-     <span class="material-symbols-outlined text-lg" data-icon="edit_calendar">
-      edit_calendar
-     </span>
-     <span>
-      Editar pedido
-     </span>
-    </a>
+    
    </nav>
   </aside>
   <!-- Main Content Canvas -->
@@ -150,35 +136,35 @@
         Registrar administrador
        </h2>
       </header>
-      <form class="space-y-8" onsubmit="return confirm('&iquest;Est&aacute;s seguro de registrar a este administrador?') &amp;&amp; confirm('Verifica que los datos sean correctos. &iquest;Continuar?');">
+      <form class="space-y-8" onsubmit="event.preventDefault(); if(confirm('&iquest;Est&aacute;s seguro de registrar a este administrador?') && confirm('Verifica que los datos sean correctos. &iquest;Continuar?')) { window.Api.crearUsuario({nombre: this.nombre.value, email: this.email.value, password: this.password.value, telefono: this.telefono.value, rol: 'admin'}).then(() => { alert('Administrador registrado con éxito'); window.location.href='/personal'; }).catch(e => alert(e.message || 'Error al registrar administrador')); }">
        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Field: Name -->
         <div class="flex flex-col gap-2">
          <label class="text-[10px] font-bold uppercase tracking-widest text-secondary-fixed-dim">
           Full Name
          </label>
-         <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" placeholder="OPERATOR_NAME" type="text"/>
+         <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" name="nombre" name="nombre" required placeholder="OPERATOR_NAME" type="text" required/>
         </div>
         <!-- Field: Company Email -->
         <div class="flex flex-col gap-2">
          <label class="text-[10px] font-bold uppercase tracking-widest text-secondary-fixed-dim">
           Company Email
          </label>
-         <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" placeholder="ADMIN@MACUIN.INT" type="email"/>
+         <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" name="email" name="email" required placeholder="ADMIN@MACUIN.INT" type="email" required/>
         </div>
         <!-- Field: Password -->
         <div class="flex flex-col gap-2">
          <label class="text-[10px] font-bold uppercase tracking-widest text-secondary-fixed-dim">
           System Access Key
          </label>
-         <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"/>
+         <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" name="password" name="password" required placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password" required/>
         </div>
         <!-- Field: Phone Number -->
         <div class="flex flex-col gap-2">
          <label class="text-[10px] font-bold uppercase tracking-widest text-secondary-fixed-dim">
           Direct Line
          </label>
-         <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" placeholder="+52 000 000 0000" type="tel"/>
+         <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" name="telefono" name="telefono" placeholder="+52 000 000 0000" type="tel"/>
         </div>
        </div>
        <div class="pt-8 border-t border-outline-variant/10">

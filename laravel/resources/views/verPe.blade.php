@@ -35,7 +35,7 @@
     </div>
    </div>
    <nav class="flex-1 space-y-1">
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="#">
+    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="/dashboard">
      <span class="material-symbols-outlined" data-icon="dashboard">
       dashboard
      </span>
@@ -43,7 +43,7 @@
       General
      </span>
     </a>
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="#">
+    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="/personal">
      <span class="material-symbols-outlined" data-icon="badge">
       badge
      </span>
@@ -51,7 +51,7 @@
       Gestion de personal
      </span>
     </a>
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="#">
+    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="/registrar-admin">
      <span class="material-symbols-outlined" data-icon="person_add">
       person_add
      </span>
@@ -59,7 +59,7 @@
       Registrar administrador
      </span>
     </a>
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="#">
+    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="/productos">
      <span class="material-symbols-outlined" data-icon="inventory_2">
       inventory_2
      </span>
@@ -67,7 +67,7 @@
       Gestion de productos
      </span>
     </a>
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="#">
+    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="/agregar-producto">
      <span class="material-symbols-outlined" data-icon="add_box">
       add_box
      </span>
@@ -75,16 +75,9 @@
       Agregar producto
      </span>
     </a>
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="#">
-     <span class="material-symbols-outlined" data-icon="edit_note">
-      edit_note
-     </span>
-     <span>
-      Editar producto
-     </span>
-    </a>
+    
     <!-- Active State: Ver pedidos -->
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#ffb3b1] bg-[#1c2a41] border-l-4 border-[#ee3f4b] pl-3 transition-colors duration-150" href="#">
+    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#ffb3b1] bg-[#1c2a41] border-l-4 border-[#ee3f4b] pl-3 transition-colors duration-150" href="/pedidos">
      <span class="material-symbols-outlined" data-icon="list_alt">
       list_alt
      </span>
@@ -92,14 +85,7 @@
       Ver pedidos
      </span>
     </a>
-    <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="#">
-     <span class="material-symbols-outlined" data-icon="edit_calendar">
-      edit_calendar
-     </span>
-     <span>
-      Editar pedido
-     </span>
-    </a>
+    
    </nav>
   </aside>
   <!-- Main Content Shell -->
@@ -194,25 +180,33 @@
    </section>
   </main>
   <!-- Contextual Details Panel (Side Preview) -->
-  <script>
-   document.addEventListener("DOMContentLoaded", async () => {
+  
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
         const container = document.getElementById("pedidos_admin_grid");
         try {
-            const res = await window.Api.getPedidos();
-            const pedidos = res.data || [];
-            container.innerHTML = pedidos.map(p => `
+            const [resP, resU] = await Promise.all([window.Api.getPedidos(), window.Api.getUsuarios()]);
+            const usuarios = resU.data || [];
+            const pedidos = resP.data || [];
+            
+            container.innerHTML = pedidos.map(p => {
+                const u = usuarios.find(x => x.id == p.usuario_id);
+                const nombre = u ? u.nombre : 'Usuario Reservado';
+                return `
             <tr class="hover:bg-surface-bright transition-colors group">
              <td class="px-6 py-5 font-mono text-[0.875rem] text-on-surface">#ORD-${p.id}</td>
-             <td class="px-6 py-5"><div class="flex flex-col"><span class="text-[0.875rem] font-bold">Usuario ID: ${p.usuario_id}</span></div></td>
+             <td class="px-6 py-5"><div class="flex flex-col"><span class="text-[0.875rem] font-bold uppercase">${nombre}</span><span class="text-[0.65rem] text-secondary">ID: ${p.usuario_id}</span></div></td>
              <td class="px-6 py-5"><span class="px-2 py-0.5 text-[0.6rem] font-black bg-secondary-container text-on-secondary-container uppercase tracking-tighter">Normal</span></td>
-             <td class="px-6 py-5"><div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full ${p.estado==='Entregado'?'bg-green-500':'bg-secondary'}"></div><span class="text-[0.75rem] font-bold uppercase tracking-tight text-secondary">${p.estado}</span></div></td>
-             <td class="px-6 py-5 text-center"><a href="/editar-pedido" class="inline-flex items-center justify-center w-8 h-8 bg-surface-container-highest hover:bg-primary hover:text-on-primary-fixed transition-all"><span class="material-symbols-outlined text-[1.2rem]">edit_note</span></a></td>
+             <td class="px-6 py-5"><div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full ${p.estatus==='Entregado'?'bg-green-500':'bg-secondary'}"></div><span class="text-[0.75rem] font-bold uppercase tracking-tight text-secondary">${p.estatus || p.estado || 'Activo'}</span></div></td>
+             <td class="px-6 py-5 text-center"><a href="/editar-pedido?id=${p.id}" class="inline-flex items-center justify-center w-8 h-8 bg-surface-container-highest hover:bg-primary hover:text-on-primary-fixed transition-all"><span class="material-symbols-outlined text-[1.2rem]">edit_note</span></a></td>
             </tr>
-            `).join('');
+            `;
+            }).join('');
         } catch (e) {
-            container.innerHTML = '<tr><td colspan="5" class="p-8 text-error">Error cargando pedidos.</td></tr>';
+            container.innerHTML = '<tr><td colspan="5" class="p-8 text-error">Error cargando matriz de pedidos.</td></tr>';
         }
     });
-  </script>
+</script>
+
  </body>
 </html>

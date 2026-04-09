@@ -18,30 +18,31 @@
   </script>
  </head>
  <body class="bg-background text-on-surface antialiased">
-  <!-- TopNavBar -->
-  <header class="flex justify-between items-center w-full px-8 h-16 bg-[#041329] dark:bg-[#041329] font-['Inter'] text-[0.875rem] font-medium tracking-wide fixed top-0 z-50">
-   <div class="text-lg font-black tracking-tighter text-[#ffb3b1]">
-    MACUIN INDUSTRIAL
+  <header class="bg-[#041329] flex justify-between items-center w-full px-8 h-16 fixed top-0 z-50 font-['Inter'] text-[0.875rem] font-medium tracking-wide">
+   <div class="flex items-center gap-8">
+    <span class="text-lg font-black tracking-tighter text-[#ffb3b1]">
+     MACUIN INDUSTRIAL
+    </span>
+    <nav class="hidden md:flex items-center gap-6">
+     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="/catalogo">
+      Catalogo
+     </a>
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/carrito">
+      Carrito
+     </a>
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/pedidos">
+      Pedidos en curso
+     </a>
+    </nav>
    </div>
-   <nav class="hidden md:flex items-center space-x-8">
-    <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
-     Catalogo
-    </a>
-    <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1 transition-all duration-150" href="#">
-     Carrito
-    </a>
-    <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
-     Pedidos en curso
-    </a>
-   </nav>
    <div class="flex items-center gap-6">
-    <div class="hidden lg:flex items-center bg-surface-container-low px-4 py-1 gap-2">
-     <span class="material-symbols-outlined text-secondary scale-75">
+    <div class="hidden lg:flex items-center bg-surface-container-high px-3 py-1.5 border-b-2 border-outline-variant">
+     <span class="material-symbols-outlined text-secondary text-sm mr-2" data-icon="search">
       search
      </span>
-     <input class="bg-transparent border-none text-[0.75rem] focus:ring-0 text-secondary placeholder:text-outline-variant uppercase tracking-widest" placeholder="BUSCAR SKU..." type="text"/>
+     <input class="bg-transparent border-none focus:ring-0 text-xs placeholder:text-outline p-0 w-48 uppercase tracking-widest" placeholder="BUSCAR SKU..." type="text" oninput="renderCat(this.value)"/>
     </div>
-    <button class="bg-surface-container-highest px-4 py-2 text-[0.75rem] font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors">
+    <button class="bg-[#1c2a41] text-[#c2c6d3] px-4 py-2 text-xs font-bold uppercase hover:bg-surface-bright transition-all duration-150" onclick="window.Api.logout()">
      Cerrar Sesi&oacute;n
     </button>
    </div>
@@ -65,85 +66,7 @@
       </h1>
      </div>
      <!-- Items Section -->
-     <div class="space-y-4">
-      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10">
-       <span class="text-[0.7rem] font-bold text-outline uppercase tracking-widest">
-        DESCRIPCI&Oacute;N DE PARTES
-       </span>
-       <span class="text-[0.7rem] font-bold text-outline uppercase tracking-widest">
-        SUBTOTAL
-       </span>
-      </div>
-      <!-- Item Row 1 -->
-      <div class="group flex items-center justify-between py-6 bg-surface-container-low px-6 transition-colors hover:bg-surface-container-high">
-       <div class="flex items-start gap-6">
-        <div class="w-16 h-16 bg-surface-container-highest flex items-center justify-center">
-         <span class="material-symbols-outlined text-secondary scale-125">
-          settings_input_component
-         </span>
-        </div>
-        <div>
-         <h3 class="font-bold text-on-surface tracking-tight text-[1rem]">
-          RODAMIENTO INDUSTRIAL T500
-         </h3>
-         <p class="text-[0.75rem] text-secondary-fixed-dim mt-1">
-          SKU: 882910-X | CANTIDAD: 02
-         </p>
-        </div>
-       </div>
-       <div class="text-right">
-        <span class="font-mono text-[1.125rem] font-medium text-on-surface">
-         $1,240.00
-        </span>
-       </div>
-      </div>
-      <!-- Item Row 2 -->
-      <div class="group flex items-center justify-between py-6 bg-surface-container-low px-6 transition-colors hover:bg-surface-container-high">
-       <div class="flex items-start gap-6">
-        <div class="w-16 h-16 bg-surface-container-highest flex items-center justify-center">
-         <span class="material-symbols-outlined text-secondary scale-125">
-          precision_manufacturing
-         </span>
-        </div>
-        <div>
-         <h3 class="font-bold text-on-surface tracking-tight text-[1rem]">
-          VALVULA DE PRESI&Oacute;N HIDR&Aacute;ULICA
-         </h3>
-         <p class="text-[0.75rem] text-secondary-fixed-dim mt-1">
-          SKU: 110294-A | CANTIDAD: 01
-         </p>
-        </div>
-       </div>
-       <div class="text-right">
-        <span class="font-mono text-[1.125rem] font-medium text-on-surface">
-         $850.50
-        </span>
-       </div>
-      </div>
-      <!-- Item Row 3 -->
-      <div class="group flex items-center justify-between py-6 bg-surface-container-low px-6 transition-colors hover:bg-surface-container-high">
-       <div class="flex items-start gap-6">
-        <div class="w-16 h-16 bg-surface-container-highest flex items-center justify-center">
-         <span class="material-symbols-outlined text-secondary scale-125">
-          bolt
-         </span>
-        </div>
-        <div>
-         <h3 class="font-bold text-on-surface tracking-tight text-[1rem]">
-          ACOPLE ELECTROMAGN&Eacute;TICO V3
-         </h3>
-         <p class="text-[0.75rem] text-secondary-fixed-dim mt-1">
-          SKU: 449210-B | CANTIDAD: 04
-         </p>
-        </div>
-       </div>
-       <div class="text-right">
-        <span class="font-mono text-[1.125rem] font-medium text-on-surface">
-         $3,120.00
-        </span>
-       </div>
-      </div>
-     </div>
+     <div class="space-y-4" id="r-grid"></div>
      <!-- Shipping Info Grid (Plate-on-Plate) -->
      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-outline-variant/20">
       <div class="bg-surface-container-low p-8">
@@ -156,11 +79,7 @@
         </h4>
        </div>
        <p class="text-on-surface font-medium leading-relaxed">
-        Planta Industrial Norte, Almac&eacute;n 4
-        <br/>
-        Eje Central 102, Parque Industrial
-        <br/>
-        Quer&eacute;taro, MX 76220
+        <span id="r-dir">Cargando dirección...</span>
        </p>
       </div>
       <div class="bg-surface-container-low p-8">
@@ -193,9 +112,7 @@
         <span class="text-secondary text-[0.875rem] uppercase tracking-wide">
          SUBTOTAL
         </span>
-        <span class="font-mono text-on-surface">
-         $5,210.50
-        </span>
+        <span id="r-sub" class="font-mono text-on-surface">$0.00</span>
        </div>
        <div class="flex justify-between items-center">
         <span class="text-secondary text-[0.875rem] uppercase tracking-wide">
@@ -209,9 +126,7 @@
         <span class="text-secondary text-[0.875rem] uppercase tracking-wide">
          IMPUESTOS (16%)
         </span>
-        <span class="font-mono text-on-surface">
-         $872.88
-        </span>
+        <span id="r-iva" class="font-mono text-on-surface">$0.00</span>
        </div>
        <div class="h-px bg-outline-variant/30 my-4">
        </div>
@@ -219,15 +134,11 @@
         <span class="text-on-surface font-black text-[1rem] uppercase">
          NETO TOTAL
         </span>
-        <span class="text-[2.5rem] font-black tracking-tighter text-on-primary-container leading-none font-mono">
-         $6,328.38
-        </span>
+        <span id="r-tot" class="text-[2.5rem] font-black tracking-tighter text-on-primary-container leading-none font-mono">$0.00</span>
        </div>
       </div>
-      <div class="space-y-4">
-       <button class="w-full bg-on-primary-container hover:bg-on-primary-fixed-variant text-white font-black py-5 uppercase tracking-[0.2em] text-[1rem] transition-all active:scale-[0.98] shadow-lg shadow-on-primary-container/20">
-        Confirmar Pedido
-       </button>
+      <div class="space-y-4" id="r-grid">
+       <button id="btn-conf" class="w-full bg-on-primary-container hover:bg-on-primary-fixed-variant text-white font-black py-5 uppercase tracking-[0.2em] text-[1rem] transition-all active:scale-[0.98] shadow-lg shadow-on-primary-container/20">Confirmar Pedido</button>
        <button class="w-full bg-surface-container-highest border border-outline/20 hover:border-outline/40 text-secondary font-bold py-4 uppercase tracking-[0.1em] text-[0.75rem] transition-colors">
         Descargar Cotizaci&oacute;n (PDF)
        </button>
@@ -237,5 +148,100 @@
    </div>
   </main>
   <!-- Footer Utility -->
- </body>
+ 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const path = window.location.pathname;
+        const links = document.querySelectorAll('header nav a');
+        links.forEach(l => {
+            const href = l.getAttribute('href');
+            if(path.includes(href) && href !== '/') {
+                l.className = "text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1";
+            } else {
+                l.className = "text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150";
+            }
+        });
+    });
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        const grid = document.getElementById("r-grid");
+        let cart = JSON.parse(localStorage.getItem('macuin_cart') || '[]');
+        let chk = JSON.parse(localStorage.getItem('macuin_checkout_data'));
+        
+        if(!chk || cart.length === 0) {
+            window.location.href = '/carrito';
+            return;
+        }
+        
+        const dirDOM = document.getElementById('r-dir');
+        if(dirDOM) dirDOM.innerText = chk.direccion || '';
+
+        try {
+            const res = await window.Api.getProductos();
+            const prods = res.data || [];
+            let subtotal = 0;
+            let html = `      <div class="flex items-center justify-between py-2 border-b border-outline-variant/10">
+               <span class="text-[0.7rem] font-bold text-outline uppercase tracking-widest">DESCRIPCIÓN DE PARTES</span>
+               <span class="text-[0.7rem] font-bold text-outline uppercase tracking-widest">SUBTOTAL</span>
+              </div>`;
+            
+            cart.forEach(item => {
+                const p = prods.find(x => x.id == item.id);
+                if(p) {
+                    const lineTot = item.qty * parseFloat(p.precio);
+                    subtotal += lineTot;
+                    html += `
+                      <div class="group flex items-center justify-between py-6 bg-surface-container-low px-6 transition-colors hover:bg-surface-container-high">
+                       <div class="flex items-start gap-6">
+                        <div class="w-16 h-16 bg-surface-container-highest flex items-center justify-center">
+                         <span class="material-symbols-outlined text-secondary scale-125">settings_input_component</span>
+                        </div>
+                        <div>
+                         <h3 class="font-bold text-on-surface tracking-tight text-[1rem] uppercase">${p.nombre}</h3>
+                         <p class="text-[0.75rem] text-secondary-fixed-dim mt-1">SKU: MAC-${p.id} | CANTIDAD: ${item.qty}</p>
+                        </div>
+                       </div>
+                       <div class="text-right">
+                        <span class="font-mono text-[1.125rem] font-medium text-on-surface">${lineTot.toLocaleString('en-US',{style:'currency',currency:'USD'})}</span>
+                       </div>
+                      </div>
+                    `;
+                }
+            });
+            if(grid) grid.innerHTML = html;
+            
+            const iva = subtotal * 0.16;
+            const envio = 245.00;
+            const final = subtotal + iva + envio;
+            
+            document.getElementById('r-sub').innerText = subtotal.toLocaleString('en-US',{style:'currency',currency:'USD'});
+            document.getElementById('r-iva').innerText = iva.toLocaleString('en-US',{style:'currency',currency:'USD'});
+            document.getElementById('r-tot').innerText = final.toLocaleString('en-US',{style:'currency',currency:'USD'});
+            
+        } catch(e) {}
+        
+        document.getElementById('btn-conf').addEventListener('click', async () => {
+            const uid = localStorage.getItem('user_id');
+            if(!uid) return alert('Session invalida.');
+            const packageData = {
+                tarjeta: chk.tarjeta,
+                telefono: chk.telefono,
+                direccion: chk.direccion,
+                usuario_id: parseInt(uid)
+            };
+            try {
+                await window.Api.crearPedido(packageData);
+                localStorage.removeItem('macuin_cart');
+                localStorage.removeItem('macuin_checkout_data');
+                alert('COMPRA FINALIZADA. El departamento logístico ha sido notificado.');
+                window.location.href = '/pedidos';
+            } catch(e) { alert('Verifica tus datos. Error transaccional del servidor SQL.'); console.error(e); }
+        });
+    });
+</script>
+
+</body>
 </html>

@@ -23,54 +23,44 @@
     </h1>
    </div>
    <nav class="flex-1 space-y-1">
-    <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="#">
+    <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="/dashboard">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="dashboard">
       dashboard
      </span>
      General
     </a>
-    <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="#">
+    <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="/personal">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="badge">
       badge
      </span>
      Gestion de personal
     </a>
-    <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="#">
+    <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="/registrar-admin">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="person_add">
       person_add
      </span>
      Registrar administrador
     </a>
-    <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="#">
+    <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="/productos">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="inventory_2">
       inventory_2
      </span>
      Gestion de productos
     </a>
-    <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="#">
+    <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="/agregar-producto">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="add_box">
       add_box
      </span>
      Agregar producto
     </a>
-    <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="#">
-     <span class="material-symbols-outlined mr-3 text-lg" data-icon="edit_note">
-      edit_note
-     </span>
-     Editar producto
-    </a>
-    <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="#">
+    
+    <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="/pedidos">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="list_alt">
       list_alt
      </span>
      Ver pedidos
     </a>
-    <a class="flex items-center px-6 py-3 transition-all duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#ffb3b1] bg-[#1c2a41] border-l-4 border-[#ee3f4b] pl-[20px]" href="#">
-     <span class="material-symbols-outlined mr-3 text-lg" data-icon="edit_calendar">
-      edit_calendar
-     </span>
-     Editar pedido
-    </a>
+    
    </nav>
    <div class="mt-auto px-6 border-t border-outline-variant pt-6 opacity-40">
     <div class="flex items-center gap-3">
@@ -88,6 +78,8 @@
       </p>
      </div>
     </div>
+   
+    <button class="w-full mt-4 bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-2" onclick="window.Api.logout()">Cerrar sesión</button>
    </div>
   </aside>
   <!-- Main Content Area -->
@@ -95,9 +87,7 @@
    <!-- Header -->
    <header class="h-16 flex items-center justify-between px-10 bg-surface-container-low">
     <div class="flex items-center gap-4">
-     <h2 class="text-on-surface font-headline font-bold text-sm tracking-tight uppercase">
-      Editar pedido / ID: #MAC-88421
-     </h2>
+     <h2 id="e-title" class="text-on-surface font-headline font-bold text-sm tracking-tight uppercase">Editar pedido</h2>
     </div>
     <div class="flex gap-4">
      <button class="bg-surface-container-highest px-4 py-2 text-[10px] font-black uppercase tracking-widest text-secondary hover:text-on-surface transition-colors border border-outline/10">
@@ -115,9 +105,7 @@
        Estado Actual
       </span>
       <div class="flex items-end gap-3">
-       <span class="text-5xl font-black tracking-tighter text-on-surface leading-none uppercase">
-        En Ruta
-       </span>
+       <span id="e-status-big" class="text-5xl font-black tracking-tighter text-on-surface leading-none uppercase">Cargando...</span>
        <div class="w-3 h-3 bg-tertiary mb-1">
        </div>
       </div>
@@ -126,40 +114,6 @@
        <br/>
        Operador: LOG_UNIT_A12
       </p>
-     </div>
-     <!-- Metrics Card -->
-     <div class="col-span-12 md:col-span-5 bg-surface-container-high p-8 flex flex-col justify-between">
-      <div class="flex justify-between items-start">
-       <span class="text-[10px] font-bold text-secondary uppercase tracking-[0.2em]">
-        Valor de Carga
-       </span>
-       <span class="text-[10px] font-mono text-primary bg-primary-container px-2 py-0.5">
-        PRIORIDAD ALTA
-       </span>
-      </div>
-      <div class="text-5xl font-black tracking-tighter text-on-surface leading-none tabular-nums">
-       $14,290.00
-      </div>
-      <div class="mt-4 flex gap-4">
-       <div>
-        <p class="text-[9px] text-secondary uppercase font-bold">
-         Art&iacute;culos
-        </p>
-        <p class="text-lg font-bold">
-         128 unidades
-        </p>
-       </div>
-       <div class="w-px bg-outline-variant">
-       </div>
-       <div>
-        <p class="text-[9px] text-secondary uppercase font-bold">
-         Peso Total
-        </p>
-        <p class="text-lg font-bold">
-         450 kg
-        </p>
-       </div>
-      </div>
      </div>
      <!-- Quick Action/ID Card -->
      <div class="col-span-12 md:col-span-3 bg-surface-container-low border border-primary/20 p-8 flex flex-col">
@@ -177,7 +131,7 @@
     <!-- Configuration Form -->
     <div class="grid grid-cols-12 gap-10">
      <!-- Main Form Section -->
-     <div class="col-span-12 lg:col-span-8 space-y-10">
+     <div class="col-span-12 space-y-10">
       <section>
        <div class="flex items-center gap-4 mb-6">
         <span class="text-xs font-black text-on-surface uppercase tracking-widest">
@@ -191,13 +145,13 @@
          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
           Cliente / Corporaci&oacute;n
          </label>
-         <input class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface" type="text" value="Industrial Solutions Ltd."/>
+         <input class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface" type="text" id="e-cliente" readonly/>
         </div>
         <div class="flex flex-col gap-2">
          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
           Punto de Entrega
          </label>
-         <input class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface" type="text" value="Planta Norte - Dock 04"/>
+         <input class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface" type="text" id="e-dir" readonly/>
         </div>
         <div class="col-span-2 flex flex-col gap-2">
          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
@@ -220,22 +174,12 @@
          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
           Modificar Estado
          </label>
-         <select class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface appearance-none">
-          <option>
-           En Almac&eacute;n
-          </option>
-          <option>
-           Procesando
-          </option>
-          <option selected="">
-           En Ruta
-          </option>
-          <option>
-           Entregado
-          </option>
-          <option>
-           Retenido en Aduana
-          </option>
+         <select id="e-select" class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface appearance-none">
+          <option value="Pendiente">Pendiente</option>
+          <option value="Procesando">Procesando</option>
+          <option value="En Ruta">En Ruta</option>
+          <option value="Entregado">Entregado</option>
+          <option value="Cancelado">Cancelado</option>
          </select>
         </div>
         <div class="flex flex-col gap-2">
@@ -253,89 +197,58 @@
        </div>
       </section>
       <div class="col-span-12 flex justify-end mt-4">
-       <button class="bg-[#ffb3b1] hover:bg-[#ee3f4b] text-on-primary font-black text-xs px-8 py-4 transition-all duration-150 uppercase tracking-widest" onclick="return confirm('&iquest;Seguro que deseas guardar los cambios en este pedido?') &amp;&amp; confirm('Revisa bien la nueva informaci&oacute;n. &iquest;Confirmar edici&oacute;n?');">
-        Guardar Cambios
-       </button>
+       <button id="btn-save" class="bg-[#ffb3b1] hover:bg-[#ee3f4b] text-[#3c0006] font-black text-xs px-8 py-4 transition-all duration-150 uppercase tracking-widest">Guardar Cambios</button>
       </div>
      </div>
-     <!-- Sidebar Details/History -->
-     <div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
-      <div class="bg-surface-container-low p-6 border-l-4 border-tertiary">
-       <h3 class="text-[11px] font-black text-on-surface uppercase tracking-[0.2em] mb-4">
-        Registro de Auditor&iacute;a
-       </h3>
-       <div class="space-y-4">
-        <div class="flex gap-4">
-         <span class="text-[10px] font-mono text-secondary-fixed-dim">
-          14:22
-         </span>
-         <p class="text-[11px] text-on-surface-variant">
-          <span class="font-bold text-on-surface">
-           ESTADO_MODIFICADO:
-          </span>
-          "En Almac&eacute;n" &rarr; "En Ruta" por ADMIN_02
-         </p>
-        </div>
-        <div class="flex gap-4">
-         <span class="text-[10px] font-mono text-secondary-fixed-dim">
-          10:05
-         </span>
-         <p class="text-[11px] text-on-surface-variant">
-          <span class="font-bold text-on-surface">
-           CARGA_VERIFICADA:
-          </span>
-          Unidad de sellado validada por SCAN_UNIT_9
-         </p>
-        </div>
-        <div class="flex gap-4">
-         <span class="text-[10px] font-mono text-secondary-fixed-dim">
-          08:12
-         </span>
-         <p class="text-[11px] text-on-surface-variant">
-          <span class="font-bold text-on-surface">
-           ORDEN_CREADA:
-          </span>
-          Ticket #MAC-88421 generado en sistema.
-         </p>
-        </div>
-       </div>
-      </div>
-      <div class="bg-surface-container-high p-6">
-       <h3 class="text-[11px] font-black text-on-surface uppercase tracking-[0.2em] mb-4">
-        Firmas Digitales
-       </h3>
-       <div class="space-y-3">
-        <div class="flex items-center justify-between p-3 bg-surface-container-highest">
-         <span class="text-[10px] font-bold text-secondary">
-          Autorizaci&oacute;n Admin
-         </span>
-         <span class="material-symbols-outlined text-primary text-sm" data-weight="fill" style="font-variation-settings: 'FILL' 1;">
-          check_circle
-         </span>
-        </div>
-        <div class="flex items-center justify-between p-3 bg-surface-container-highest">
-         <span class="text-[10px] font-bold text-secondary">
-          Validaci&oacute;n Financiera
-         </span>
-         <span class="material-symbols-outlined text-primary text-sm" data-weight="fill" style="font-variation-settings: 'FILL' 1;">
-          check_circle
-         </span>
-        </div>
-        <div class="flex items-center justify-between p-3 bg-surface-container-highest opacity-50">
-         <span class="text-[10px] font-bold text-secondary">
-          Confirmaci&oacute;n Cliente
-         </span>
-         <span class="material-symbols-outlined text-secondary text-sm">
-          radio_button_unchecked
-         </span>
-        </div>
-       </div>
-      </div>
      </div>
-    </div>
     <!-- Footer Action Bar -->
    </div>
   </main>
   <!-- Contextual Decorative UI (Industrial Aesthetic) -->
- </body>
+ 
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        const params = new URLSearchParams(window.location.search);
+        const pid = params.get('id');
+        if(!pid) return;
+        
+        try {
+            const [resP, resU] = await Promise.all([window.Api.getPedidos(), window.Api.getUsuarios()]);
+            const p = resP.data.find(x => x.id == pid);
+            if(p) {
+                const u = resU.data.find(x => x.id == p.usuario_id);
+                document.getElementById('e-title').innerText = `Editar pedido / ID: #MAC-${p.id}`;
+                document.getElementById('e-status-big').innerText = p.estatus || p.estado || 'SIN ESTADO';
+                const iCli = document.getElementById('e-cliente');
+                if(iCli) iCli.value = u ? u.nombre : 'Desconocido';
+                const iDir = document.getElementById('e-dir');
+                if(iDir) iDir.value = p.direccion || 'Sin direccion';
+                
+                const sel = document.getElementById('e-select');
+                if(sel) {
+                    for(let opt of sel.options) {
+                        if(opt.value === p.estatus || opt.value === p.estado) {
+                            opt.selected = true;
+                        }
+                    }
+                }
+            }
+        } catch(e) { console.error('E:', e); }
+        
+        let savebtn = document.getElementById('btn-save');
+        if (savebtn) {
+            savebtn.addEventListener('click', async () => {
+                if(!confirm('¿Guardar cambios logísticos oficiales en servidor?')) return;
+                const nuevoEstado = document.getElementById('e-select').value;
+                try {
+                    await window.Api.actualizarPedido(pid, {estatus: nuevoEstado});
+                    alert('Pedido re-codificado con éxito.');
+                    window.location.href = '/pedidos';
+                } catch(e) { alert('Error modificando estado...'); }
+            });
+        }
+    });
+</script>
+
+</body>
 </html>

@@ -18,33 +18,35 @@
   </script>
  </head>
  <body class="bg-background text-on-surface antialiased overflow-x-hidden">
-  <!-- Top Navigation Bar -->
-  <nav class="flex justify-between items-center w-full px-8 h-16 bg-[#041329] dark:bg-[#041329] fixed top-0 z-50">
-   <div class="text-lg font-black tracking-tighter text-[#ffb3b1]">
-    MACUIN INDUSTRIAL
-   </div>
-   <div class="hidden md:flex items-center space-x-8 font-['Inter'] text-[0.875rem] font-medium tracking-wide">
-    <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
-     Catalogo
-    </a>
-    <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
-     Carrito
-    </a>
-    <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="#">
-     Pedidos en curso
-    </a>
+  <header class="bg-[#041329] flex justify-between items-center w-full px-8 h-16 fixed top-0 z-50 font-['Inter'] text-[0.875rem] font-medium tracking-wide">
+   <div class="flex items-center gap-8">
+    <span class="text-lg font-black tracking-tighter text-[#ffb3b1]">
+     MACUIN INDUSTRIAL
+    </span>
+    <nav class="hidden md:flex items-center gap-6">
+     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="/catalogo">
+      Catalogo
+     </a>
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/carrito">
+      Carrito
+     </a>
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/pedidos">
+      Pedidos en curso
+     </a>
+    </nav>
    </div>
    <div class="flex items-center gap-6">
-    <button class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150 font-['Inter'] text-[0.875rem] font-medium tracking-wide">
+    <div class="hidden lg:flex items-center bg-surface-container-high px-3 py-1.5 border-b-2 border-outline-variant">
+     <span class="material-symbols-outlined text-secondary text-sm mr-2" data-icon="search">
+      search
+     </span>
+     <input class="bg-transparent border-none focus:ring-0 text-xs placeholder:text-outline p-0 w-48 uppercase tracking-widest" placeholder="BUSCAR SKU..." type="text" oninput="renderCat(this.value)"/>
+    </div>
+    <button class="bg-[#1c2a41] text-[#c2c6d3] px-4 py-2 text-xs font-bold uppercase hover:bg-surface-bright transition-all duration-150" onclick="window.Api.logout()">
      Cerrar Sesi&oacute;n
     </button>
-    <div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center">
-     <span class="material-symbols-outlined text-secondary" data-icon="person">
-      person
-     </span>
-    </div>
    </div>
-  </nav>
+  </header>
   <main class="pt-24 pb-12 px-6 md:px-12 max-w-7xl mx-auto">
    <!-- Header Section -->
    <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -52,9 +54,7 @@
      <span class="text-primary font-bold tracking-widest text-xs uppercase mb-2 block">
       Referencia de Seguimiento
      </span>
-     <h1 class="text-4xl md:text-5xl font-black tracking-tighter text-on-surface leading-none uppercase">
-      ORD-88293-XP
-     </h1>
+     <h1 id="s-id" class="text-4xl md:text-5xl font-black tracking-tighter text-on-surface leading-none uppercase">Cargando...</h1>
     </div>
     <div class="flex items-center gap-4">
      <button class="bg-on-primary-container text-white font-bold text-sm tracking-widest px-8 py-4 uppercase hover:opacity-90 active:scale-95 transition-all">
@@ -74,18 +74,14 @@
         Estatus Actual
        </span>
       </div>
-      <div class="text-6xl md:text-8xl font-black tracking-tighter text-on-surface uppercase mb-4">
-       En Tr&aacute;nsito
-      </div>
+      <div id="s-status" class="text-6xl md:text-8xl font-black tracking-tighter text-on-surface uppercase mb-4">...</div>
      </div>
      <div class="mt-8 pt-8 border-t border-outline-variant/20 flex flex-wrap gap-12">
       <div>
        <div class="text-secondary text-xs font-bold uppercase tracking-widest mb-1">
         Fecha Estimada
        </div>
-       <div class="text-xl font-bold font-mono">
-        24 OCT 2023
-       </div>
+       <div id="s-date" class="text-xl font-bold font-mono">-- -- ----</div>
       </div>
       <div>
        <div class="text-secondary text-xs font-bold uppercase tracking-widest mb-1">
@@ -124,7 +120,7 @@
     </div>
     <!-- Progress Timeline -->
     <!-- Detail Grid -->
-    <div class="md:col-span-12 bg-surface-container-lowest p-8">
+    <div class="md:col-span-12 bg-surface-container-lowest p-8 hidden">
      <div class="flex justify-between items-center mb-8">
       <div class="text-secondary text-xs font-bold uppercase tracking-widest">
        Detalle de Productos
@@ -192,5 +188,47 @@
    </div>
   </main>
   <!-- Navigation Shell Support (Mobile Only Bottom Nav) -->
- </body>
+ 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const path = window.location.pathname;
+        const links = document.querySelectorAll('header nav a');
+        links.forEach(l => {
+            const href = l.getAttribute('href');
+            if(path.includes(href) && href !== '/') {
+                l.className = "text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1";
+            } else {
+                l.className = "text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150";
+            }
+        });
+    });
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        const params = new URLSearchParams(window.location.search);
+        const pid = params.get('id');
+        if(!pid) return window.location.href = '/pedidos';
+
+        try {
+            const res = await window.Api.getPedidos();
+            const p = (res.data || []).find(x => x.id == pid);
+            if(p) {
+                document.getElementById('s-id').innerText = `ORD-#MAC-${p.id}`;
+                document.getElementById('s-status').innerText = p.estatus || p.estado || 'Procesando';
+                const fecha = new Date(p.creado_en);
+                fecha.setDate(fecha.getDate() + 3); // Simulación de 3 días para entrega
+                document.getElementById('s-date').innerText = fecha.toLocaleDateString('es-MX', {day:'2-digit', month:'short', year:'numeric'}).toUpperCase();
+            } else {
+                alert('Pedido no encontrado.');
+                window.location.href = '/pedidos';
+            }
+        } catch(e) {
+            console.error(e);
+        }
+    });
+</script>
+
+</body>
 </html>

@@ -26,55 +26,45 @@
     </h1>
    </div>
    <nav class="flex-1 space-y-1">
-    <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="#">
+    <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/dashboard">
      <span class="material-symbols-outlined mr-3" data-icon="dashboard">
       dashboard
      </span>
      General
     </a>
     <!-- Active State: Gestion de personal -->
-    <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#ffb3b1] bg-[#1c2a41] border-l-4 border-[#ee3f4b] pl-3" href="#">
+    <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#ffb3b1] bg-[#1c2a41] border-l-4 border-[#ee3f4b] pl-3" href="/personal">
      <span class="material-symbols-outlined mr-3" data-icon="badge">
       badge
      </span>
      Gestion de personal
     </a>
-    <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="#">
+    <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/registrar-admin">
      <span class="material-symbols-outlined mr-3" data-icon="person_add">
       person_add
      </span>
      Registrar administrador
     </a>
-    <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="#">
+    <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/productos">
      <span class="material-symbols-outlined mr-3" data-icon="inventory_2">
       inventory_2
      </span>
      Gestion de productos
     </a>
-    <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="#">
+    <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/agregar-producto">
      <span class="material-symbols-outlined mr-3" data-icon="add_box">
       add_box
      </span>
      Agregar producto
     </a>
-    <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="#">
-     <span class="material-symbols-outlined mr-3" data-icon="edit_note">
-      edit_note
-     </span>
-     Editar producto
-    </a>
-    <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="#">
+    
+    <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/pedidos">
      <span class="material-symbols-outlined mr-3" data-icon="list_alt">
       list_alt
      </span>
      Ver pedidos
     </a>
-    <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="#">
-     <span class="material-symbols-outlined mr-3" data-icon="edit_calendar">
-      edit_calendar
-     </span>
-     Editar pedido
-    </a>
+    
    </nav>
    <div class="px-6 mt-auto pt-6 border-t border-surface-container-high">
     <div class="flex items-center gap-3">
@@ -84,14 +74,12 @@
       </span>
      </div>
      <div>
-      <p class="text-[0.75rem] font-bold text-on-surface uppercase leading-none">
-       Root_Admin
-      </p>
-      <p class="text-[0.65rem] text-secondary">
-       Level 0 Access
-      </p>
+      <p class="text-[0.75rem] font-bold text-on-surface uppercase leading-none" id="sidebar-name">Root_Admin</p>
+      <p class="text-[0.65rem] text-secondary" id="sidebar-email">Level 0 Access</p>
      </div>
     </div>
+   
+    <button class="w-full mt-4 bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-2" onclick="window.Api.logout()">Cerrar sesión</button>
    </div>
   </aside>
   <!-- Main Content Canvas -->
@@ -108,11 +96,9 @@
       <span class="material-symbols-outlined text-sm text-primary" data-icon="search">
        search
       </span>
-      <input class="bg-transparent border-none focus:ring-0 text-[0.75rem] font-bold tracking-widest placeholder:text-secondary/30 uppercase w-48" placeholder="BUSCAR PERSONAL..." type="text"/>
+      <input class="bg-transparent border-none focus:ring-0 text-[0.75rem] font-bold tracking-widest placeholder:text-secondary/30 uppercase w-48" placeholder="BUSCAR PERSONAL..." type="text" oninput="renderUs(this.value)"/>
      </div>
-     <button class="bg-on-primary-container text-white px-6 py-2 text-[0.75rem] font-black uppercase tracking-widest hover:opacity-90 active:scale-95 transition-all">
-      Registrar Nuevo
-     </button>
+     
     </div>
    </header>
    <!-- KPI Strip / Asymmetric Layout Element -->
@@ -121,25 +107,19 @@
      <p class="text-[0.65rem] font-black text-secondary uppercase tracking-[0.2em] mb-1">
       Total Personal
      </p>
-     <p class="text-4xl font-black tracking-tighter text-on-surface">
-      128
-     </p>
+     <p class="text-4xl font-black tracking-tighter text-on-surface" id="kpi-total">0</p>
     </div>
     <div class="p-8 border-r border-surface-container-high">
      <p class="text-[0.65rem] font-black text-secondary uppercase tracking-[0.2em] mb-1">
       Activos
      </p>
-     <p class="text-4xl font-black tracking-tighter text-on-surface text-primary">
-      124
-     </p>
+     <p class="text-4xl font-black tracking-tighter text-on-surface text-primary" id="kpi-activos">0</p>
     </div>
     <div class="p-8 border-r border-surface-container-high">
      <p class="text-[0.65rem] font-black text-secondary uppercase tracking-[0.2em] mb-1">
       Admin Roles
      </p>
-     <p class="text-4xl font-black tracking-tighter text-on-surface">
-      12
-     </p>
+     <p class="text-4xl font-black tracking-tighter text-on-surface" id="kpi-admins">0</p>
     </div>
     <div class="p-8">
      <p class="text-[0.65rem] font-black text-secondary uppercase tracking-[0.2em] mb-1">
@@ -211,7 +191,24 @@
         try {
             const res = await window.Api.getUsuarios();
             const usuarios = res.data || [];
-            container.innerHTML = usuarios.map(u => `
+
+            document.getElementById('kpi-total').innerText = usuarios.length;
+            document.getElementById('kpi-activos').innerText = usuarios.length;
+            document.getElementById('kpi-admins').innerText = usuarios.filter(u => u.rol === 'admin').length;
+            document.getElementById('sidebar-name').innerText = localStorage.getItem('user_nombre') || 'Root_Admin';
+            document.getElementById('sidebar-email').innerText = localStorage.getItem('user_email') || 'N/A';
+
+                        window.all_us = usuarios;
+            renderUs("");
+        } catch (e) {
+            document.getElementById("personal_grid").innerHTML = '<p class="text-error p-8">Error cargando usuarios.</p>';
+        }
+    });
+
+    window.renderUs = (q) => {
+        const c = document.getElementById("personal_grid");
+        const list = window.all_us.filter(u => `${u.id} ${u.nombre} ${u.email} ${u.rol}`.toLowerCase().includes(q.toLowerCase()));
+        c.innerHTML = list.map(u => `
             <div class="grid grid-cols-12 gap-4 px-6 py-5 items-center bg-surface hover:bg-surface-bright transition-colors group cursor-default">
              <div class="col-span-1 font-mono text-xs text-secondary">#00${u.id}</div>
              <div class="col-span-3 font-bold text-[0.875rem] text-on-surface uppercase">${u.nombre}</div>
@@ -226,11 +223,9 @@
               </button>
              </div>
             </div>
-            `).join('');
-        } catch (e) {
-            container.innerHTML = '<p class="text-error p-8">Error cargando usuarios.</p>';
-        }
-    });
+        `).join('');
+    };
+
   </script>
  </body>
 </html>

@@ -25,13 +25,13 @@
      MACUIN INDUSTRIAL
     </span>
     <nav class="hidden md:flex items-center gap-6">
-     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="#">
+     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="/catalogo">
       Catalogo
      </a>
-     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/carrito">
       Carrito
      </a>
-     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/pedidos">
       Pedidos en curso
      </a>
     </nav>
@@ -41,9 +41,9 @@
      <span class="material-symbols-outlined text-secondary text-sm mr-2" data-icon="search">
       search
      </span>
-     <input class="bg-transparent border-none focus:ring-0 text-xs placeholder:text-outline p-0 w-48 uppercase tracking-widest" placeholder="BUSCAR SKU..." type="text"/>
+     <input class="bg-transparent border-none focus:ring-0 text-xs placeholder:text-outline p-0 w-48 uppercase tracking-widest" placeholder="BUSCAR SKU..." type="text" oninput="renderCat(this.value)"/>
     </div>
-    <button class="bg-[#1c2a41] text-[#c2c6d3] px-4 py-2 text-xs font-bold uppercase hover:bg-surface-bright transition-all duration-150">
+    <button class="bg-[#1c2a41] text-[#c2c6d3] px-4 py-2 text-xs font-bold uppercase hover:bg-surface-bright transition-all duration-150" onclick="window.Api.logout()">
      Cerrar Sesi&oacute;n
     </button>
    </div>
@@ -76,11 +76,28 @@
   <!-- Bottom Navigation for Mobile -->
   <script>
    document.addEventListener("DOMContentLoaded", async () => {
-        const container = document.getElementById("catalogo_grid");
+        window.all_prod = [];
         try {
             const res = await window.Api.getProductos();
-            const productos = res.data || [];
-            container.innerHTML = productos.map(p => `
+            window.all_prod = res.data || [];
+            renderCat("");
+        } catch (e) {
+            document.getElementById("catalogo_grid").innerHTML = '<p class="p-8 text-error">Error cargando catálogo.</p>';
+        }
+    });
+
+    window.addToCart = (id) => {
+        let cart = JSON.parse(localStorage.getItem('macuin_cart') || '[]');
+        let item = cart.find(x => x.id == id);
+        if(item) { item.qty += 1; } else { cart.push({id: id, qty: 1}); }
+        localStorage.setItem('macuin_cart', JSON.stringify(cart));
+        alert('Producto agregado al carrito!');
+    };
+
+    window.renderCat = (query) => {
+        const c = document.getElementById("catalogo_grid");
+        const list = window.all_prod.filter(p => `${p.id} ${p.nombre} ${p.fabricante}`.toLowerCase().includes(query.toLowerCase()));
+        c.innerHTML = list.map(p => `
             <div class="bg-surface-container-low group border-b border-r border-outline-variant/10 p-8 flex flex-col justify-between aspect-square transition-all duration-300 hover:bg-surface-container-high">
              <div class="flex justify-between items-start">
               <span class="text-[0.65rem] font-bold text-outline uppercase tracking-[0.2em]">MAC-${p.id}</span>
@@ -92,16 +109,33 @@
                <span class="text-2xl font-black text-on-surface tracking-tighter">$${p.precio}</span>
                <span class="text-[0.65rem] text-secondary font-bold uppercase tracking-widest">USD / UNIT</span>
               </div>
-              <button class="w-full bg-on-primary-container text-white py-3 font-black text-[0.75rem] uppercase tracking-widest transition-all active:scale-95 duration-100 flex items-center justify-center gap-2">
+                            <button onclick="window.location.href='/producto?id=' + p.id" class="w-full bg-on-primary-container text-white py-3 font-black text-[0.75rem] uppercase tracking-widest transition-all active:scale-95 duration-100 flex items-center justify-center gap-2">
                Ver detalles <span class="material-symbols-outlined text-sm">chevron_right</span>
+              </button>
+              <button onclick="addToCart(${p.id})" class="w-full mt-2 bg-surface-container-highest text-primary py-3 font-black text-[0.75rem] uppercase tracking-widest transition-all active:scale-95 hover:bg-surface-bright duration-100 flex items-center justify-center gap-2">
+               <span class="material-symbols-outlined text-sm">add_shopping_cart</span> Al Carrito
               </button>
              </div>
             </div>
-            `).join('');
-        } catch (e) {
-            container.innerHTML = '<p class="p-8 text-error">Error cargando catálogo.</p>';
-        }
-    });
+        `).join('');
+    };
+
   </script>
- </body>
+ 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const path = window.location.pathname;
+        const links = document.querySelectorAll('header nav a');
+        links.forEach(l => {
+            const href = l.getAttribute('href');
+            if(path.includes(href) && href !== '/') {
+                l.className = "text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1";
+            } else {
+                l.className = "text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150";
+            }
+        });
+    });
+</script>
+
+</body>
 </html>

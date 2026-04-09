@@ -15,33 +15,35 @@
   </script>
  </head>
  <body class="font-body antialiased selection:bg-on-primary-container selection:text-white">
-  <!-- TopNavBar -->
-  <nav class="fixed top-0 z-50 w-full bg-[#041329] flex justify-between items-center px-8 h-16">
+  <header class="bg-[#041329] flex justify-between items-center w-full px-8 h-16 fixed top-0 z-50 font-['Inter'] text-[0.875rem] font-medium tracking-wide">
    <div class="flex items-center gap-8">
     <span class="text-lg font-black tracking-tighter text-[#ffb3b1]">
      MACUIN INDUSTRIAL
     </span>
-    <div class="hidden md:flex gap-6 font-['Inter'] text-[0.875rem] font-medium tracking-wide">
-     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
+    <nav class="hidden md:flex items-center gap-6">
+     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="/catalogo">
       Catalogo
      </a>
-     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="#">
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/carrito">
       Carrito
      </a>
-     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/pedidos">
       Pedidos en curso
      </a>
-    </div>
+    </nav>
    </div>
-   <div class="flex items-center gap-4">
-    <div class="relative hidden lg:block">
-     <input class="bg-surface-container-high border-none text-xs tracking-widest px-4 py-2 w-64 focus:ring-1 focus:ring-primary" placeholder="BUSCAR COMPONENTE..." type="text"/>
+   <div class="flex items-center gap-6">
+    <div class="hidden lg:flex items-center bg-surface-container-high px-3 py-1.5 border-b-2 border-outline-variant">
+     <span class="material-symbols-outlined text-secondary text-sm mr-2" data-icon="search">
+      search
+     </span>
+     <input class="bg-transparent border-none focus:ring-0 text-xs placeholder:text-outline p-0 w-48 uppercase tracking-widest" placeholder="BUSCAR SKU..." type="text" oninput="renderCat(this.value)"/>
     </div>
-    <button class="bg-[#1c2a41] px-4 py-2 text-[0.875rem] font-medium text-[#ffb3b1] hover:bg-[#27354c] transition-all active:scale-95 duration-100">
+    <button class="bg-[#1c2a41] text-[#c2c6d3] px-4 py-2 text-xs font-bold uppercase hover:bg-surface-bright transition-all duration-150" onclick="window.Api.logout()">
      Cerrar Sesi&oacute;n
     </button>
    </div>
-  </nav>
+  </header>
   <main class="pt-24 pb-12 px-8 max-w-7xl mx-auto">
    <header class="mb-12">
     <h1 class="text-3xl font-black tracking-tighter text-on-surface uppercase mb-2">
@@ -64,17 +66,13 @@
        <span class="text-xs uppercase font-bold text-secondary">
         Subtotal Log&iacute;stico
        </span>
-       <span class="text-sm font-mono">
-        $1,757.50
-       </span>
+       <span id="c-sub" class="text-sm font-mono">$0.00</span>
       </div>
       <div class="flex justify-between items-baseline">
        <span class="text-xs uppercase font-bold text-secondary">
         Impuestos Estimados (IVA 16%)
        </span>
-       <span class="text-sm font-mono">
-        $281.20
-       </span>
+       <span id="c-iva" class="text-sm font-mono">$0.00</span>
       </div>
      </div>
     </section>
@@ -83,14 +81,14 @@
      <h2 class="text-xs font-bold uppercase tracking-widest text-primary mb-8">
       Informaci&oacute;n de Despacho
      </h2>
-     <form class="space-y-8">
+     <form id="form-pago" class="space-y-8">
       <!-- Address Fields -->
       <div class="space-y-6">
        <div class="relative">
         <label class="block text-[10px] uppercase font-black tracking-tighter text-secondary mb-1">
          Direcci&oacute;n de Entrega Industrial
         </label>
-        <input class="w-full bg-surface-container-highest border-none border-b-2 border-outline-variant/30 text-on-surface text-sm p-3 focus:ring-0 focus:border-on-primary-container transition-all" type="text" value="Calle de la Industria #402, Zona Industrial"/>
+        <input class="w-full bg-surface-container-highest border-none border-b-2 border-outline-variant/30 text-on-surface text-sm p-3 focus:ring-0 focus:border-on-primary-container transition-all" type="text" id="c-dir" value="Calle de la Industria #402, Zona Industrial"/>
        </div>
        <div class="grid grid-cols-2 gap-4">
         <div class="relative">
@@ -103,7 +101,7 @@
          <label class="block text-[10px] uppercase font-black tracking-tighter text-secondary mb-1">
           Tel&eacute;fono de Enlace
          </label>
-         <input class="w-full bg-surface-container-highest border-none border-b-2 border-outline-variant/30 text-on-surface text-sm p-3 focus:ring-0 focus:border-on-primary-container transition-all" type="tel" value="+52 442 198 2233"/>
+         <input class="w-full bg-surface-container-highest border-none border-b-2 border-outline-variant/30 text-on-surface text-sm p-3 focus:ring-0 focus:border-on-primary-container transition-all" type="tel" id="c-tel" value="+52 442 198 2233"/>
         </div>
        </div>
       </div>
@@ -124,7 +122,7 @@
           N&uacute;mero de Tarjeta de Cr&eacute;dito/D&eacute;bito
          </label>
          <div class="relative flex items-center">
-          <input class="w-full bg-surface-container-highest border-none border-b-2 border-outline-variant/30 text-on-surface text-sm p-3 focus:ring-0 focus:border-on-primary-container transition-all pr-12" placeholder="**** **** **** 4421" type="text"/>
+          <input class="w-full bg-surface-container-highest border-none border-b-2 border-outline-variant/30 text-on-surface text-sm p-3 focus:ring-0 focus:border-on-primary-container transition-all pr-12" id="c-tarj" placeholder="**** **** **** 4421" required type="text"/>
           <span class="absolute right-3 material-symbols-outlined text-secondary text-lg">
            credit_card
           </span>
@@ -152,11 +150,9 @@
         <span class="text-xs uppercase font-black tracking-tighter text-on-surface">
          Total Final Facturado
         </span>
-        <span class="text-3xl font-black tracking-tighter text-primary">
-         $2,038.70
-        </span>
+        <span id="c-tot" class="text-3xl font-black tracking-tighter text-primary">$0.00</span>
        </div>
-       <button class="w-full bg-on-primary-container text-white text-sm font-black uppercase tracking-[0.2em] py-5 px-8 hover:bg-opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-3" type="button">
+       <button class="w-full bg-on-primary-container text-white text-sm font-black uppercase tracking-[0.2em] py-5 px-8 hover:bg-opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-3" type="submit">
         Proceed to Summary
         <span class="material-symbols-outlined text-lg">
          arrow_forward
@@ -168,18 +164,85 @@
    </div>
   </main>
   <!-- Bottom Mobile Nav -->
-  <script>
-   document.addEventListener("DOMContentLoaded", () => {
+  
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
         const container = document.getElementById("carrito_grid");
-        // Simulated empty cart since cart is mostly local storage in these systems
-        container.innerHTML = `
-            <div class="p-12 text-center border border-dashed border-outline-variant/30 flex flex-col items-center justify-center">
-                <span class="material-symbols-outlined text-4xl text-outline-variant mb-4">shopping_cart</span>
-                <p class="text-secondary text-sm font-bold uppercase tracking-widest">El carrito de compras está vacío.</p>
-                <a href="/catalogo" class="mt-6 text-primary text-xs font-black uppercase tracking-tighter hover:underline">Explorar Catálogo</a>
-            </div>
-        `;
+        let cart = JSON.parse(localStorage.getItem('macuin_cart') || '[]');
+        if(cart.length === 0) {
+            container.innerHTML = `
+                <div class="p-12 text-center border border-dashed border-outline-variant/30 flex flex-col items-center justify-center">
+                    <span class="material-symbols-outlined text-4xl text-outline-variant mb-4">shopping_cart</span>
+                    <p class="text-secondary text-sm font-bold uppercase tracking-widest">El carrito de compras está vacío.</p>
+                    <a href="/catalogo" class="mt-6 text-primary text-xs font-black uppercase tracking-tighter hover:underline">Explorar Catálogo</a>
+                </div>`;
+            return;
+        }
+        
+        try {
+            const res = await window.Api.getProductos();
+            const prods = res.data || [];
+            let subtotal = 0;
+            let html = '';
+            
+            cart.forEach(item => {
+                const p = prods.find(x => x.id == item.id);
+                if(p) {
+                    const lineTot = item.qty * parseFloat(p.precio);
+                    subtotal += lineTot;
+                    html += `
+                    <div class="flex items-center justify-between p-4 bg-surface-container-low border border-outline-variant/10">
+                        <div>
+                            <p class="text-sm font-bold text-on-surface uppercase">${p.nombre}</p>
+                            <p class="text-[0.65rem] text-secondary uppercase tracking-widest">Q: ${item.qty} | SKU: MAC-${p.id}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-mono font-bold">${lineTot.toLocaleString('en-US',{style:'currency',currency:'USD'})}</p>
+                        </div>
+                    </div>`;
+                }
+            });
+            
+            container.innerHTML = html;
+            const iva = subtotal * 0.16;
+            const final = subtotal + iva;
+            
+            document.getElementById('c-sub').innerText = subtotal.toLocaleString('en-US',{style:'currency',currency:'USD'});
+            document.getElementById('c-iva').innerText = iva.toLocaleString('en-US',{style:'currency',currency:'USD'});
+            document.getElementById('c-tot').innerText = final.toLocaleString('en-US',{style:'currency',currency:'USD'});
+            
+        } catch(e) { console.error(e); }
+        
+        let formPago = document.getElementById('form-pago');
+                if(formPago) {
+            formPago.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const dir = document.getElementById('c-dir');
+                const tel = document.getElementById('c-tel');
+                const tarj = document.getElementById('c-tarj');
+                if(!tarj || !tarj.value) return alert('Datos Incompletos');
+                localStorage.setItem('macuin_checkout_data', JSON.stringify({direccion: dir.value, telefono: tel.value, tarjeta: tarj.value}));
+                window.location.href = '/resumen';
+            });
+        }
     });
-  </script>
- </body>
+</script>
+
+ 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const path = window.location.pathname;
+        const links = document.querySelectorAll('header nav a');
+        links.forEach(l => {
+            const href = l.getAttribute('href');
+            if(path.includes(href) && href !== '/') {
+                l.className = "text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1";
+            } else {
+                l.className = "text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150";
+            }
+        });
+    });
+</script>
+
+</body>
 </html>

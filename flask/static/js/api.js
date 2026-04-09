@@ -29,11 +29,13 @@ const Api = {
         localStorage.setItem('user_email', data.email);
         localStorage.setItem('user_id', data.usuario_id);
         localStorage.setItem('user_rol', data.rol);
+        localStorage.setItem('user_nombre', data.nombre);
         alert(data.mensaje);
         
         // Redirect logic based on role
         if (data.rol === 'admin' || data.rol === 'staff') {
-            window.location.href = '/personal'; // Ajusta la ruta a tu admin dashboard
+            alert('Acceso denegado: El portal de usuarios es solo para clientes.');
+            localStorage.clear();
         } else {
             window.location.href = '/catalogo'; // Ajusta la ruta a tu tienda (Usuario)
         }

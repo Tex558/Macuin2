@@ -26,55 +26,45 @@
     </h1>
    </div>
    <nav class="flex-1 space-y-1">
-    <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="#">
+    <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="/dashboard">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="dashboard">
       dashboard
      </span>
      General
     </a>
-    <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="#">
+    <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="/personal">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="badge">
       badge
      </span>
      Gestion de personal
     </a>
-    <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="#">
+    <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="/registrar-admin">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="person_add">
       person_add
      </span>
      Registrar administrador
     </a>
     <!-- Active Tab: Gestion de productos -->
-    <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#ffb3b1] bg-[#1c2a41] border-l-4 border-[#ee3f4b] pl-3 transition-colors duration-150" href="#">
+    <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#ffb3b1] bg-[#1c2a41] border-l-4 border-[#ee3f4b] pl-3 transition-colors duration-150" href="/productos">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="inventory_2">
       inventory_2
      </span>
      Gestion de productos
     </a>
-    <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="#">
+    <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="/agregar-producto">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="add_box">
       add_box
      </span>
      Agregar producto
     </a>
-    <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="#">
-     <span class="material-symbols-outlined mr-3 text-lg" data-icon="edit_note">
-      edit_note
-     </span>
-     Editar producto
-    </a>
-    <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="#">
+    
+    <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="/pedidos">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="list_alt">
       list_alt
      </span>
      Ver pedidos
     </a>
-    <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="#">
-     <span class="material-symbols-outlined mr-3 text-lg" data-icon="edit_calendar">
-      edit_calendar
-     </span>
-     Editar pedido
-    </a>
+    
    </nav>
   </aside>
   <!-- Main Content Canvas -->
@@ -91,14 +81,9 @@
       <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-secondary text-sm" data-icon="search">
        search
       </span>
-      <input class="bg-surface-container-highest border-none text-[0.75rem] pl-10 pr-4 py-2 w-64 focus:ring-1 focus:ring-on-primary-container placeholder:text-secondary/50" placeholder="BUSCAR SKU O NOMBRE..." type="text"/>
+      <input class="bg-surface-container-highest border-none text-[0.75rem] pl-10 pr-4 py-2 w-64 focus:ring-1 focus:ring-on-primary-container placeholder:text-secondary/50" placeholder="BUSCAR SKU O NOMBRE..." type="text" oninput="renderPr(this.value)"/>
      </div>
-     <button class="bg-on-primary-container text-white px-6 py-2 text-[0.75rem] font-black tracking-widest uppercase flex items-center gap-2 hover:bg-on-primary-fixed-variant transition-colors active:scale-95 duration-100">
-      <span class="material-symbols-outlined text-sm" data-icon="add">
-       add
-      </span>
-      Nuevo Producto
-     </button>
+     
     </div>
    </header>
    <!-- Product Dashboard Grid -->
@@ -220,12 +205,12 @@
   </main>
   <!-- Contextual Floating Action Button -->
   <script>
-   document.addEventListener("DOMContentLoaded", async () => {
-        const container = document.getElementById("productos_grid");
-        try {
-            const res = await window.Api.getProductos();
-            const productos = res.data || [];
-            container.innerHTML = productos.map(p => `
+   
+   window.all_pr = [];
+   window.renderPr = (q) => {
+       const container = document.getElementById("productos_grid");
+       const filtered = window.all_pr.filter(p => `${p.id} ${p.nombre} ${p.fabricante}`.toLowerCase().includes(q.toLowerCase()));
+       container.innerHTML = filtered.map(p => `
             <div class="grid grid-cols-12 gap-4 px-6 py-5 hover:bg-surface-bright transition-colors items-center group">
              <div class="col-span-1 font-mono text-[0.75rem] text-secondary">MAC-${p.id}</div>
              <div class="col-span-4"><p class="text-[0.875rem] font-bold text-on-surface uppercase">${p.nombre}</p></div>
@@ -234,12 +219,22 @@
              <div class="col-span-1 text-right font-mono text-[0.875rem]">${p.stock}</div>
              <div class="col-span-1 flex justify-center"><div class="w-2 h-2 ${p.stock > 10 ? 'bg-green-500' : 'bg-on-primary-container animate-pulse'} rounded-full"></div></div>
              <div class="col-span-2 flex justify-end gap-2 opacity-40 group-hover:opacity-100 transition-opacity">
+              <a href="/editar-producto?id=${p.id}" class="p-2 hover:bg-primary-container text-secondary hover:text-on-primary-container transition-colors">
+               <span class="material-symbols-outlined text-lg">edit_note</span>
+              </a>
               <button class="p-2 hover:bg-primary-container text-secondary hover:text-on-primary-container transition-colors" onclick="if(confirm('¿Eliminar?')) window.Api.eliminarProducto(${p.id}).then(()=>location.reload())">
                <span class="material-symbols-outlined text-lg">delete</span>
               </button>
              </div>
             </div>
-            `).join('');
+       `).join('');
+   };
+   document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const res = await window.Api.getProductos();
+            window.all_pr = res.data || [];
+            renderPr("");
+
         } catch (e) {
             container.innerHTML = '<p class="p-8 text-error">Error cargando productos.</p>';
         }

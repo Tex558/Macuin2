@@ -17,36 +17,35 @@
   </script>
  </head>
  <body class="antialiased industrial-grid">
-  <!-- TopNavBar -->
-  <nav class="flex justify-between items-center w-full px-8 h-16 bg-[#041329] dark:bg-[#041329] font-['Inter'] text-[0.875rem] font-medium tracking-wide fixed top-0 z-50">
-   <div class="text-lg font-black tracking-tighter text-[#ffb3b1]">
-    MACUIN INDUSTRIAL
+  <header class="bg-[#041329] flex justify-between items-center w-full px-8 h-16 fixed top-0 z-50 font-['Inter'] text-[0.875rem] font-medium tracking-wide">
+   <div class="flex items-center gap-8">
+    <span class="text-lg font-black tracking-tighter text-[#ffb3b1]">
+     MACUIN INDUSTRIAL
+    </span>
+    <nav class="hidden md:flex items-center gap-6">
+     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="/catalogo">
+      Catalogo
+     </a>
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/carrito">
+      Carrito
+     </a>
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/pedidos">
+      Pedidos en curso
+     </a>
+    </nav>
    </div>
-   <div class="hidden md:flex items-center space-x-8">
-    <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
-     Catalogo
-    </a>
-    <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
-     Carrito
-    </a>
-    <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
-     Pedidos en curso
-    </a>
-   </div>
-   <div class="flex items-center space-x-6">
-    <div class="relative hidden lg:block">
-     <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-[#c2c6d3]">
-      <span class="material-symbols-outlined text-sm">
-       search
-      </span>
+   <div class="flex items-center gap-6">
+    <div class="hidden lg:flex items-center bg-surface-container-high px-3 py-1.5 border-b-2 border-outline-variant">
+     <span class="material-symbols-outlined text-secondary text-sm mr-2" data-icon="search">
+      search
      </span>
-     <input class="bg-[#1c2a41] border-none text-sm pl-10 pr-4 py-2 w-64 focus:ring-1 focus:ring-[#ee3f4b]" placeholder="BUSCAR SKU / MODELO" type="text"/>
+     <input class="bg-transparent border-none focus:ring-0 text-xs placeholder:text-outline p-0 w-48 uppercase tracking-widest" placeholder="BUSCAR SKU..." type="text" oninput="renderCat(this.value)"/>
     </div>
-    <button class="bg-[#1c2a41] text-[#ffb3b1] px-4 py-2 text-xs font-bold uppercase tracking-widest hover:bg-[#27354c] transition-colors">
+    <button class="bg-[#1c2a41] text-[#c2c6d3] px-4 py-2 text-xs font-bold uppercase hover:bg-surface-bright transition-all duration-150" onclick="window.Api.logout()">
      Cerrar Sesi&oacute;n
     </button>
    </div>
-  </nav>
+  </header>
   <main class="pt-24 pb-12 px-8 max-w-7xl mx-auto min-h-screen">
    <!-- Back Action -->
    <div class="mb-12">
@@ -63,31 +62,21 @@
     <!-- Left Side: Product Specifications (Technical Layout) -->
     <div class="lg:col-span-7 bg-[#0d1c32] p-12 flex flex-col justify-between">
      <div>
-      <h1 class="text-4xl md:text-6xl font-black tracking-tighter text-[#d6e3ff] mb-4 leading-none uppercase">
-       V&aacute;lvula de Control
-       <br/>
-       Serie-K Pro
-      </h1>
-      <p class="text-[#c2c6d3] text-lg max-w-xl font-light leading-relaxed">
-       Actuador neum&aacute;tico de alta precisi&oacute;n dise&ntilde;ado para entornos industriales de flujo constante. Sellado reforzado con aleaci&oacute;n de titanio.
-      </p>
+      <h1 id="p-name" class="text-4xl md:text-6xl font-black tracking-tighter text-[#d6e3ff] mb-4 leading-none uppercase"></h1>
+      <p id="p-desc" class="text-[#c2c6d3] text-lg max-w-xl font-light leading-relaxed"></p>
      </div>
      <div class="mt-16 grid grid-cols-2 gap-12 border-t border-[#1c2a41] pt-12">
       <div>
        <span class="block text-[0.7rem] font-bold text-[#ffb3b1] uppercase tracking-[0.3em] mb-2">
         Fabricante
        </span>
-       <span class="text-2xl font-bold text-[#d6e3ff] tracking-tight">
-        INDUSTRIAS HEAVY-TECH
-       </span>
+       <span id="p-fab" class="text-2xl font-bold text-[#d6e3ff] tracking-tight"></span>
       </div>
       <div>
        <span class="block text-[0.7rem] font-bold text-[#ffb3b1] uppercase tracking-[0.3em] mb-2">
         Categor&iacute;a
        </span>
-       <span class="text-2xl font-bold text-[#d6e3ff] tracking-tight">
-        HIDR&Aacute;ULICA PESADA
-       </span>
+       <span id="p-cat" class="text-2xl font-bold text-[#d6e3ff] tracking-tight">---</span>
       </div>
      </div>
     </div>
@@ -98,12 +87,7 @@
        <span class="block text-[0.7rem] font-bold text-[#c2c6d3] uppercase tracking-[0.3em] mb-2">
         Precio Unitario
        </span>
-       <div class="text-5xl font-mono font-bold text-[#d6e3ff] tracking-tighter">
-        $2,499.00
-        <span class="text-sm font-sans text-[#c2c6d3] tracking-normal">
-         MXN
-        </span>
-       </div>
+       <div id="p-price" class="text-5xl font-mono font-bold text-[#d6e3ff] tracking-tighter">$0.00 <span class="text-sm font-sans text-[#c2c6d3] tracking-normal">USD</span></div>
       </div>
      </div>
      <div class="space-y-4">
@@ -112,22 +96,12 @@
         Cantidad
        </span>
        <div class="flex items-center space-x-6">
-        <button class="text-[#ffb3b1] hover:text-[#ee3f4b]">
-         <span class="material-symbols-outlined">
-          remove
-         </span>
-        </button>
-        <span class="text-xl font-bold text-[#d6e3ff]">
-         01
-        </span>
-        <button class="text-[#ffb3b1] hover:text-[#ee3f4b]">
-         <span class="material-symbols-outlined">
-          add
-         </span>
-        </button>
+        <button onclick="modQty(-1)" class="text-[#ffb3b1] hover:text-[#ee3f4b]"><span class="material-symbols-outlined">remove</span></button>
+        <span id="p-qty" class="text-xl font-bold text-[#d6e3ff]">1</span>
+        <button onclick="modQty(1)" class="text-[#ffb3b1] hover:text-[#ee3f4b]"><span class="material-symbols-outlined">add</span></button>
        </div>
       </div>
-      <button class="w-full py-6 bg-gradient-to-tr from-[#ee3f4b] to-[#ffb3b1] text-[#3c0006] font-black text-sm uppercase tracking-[0.25em] transition-all active:scale-95 flex items-center justify-center space-x-3">
+      <button id="btn-add" class="w-full py-6 bg-gradient-to-tr from-[#ee3f4b] to-[#ffb3b1] text-[#3c0006] font-black text-sm uppercase tracking-[0.25em] transition-all active:scale-95 flex items-center justify-center space-x-3">
        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">
         shopping_cart
        </span>
@@ -141,5 +115,57 @@
    <!-- Technical Specs Grid -->
   </main>
   <!-- Footer Meta -->
- </body>
+ 
+<script>
+    let curProdId = null;
+    let qty = 1;
+    window.modQty = function(d) {
+        qty = Math.max(1, qty + d);
+        document.getElementById('p-qty').innerText = qty;
+    }
+    document.addEventListener("DOMContentLoaded", async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        if(!id) return;
+        try {
+            const res = await window.Api.getProductos();
+            const p = res.data.find(x => x.id == id);
+            if(p) {
+                curProdId = p.id;
+                document.getElementById('p-name').innerText = p.nombre;
+                document.getElementById('p-desc').innerText = p.especificaciones || 'No specifications provided.';
+                document.getElementById('p-fab').innerText = p.fabricante;
+                document.getElementById('p-price').innerHTML = `$${p.precio} <span class="text-sm font-sans text-[#c2c6d3] tracking-normal">USD</span>`;
+            }
+        } catch(e) { console.error(e); }
+        
+        document.getElementById('btn-add').addEventListener('click', () => {
+            if(!curProdId) return;
+            let cart = JSON.parse(localStorage.getItem('macuin_cart') || '[]');
+            let item = cart.find(x => x.id == curProdId);
+            if(item) item.qty += qty; else cart.push({id: curProdId, qty: qty});
+            localStorage.setItem('macuin_cart', JSON.stringify(cart));
+            alert('Producto agregado al carrito!');
+            window.location.href='/carrito';
+        });
+    });
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const path = window.location.pathname;
+        const links = document.querySelectorAll('header nav a');
+        links.forEach(l => {
+            const href = l.getAttribute('href');
+            if(path.includes(href) && href !== '/') {
+                l.className = "text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1";
+            } else {
+                l.className = "text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150";
+            }
+        });
+    });
+</script>
+
+</body>
 </html>

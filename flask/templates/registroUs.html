@@ -40,14 +40,14 @@
        REGISTRAR NUEVO USUARIO
       </h2>
      </div>
-     <form class="space-y-6">
+     <form class="space-y-6" onsubmit="event.preventDefault(); window.Api.crearUsuario({nombre: this.nombre.value, email: this.email.value, password: this.password.value, rol: 'user'}).then(() => { alert('Usuario registrado con éxito. Ya puedes iniciar sesión.'); window.location.href='/'; }).catch(e => alert(e.message || 'Error al registrar usuario'));">
       <!-- Field: Name -->
       <div class="space-y-1.5">
        <label class="block text-[0.75rem] font-bold uppercase tracking-wider text-secondary" for="name">
         NOMBRE COMPLETO
        </label>
        <div class="relative group">
-        <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-container text-on-surface py-3 px-4 focus:border-on-primary-container transition-colors duration-200 placeholder:text-secondary/30 text-[0.875rem]" id="name" placeholder="P. Ej. ING. ARTURO P&Eacute;REZ" type="text"/>
+        <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-container text-on-surface py-3 px-4 focus:border-on-primary-container transition-colors duration-200 placeholder:text-secondary/30 text-[0.875rem]" id="name" name="nombre" placeholder="P. Ej. ING. ARTURO P&Eacute;REZ" type="text" required/>
        </div>
       </div>
       <!-- Field: Email -->
@@ -56,7 +56,7 @@
         CORREO ELECTR&Oacute;NICO INSTITUCIONAL
        </label>
        <div class="relative group">
-        <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-container text-on-surface py-3 px-4 focus:border-on-primary-container transition-colors duration-200 placeholder:text-secondary/30 text-[0.875rem]" id="email" placeholder="usuario@macuin.com" type="email"/>
+        <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-container text-on-surface py-3 px-4 focus:border-on-primary-container transition-colors duration-200 placeholder:text-secondary/30 text-[0.875rem]" id="email" name="email" placeholder="usuario@macuin.com" type="email" required/>
        </div>
       </div>
       <!-- Field: Password -->
@@ -65,7 +65,7 @@
         CONTRASE&Ntilde;A DEL SISTEMA
        </label>
        <div class="relative group">
-        <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-container text-on-surface py-3 px-4 focus:border-on-primary-container transition-colors duration-200 placeholder:text-secondary/30 text-[0.875rem]" id="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"/>
+        <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-container text-on-surface py-3 px-4 focus:border-on-primary-container transition-colors duration-200 placeholder:text-secondary/30 text-[0.875rem]" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password" required/>
        </div>
       </div>
       <!-- Action Area -->

@@ -18,21 +18,36 @@
   </script>
  </head>
  <body class="bg-surface text-on-surface antialiased overflow-hidden">
-  <div class="min-h-screen w-full flex flex-col industrial-grid">
-   <header class="flex justify-between items-center w-full px-8 h-16 bg-surface-container-low">
-    <div class="text-lg font-black tracking-tighter text-primary">
+  <header class="bg-[#041329] flex justify-between items-center w-full px-8 h-16 fixed top-0 z-50 font-['Inter'] text-[0.875rem] font-medium tracking-wide">
+   <div class="flex items-center gap-8">
+    <span class="text-lg font-black tracking-tighter text-[#ffb3b1]">
      MACUIN INDUSTRIAL
-    </div>
-    <div class="flex items-center gap-6">
-     <span class="text-secondary font-medium text-[0.875rem] tracking-wide uppercase">
-      Confirmaci&oacute;n de Orden
+    </span>
+    <nav class="hidden md:flex items-center gap-6">
+     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="/catalogo">
+      Catalogo
+     </a>
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/carrito">
+      Carrito
+     </a>
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/pedidos">
+      Pedidos en curso
+     </a>
+    </nav>
+   </div>
+   <div class="flex items-center gap-6">
+    <div class="hidden lg:flex items-center bg-surface-container-high px-3 py-1.5 border-b-2 border-outline-variant">
+     <span class="material-symbols-outlined text-secondary text-sm mr-2" data-icon="search">
+      search
      </span>
-     <button class="material-symbols-outlined text-secondary hover:text-primary transition-colors cursor-pointer">
-      close
-     </button>
+     <input class="bg-transparent border-none focus:ring-0 text-xs placeholder:text-outline p-0 w-48 uppercase tracking-widest" placeholder="BUSCAR SKU..." type="text" oninput="renderCat(this.value)"/>
     </div>
-   </header>
-   <main class="flex-grow flex items-center justify-center p-6">
+    <button class="bg-[#1c2a41] text-[#c2c6d3] px-4 py-2 text-xs font-bold uppercase hover:bg-surface-bright transition-all duration-150" onclick="window.Api.logout()">
+     Cerrar Sesi&oacute;n
+    </button>
+   </div>
+  </header>
+  <main class="flex-grow flex items-center justify-center p-6">
     <div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-12 gap-0 bg-surface-container-high outline outline-1 outline-white/5 relative">
      <div class="md:col-span-12 p-12 flex flex-col items-center text-center space-y-8">
       <div class="w-20 h-20 bg-primary-container flex items-center justify-center border-2 border-on-primary-container mb-4">
@@ -96,5 +111,21 @@
     </div>
    </main>
   </div>
- </body>
+ 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const path = window.location.pathname;
+        const links = document.querySelectorAll('header nav a');
+        links.forEach(l => {
+            const href = l.getAttribute('href');
+            if(path.includes(href) && href !== '/') {
+                l.className = "text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1";
+            } else {
+                l.className = "text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150";
+            }
+        });
+    });
+</script>
+
+</body>
 </html>

@@ -36,7 +36,7 @@
          person
         </span>
        </div>
-       <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 pl-8 text-on-surface font-label text-sm tracking-widest placeholder:text-secondary-fixed-dim/30 focus:border-on-primary-container transition-colors duration-150 rounded-none" id="username" placeholder="OPERATOR_ID" type="text"/>
+       <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 pl-8 text-on-surface font-label text-sm tracking-widest placeholder:text-secondary-fixed-dim/30 focus:border-on-primary-container transition-colors duration-150 rounded-none" id="email" name="email" placeholder="OPERATOR_ID" type="email"/>
       </div>
      </div>
      <!-- Password Input -->
@@ -50,17 +50,23 @@
          lock
         </span>
        </div>
-       <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 pl-8 text-on-surface font-label text-sm tracking-widest placeholder:text-secondary-fixed-dim/30 focus:border-on-primary-container transition-colors duration-150 rounded-none" id="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"/>
+       <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 pl-8 text-on-surface font-label text-sm tracking-widest placeholder:text-secondary-fixed-dim/30 focus:border-on-primary-container transition-colors duration-150 rounded-none" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"/>
       </div>
      </div>
      <!-- Action Section -->
-     <div class="pt-4">
+     <div class="pt-4 flex flex-col gap-4">
       <button class="w-full bg-on-primary-container hover:bg-on-primary-container/90 text-on-primary font-black font-label text-[0.875rem] uppercase tracking-widest py-4 rounded-none transition-all duration-150 active:scale-[0.98] shadow-lg shadow-on-primary-container/10 flex items-center justify-center gap-2" type="submit">
        Execute Login
        <span class="material-symbols-outlined text-[1.25rem]" data-icon="terminal">
         terminal
        </span>
       </button>
+      <a href="/registro" class="w-full bg-surface-container-highest hover:bg-surface-container-highest/80 text-on-surface font-black font-label text-[0.875rem] uppercase tracking-widest py-4 rounded-none border border-secondary-fixed-dim transition-all duration-150 active:scale-[0.98] shadow-lg flex items-center justify-center gap-2 text-center">
+       Crear Cuenta
+       <span class="material-symbols-outlined text-[1.25rem]" data-icon="person_add">
+        person_add
+       </span>
+      </a>
      </div>
     </form>
     <!-- Technical Metadata Footer -->

@@ -24,7 +24,7 @@
    </div>
    <nav class="flex-1 space-y-1 overflow-y-auto">
     <!-- General -->
-    <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="#">
+    <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/dashboard">
      <span class="material-symbols-outlined text-lg" data-icon="dashboard">
       dashboard
      </span>
@@ -33,7 +33,7 @@
      </span>
     </a>
     <!-- Gestion de personal -->
-    <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="#">
+    <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/personal">
      <span class="material-symbols-outlined text-lg" data-icon="badge">
       badge
      </span>
@@ -42,7 +42,7 @@
      </span>
     </a>
     <!-- Registrar administrador -->
-    <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="#">
+    <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/registrar-admin">
      <span class="material-symbols-outlined text-lg" data-icon="person_add">
       person_add
      </span>
@@ -51,7 +51,7 @@
      </span>
     </a>
     <!-- Gestion de productos -->
-    <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="#">
+    <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/productos">
      <span class="material-symbols-outlined text-lg" data-icon="inventory_2">
       inventory_2
      </span>
@@ -60,7 +60,7 @@
      </span>
     </a>
     <!-- Agregar producto -->
-    <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="#">
+    <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/agregar-producto">
      <span class="material-symbols-outlined text-lg" data-icon="add_box">
       add_box
      </span>
@@ -69,16 +69,9 @@
      </span>
     </a>
     <!-- Editar producto (ACTIVE) -->
-    <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#ffb3b1] bg-[#1c2a41] border-l-4 border-[#ee3f4b] pl-3" href="#">
-     <span class="material-symbols-outlined text-lg" data-icon="edit_note">
-      edit_note
-     </span>
-     <span>
-      Editar producto
-     </span>
-    </a>
+    
     <!-- Ver pedidos -->
-    <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="#">
+    <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/pedidos">
      <span class="material-symbols-outlined text-lg" data-icon="list_alt">
       list_alt
      </span>
@@ -87,14 +80,7 @@
      </span>
     </a>
     <!-- Editar pedido -->
-    <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="#">
-     <span class="material-symbols-outlined text-lg" data-icon="edit_calendar">
-      edit_calendar
-     </span>
-     <span>
-      Editar pedido
-     </span>
-    </a>
+    
    </nav>
    <div class="px-6 pt-6 border-t border-white/5">
     <div class="flex items-center gap-3">
@@ -109,6 +95,8 @@
       </p>
      </div>
     </div>
+   
+    <button class="w-full mt-4 bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-2" onclick="window.Api.logout()">Cerrar sesión</button>
    </div>
   </aside>
   <!-- Main Content Canvas -->

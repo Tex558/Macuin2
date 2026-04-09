@@ -68,7 +68,7 @@
         System Identifier
        </label>
        <div class="relative">
-        <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim text-on-surface px-4 py-3 placeholder:text-secondary-container focus:ring-0 focus:border-on-primary-container transition-colors duration-200 font-label tracking-tight" id="username" name="username" placeholder="USERNAME" type="text"/>
+        <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim text-on-surface px-4 py-3 placeholder:text-secondary-container focus:ring-0 focus:border-on-primary-container transition-colors duration-200 font-label tracking-tight" id="email" name="email" placeholder="USERNAME" type="email"/>
        </div>
       </div>
       <!-- PASSWORD INPUT -->

@@ -17,32 +17,31 @@
   </script>
  </head>
  <body class="antialiased">
-  <!-- TopNavBar (Shared Component) -->
-  <header class="flex justify-between items-center w-full px-8 h-16 bg-[#041329] dark:bg-[#041329] docked full-width top-0 z-50">
+  <header class="bg-[#041329] flex justify-between items-center w-full px-8 h-16 fixed top-0 z-50 font-['Inter'] text-[0.875rem] font-medium tracking-wide">
    <div class="flex items-center gap-8">
     <span class="text-lg font-black tracking-tighter text-[#ffb3b1]">
      MACUIN INDUSTRIAL
     </span>
-    <nav class="hidden md:flex gap-6 items-center font-['Inter'] text-[0.875rem] font-medium tracking-wide">
-     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
+    <nav class="hidden md:flex items-center gap-6">
+     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="/catalogo">
       Catalogo
      </a>
-     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="#">
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/carrito">
       Carrito
      </a>
-     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="#">
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/pedidos">
       Pedidos en curso
      </a>
     </nav>
    </div>
-   <div class="flex items-center gap-4">
-    <div class="relative hidden lg:block">
-     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-sm">
+   <div class="flex items-center gap-6">
+    <div class="hidden lg:flex items-center bg-surface-container-high px-3 py-1.5 border-b-2 border-outline-variant">
+     <span class="material-symbols-outlined text-secondary text-sm mr-2" data-icon="search">
       search
      </span>
-     <input class="bg-surface-container-highest border-none text-[0.75rem] pl-10 pr-4 py-2 w-64 focus:ring-0 border-b-2 border-transparent focus:border-[#ee3f4b]" placeholder="BUSCAR ORDEN..." type="text"/>
+     <input class="bg-transparent border-none focus:ring-0 text-xs placeholder:text-outline p-0 w-48 uppercase tracking-widest" placeholder="BUSCAR SKU..." type="text" oninput="renderCat(this.value)"/>
     </div>
-    <button class="text-[#c2c6d3] hover:text-[#ffb3b1] font-['Inter'] text-[0.875rem] font-medium tracking-wide px-4 py-2 hover:bg-[#1c2a41] transition-all duration-150">
+    <button class="bg-[#1c2a41] text-[#c2c6d3] px-4 py-2 text-xs font-bold uppercase hover:bg-surface-bright transition-all duration-150" onclick="window.Api.logout()">
      Cerrar Sesi&oacute;n
     </button>
    </div>
@@ -110,5 +109,21 @@
    </div>
   </main>
   <!-- Visual Background Element (Subtle grid/texture) -->
- </body>
+ 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const path = window.location.pathname;
+        const links = document.querySelectorAll('header nav a');
+        links.forEach(l => {
+            const href = l.getAttribute('href');
+            if(path.includes(href) && href !== '/') {
+                l.className = "text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1";
+            } else {
+                l.className = "text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150";
+            }
+        });
+    });
+</script>
+
+</body>
 </html>
