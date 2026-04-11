@@ -34,6 +34,7 @@ class Pedido(Base):
     telefono = Column(String)
     direccion = Column(String)
     estatus = Column(String, default="En curso") # En curso, entregado, cancelado
+    prioridad = Column(String, default="Normal") # Normal, Alta, Urgente
     motivo_cancelacion = Column(String, nullable=True)
     creado_en = Column(DateTime, default=datetime.utcnow)
 

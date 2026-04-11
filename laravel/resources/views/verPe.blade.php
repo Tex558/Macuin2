@@ -13,6 +13,8 @@
   <link href="/css/app.css" rel="stylesheet"/>
   <script src="/js/api.js">
   </script>
+  <script src="/js/reportes.js">
+  </script>
  </head>
  <body class="text-on-surface selection:bg-on-primary-container selection:text-white overflow-hidden">
   <!-- SideNavBar Shell -->
@@ -97,10 +99,27 @@
       Ver pedidos
      </h2>
     </div>
-    <div class="flex items-center gap-6">
-     <button class="bg-surface-container-highest px-6 h-10 text-[0.75rem] uppercase font-bold tracking-widest text-on-surface hover:bg-surface-bright transition-colors">
-      Export CSV
-     </button>
+    <div class="flex items-center gap-4">
+     <div class="bg-surface-container-highest px-4 py-2 flex items-center gap-3">
+      <span class="material-symbols-outlined text-sm text-primary" data-icon="search">
+       search
+      </span>
+      <input id="search-pedidos" class="bg-transparent border-none focus:ring-0 text-[0.75rem] font-bold tracking-widest placeholder:text-secondary/30 uppercase w-48" placeholder="BUSCAR PEDIDO..." type="text" oninput="renderPedidos(this.value)"/>
+     </div>
+     <div class="flex items-center gap-2">
+      <button class="bg-surface-container-highest px-3 h-10 text-[0.65rem] uppercase font-bold tracking-widest text-[#ee3f4b] hover:bg-surface-bright transition-colors flex items-center gap-2 border border-[#ee3f4b]/20" onclick="exportPedidos('pdf')">
+       <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+       PDF
+      </button>
+      <button class="bg-surface-container-highest px-3 h-10 text-[0.65rem] uppercase font-bold tracking-widest text-[#22c55e] hover:bg-surface-bright transition-colors flex items-center gap-2 border border-[#22c55e]/20" onclick="exportPedidos('xlsx')">
+       <span class="material-symbols-outlined text-sm">table_chart</span>
+       EXCEL
+      </button>
+      <button class="bg-surface-container-highest px-3 h-10 text-[0.65rem] uppercase font-bold tracking-widest text-[#3b82f6] hover:bg-surface-bright transition-colors flex items-center gap-2 border border-[#3b82f6]/20" onclick="exportPedidos('docx')">
+       <span class="material-symbols-outlined text-sm">description</span>
+       WORD
+      </button>
+     </div>
     </div>
    </header>
    <!-- Stats Plate (Industrial Grid) -->
@@ -182,30 +201,63 @@
   <!-- Contextual Details Panel (Side Preview) -->
   
 <script>
-    document.addEventListener("DOMContentLoaded", async () => {
+    window.all_pedidos = [];
+    window.all_ped_usuarios = [];
+
+    window.renderPedidos = (q) => {
         const container = document.getElementById("pedidos_admin_grid");
-        try {
-            const [resP, resU] = await Promise.all([window.Api.getPedidos(), window.Api.getUsuarios()]);
-            const usuarios = resU.data || [];
-            const pedidos = resP.data || [];
-            
-            container.innerHTML = pedidos.map(p => {
-                const u = usuarios.find(x => x.id == p.usuario_id);
-                const nombre = u ? u.nombre : 'Usuario Reservado';
-                return `
+        const pedidos = window.all_pedidos.filter(p => {
+            const u = window.all_ped_usuarios.find(x => x.id == p.usuario_id);
+            const nombre = u ? u.nombre : '';
+            return `${p.id} ${nombre} ${p.estatus} ${p.prioridad || ''}`.toLowerCase().includes(q.toLowerCase());
+        });
+        container.innerHTML = pedidos.map(p => {
+            const u = window.all_ped_usuarios.find(x => x.id == p.usuario_id);
+            const nombre = u ? u.nombre : 'Usuario Reservado';
+            const pri = p.prioridad || 'Normal';
+            const priColor = pri === 'Urgente' ? 'bg-[#ee3f4b] text-white' : pri === 'Alta' ? 'bg-amber-600 text-white' : 'bg-secondary-container text-on-secondary-container';
+            const statusDot = p.estatus==='Entregado' ? 'bg-green-500' : p.estatus==='Cancelado' ? 'bg-red-500' : 'bg-secondary';
+            return `
             <tr class="hover:bg-surface-bright transition-colors group">
              <td class="px-6 py-5 font-mono text-[0.875rem] text-on-surface">#ORD-${p.id}</td>
              <td class="px-6 py-5"><div class="flex flex-col"><span class="text-[0.875rem] font-bold uppercase">${nombre}</span><span class="text-[0.65rem] text-secondary">ID: ${p.usuario_id}</span></div></td>
-             <td class="px-6 py-5"><span class="px-2 py-0.5 text-[0.6rem] font-black bg-secondary-container text-on-secondary-container uppercase tracking-tighter">Normal</span></td>
-             <td class="px-6 py-5"><div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full ${p.estatus==='Entregado'?'bg-green-500':'bg-secondary'}"></div><span class="text-[0.75rem] font-bold uppercase tracking-tight text-secondary">${p.estatus || p.estado || 'Activo'}</span></div></td>
+             <td class="px-6 py-5"><span class="px-2 py-0.5 text-[0.6rem] font-black ${priColor} uppercase tracking-tighter">${pri}</span></td>
+             <td class="px-6 py-5"><div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full ${statusDot}"></div><span class="text-[0.75rem] font-bold uppercase tracking-tight text-secondary">${p.estatus || p.estado || 'Activo'}</span></div></td>
              <td class="px-6 py-5 text-center"><a href="/editar-pedido?id=${p.id}" class="inline-flex items-center justify-center w-8 h-8 bg-surface-container-highest hover:bg-primary hover:text-on-primary-fixed transition-all"><span class="material-symbols-outlined text-[1.2rem]">edit_note</span></a></td>
             </tr>
             `;
-            }).join('');
+        }).join('');
+    };
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const [resP, resU] = await Promise.all([window.Api.getPedidos(), window.Api.getUsuarios()]);
+            window.all_ped_usuarios = resU.data || [];
+            window.all_pedidos = resP.data || [];
+            renderPedidos('');
         } catch (e) {
-            container.innerHTML = '<tr><td colspan="5" class="p-8 text-error">Error cargando matriz de pedidos.</td></tr>';
+            document.getElementById('pedidos_admin_grid').innerHTML = '<tr><td colspan="5" class="p-8 text-error">Error cargando matriz de pedidos.</td></tr>';
         }
     });
+
+    window.exportPedidos = async (format) => {
+        const q = (document.getElementById('search-pedidos')?.value || '').toLowerCase();
+        const filtered = window.all_pedidos.filter(p => {
+            const u = window.all_ped_usuarios.find(x => x.id == p.usuario_id);
+            const nombre = u ? u.nombre : '';
+            return `${p.id} ${nombre} ${p.estatus} ${p.prioridad || ''}`.toLowerCase().includes(q);
+        });
+        const headers = ['Order ID', 'Cliente', 'Prioridad', 'Estatus', 'Direcci\u00f3n', 'Tel\u00e9fono', 'Fecha'];
+        const rows = filtered.map(p => {
+            const u = window.all_ped_usuarios.find(x => x.id == p.usuario_id);
+            return [`#ORD-${p.id}`, u ? u.nombre : 'Desconocido', p.prioridad || 'Normal', p.estatus || 'Activo', p.direccion || 'N/A', p.telefono || 'N/A', new Date(p.creado_en).toLocaleDateString('es-MX')];
+        });
+        const title = q ? `Reporte de Pedidos (filtro: "${q}")` : 'Reporte de Pedidos';
+        
+        if (format === 'pdf') await Reportes.generatePDF(title, headers, rows, 'pedidos_macuin');
+        else if (format === 'xlsx') await Reportes.generateXLSX(title, headers, rows, 'pedidos_macuin');
+        else if (format === 'docx') await Reportes.generateDOCX(title, headers, rows, 'pedidos_macuin');
+    };
 </script>
 
  </body>

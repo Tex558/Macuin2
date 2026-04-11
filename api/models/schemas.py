@@ -60,12 +60,14 @@ class PedidoCreate(PedidoBase):
 
 class PedidoPatch(BaseModel):
     estatus: Optional[str] = None
+    prioridad: Optional[str] = None
     motivo_cancelacion: Optional[str] = None
 
 class PedidoResponse(PedidoBase):
     id: int
     usuario_id: int
     estatus: str
+    prioridad: Optional[str] = None
     motivo_cancelacion: Optional[str] = None
     creado_en: datetime
 

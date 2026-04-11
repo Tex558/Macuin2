@@ -55,7 +55,7 @@ const Api = {
     
     getPedidos: () => apiCall('/pedidos'),
     crearPedido: (data) => apiCall('/pedidos', 'POST', data),
-    actualizarPedido: (id, data) => apiCall(`/pedidos/${id}`, 'PATCH'),
+    actualizarPedido: (id, data) => apiCall(`/pedidos/${id}`, 'PATCH', data),
     eliminarPedido: (id) => apiCall(`/pedidos/${id}`, 'DELETE')
 };
 

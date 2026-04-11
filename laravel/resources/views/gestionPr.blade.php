@@ -16,6 +16,8 @@
   <link href="/css/app.css" rel="stylesheet"/>
   <script src="/js/api.js">
   </script>
+  <script src="/js/reportes.js">
+  </script>
  </head>
  <body class="antialiased overflow-hidden">
   <!-- Sidebar Navigation Shell -->
@@ -81,65 +83,65 @@
       <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-secondary text-sm" data-icon="search">
        search
       </span>
-      <input class="bg-surface-container-highest border-none text-[0.75rem] pl-10 pr-4 py-2 w-64 focus:ring-1 focus:ring-on-primary-container placeholder:text-secondary/50" placeholder="BUSCAR SKU O NOMBRE..." type="text" oninput="renderPr(this.value)"/>
+      <input id="search-productos" class="bg-surface-container-highest border-none text-[0.75rem] pl-10 pr-4 py-2 w-64 focus:ring-1 focus:ring-on-primary-container placeholder:text-secondary/50" placeholder="BUSCAR SKU O NOMBRE..." type="text" oninput="renderPr(this.value)"/>
      </div>
-     
+     <div class="flex items-center gap-2">
+      <button class="bg-surface-container-highest px-3 h-10 text-[0.65rem] uppercase font-bold tracking-widest text-[#ee3f4b] hover:bg-surface-bright transition-colors flex items-center gap-2 border border-[#ee3f4b]/20" onclick="exportProductos('pdf')">
+       <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+       PDF
+      </button>
+      <button class="bg-surface-container-highest px-3 h-10 text-[0.65rem] uppercase font-bold tracking-widest text-[#22c55e] hover:bg-surface-bright transition-colors flex items-center gap-2 border border-[#22c55e]/20" onclick="exportProductos('xlsx')">
+       <span class="material-symbols-outlined text-sm">table_chart</span>
+       EXCEL
+      </button>
+      <button class="bg-surface-container-highest px-3 h-10 text-[0.65rem] uppercase font-bold tracking-widest text-[#3b82f6] hover:bg-surface-bright transition-colors flex items-center gap-2 border border-[#3b82f6]/20" onclick="exportProductos('docx')">
+       <span class="material-symbols-outlined text-sm">description</span>
+       WORD
+      </button>
+     </div>
     </div>
    </header>
    <!-- Product Dashboard Grid -->
    <div class="p-8 flex-1">
     <!-- Summary Stats (Asymmetric layout) -->
     <div class="grid grid-cols-12 gap-6 mb-8">
-     <div class="col-span-8 bg-surface-container-low p-6 flex flex-col justify-between">
-      <div>
-       <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-[0.2em] mb-2">
-        Inventario Total Bruto
-       </p>
-       <h3 class="text-[3.5rem] font-black leading-none tracking-tighter text-on-surface">
-        14,282
-        <span class="text-on-primary-container">
-         .
-        </span>
-       </h3>
-      </div>
-      <div class="flex gap-12 mt-4">
+      <div class="col-span-12 bg-surface-container-low p-6 flex flex-col justify-between">
        <div>
-        <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-widest">
-         En Existencia
+        <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-[0.2em] mb-2">
+         Inventario Total Bruto
         </p>
-        <p class="text-xl font-bold">
-         12,400
-        </p>
+        <h3 id="kpi-inv-total" class="text-[3.5rem] font-black leading-none tracking-tighter text-on-surface">
+         0
+        </h3>
        </div>
-       <div>
-        <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-widest">
-         Bajo Stock
-        </p>
-        <p class="text-xl font-bold text-on-primary-container">
-         182
-        </p>
-       </div>
-       <div>
-        <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-widest">
-         Descontinuados
-        </p>
-        <p class="text-xl font-bold">
-         1,700
-        </p>
+       <div class="flex gap-12 mt-4">
+        <div>
+         <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-widest">
+          Productos Registrados
+         </p>
+         <p id="kpi-pr-count" class="text-xl font-bold">
+          0
+         </p>
+        </div>
+        <div>
+         <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-widest">
+          Bajo Stock (&le;10)
+         </p>
+         <p id="kpi-pr-low" class="text-xl font-bold text-on-primary-container">
+          0
+         </p>
+        </div>
+        <div>
+         <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-widest">
+          Sin Stock
+         </p>
+         <p id="kpi-pr-zero" class="text-xl font-bold text-[#ee3f4b]">
+          0
+         </p>
+        </div>
        </div>
       </div>
      </div>
-     <div class="col-span-4 bg-on-primary-container p-6 flex flex-col justify-between">
-      <div>
-       <h4 class="text-xl font-black text-white leading-tight mb-4">
-        42 PRODUCTOS SIN ASIGNACI&Oacute;N DE PROVEEDOR
-       </h4>
-       <button class="w-full bg-surface py-3 text-[0.75rem] font-black tracking-widest text-on-primary-container uppercase hover:bg-surface-bright transition-colors">
-        REVISAR AHORA
-       </button>
-      </div>
-     </div>
-    </div>
     <!-- Industrial Data Grid -->
     <div class="bg-surface-container-low">
      <!-- Grid Header -->
@@ -235,10 +237,30 @@
             window.all_pr = res.data || [];
             renderPr("");
 
+            // Dynamic inventory stats
+            const prods = window.all_pr;
+            const totalStock = prods.reduce((s, p) => s + (p.stock || 0), 0);
+            document.getElementById('kpi-inv-total').innerText = totalStock.toLocaleString('es-MX');
+            document.getElementById('kpi-pr-count').innerText = prods.length;
+            document.getElementById('kpi-pr-low').innerText = prods.filter(p => p.stock > 0 && p.stock <= 10).length;
+            document.getElementById('kpi-pr-zero').innerText = prods.filter(p => p.stock === 0).length;
+
         } catch (e) {
-            container.innerHTML = '<p class="p-8 text-error">Error cargando productos.</p>';
+            document.getElementById('productos_grid').innerHTML = '<p class="p-8 text-error">Error cargando productos.</p>';
         }
     });
+
+    window.exportProductos = async (format) => {
+        const q = (document.getElementById('search-productos')?.value || '').toLowerCase();
+        const filtered = window.all_pr.filter(p => `${p.id} ${p.nombre} ${p.fabricante}`.toLowerCase().includes(q));
+        const headers = ['SKU', 'Nombre', 'Fabricante', 'Precio', 'Stock', 'Estado'];
+        const rows = filtered.map(p => [`MAC-${p.id}`, p.nombre, p.fabricante, `$${p.precio}`, String(p.stock), p.stock > 10 ? 'OK' : p.stock > 0 ? 'Bajo Stock' : 'Sin Stock']);
+        const title = q ? `Reporte de Productos (filtro: "${q}")` : 'Reporte de Productos';
+        
+        if (format === 'pdf') await Reportes.generatePDF(title, headers, rows, 'productos_macuin');
+        else if (format === 'xlsx') await Reportes.generateXLSX(title, headers, rows, 'productos_macuin');
+        else if (format === 'docx') await Reportes.generateDOCX(title, headers, rows, 'productos_macuin');
+    };
   </script>
  </body>
 </html>

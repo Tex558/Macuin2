@@ -16,6 +16,8 @@
   </script>
   <script src="/js/api.js">
   </script>
+  <script src="/js/reportes.js">
+  </script>
  </head>
  <body class="text-on-surface select-none">
   <!-- SideNavBar Shell -->
@@ -96,9 +98,22 @@
       <span class="material-symbols-outlined text-sm text-primary" data-icon="search">
        search
       </span>
-      <input class="bg-transparent border-none focus:ring-0 text-[0.75rem] font-bold tracking-widest placeholder:text-secondary/30 uppercase w-48" placeholder="BUSCAR PERSONAL..." type="text" oninput="renderUs(this.value)"/>
+      <input id="search-personal" class="bg-transparent border-none focus:ring-0 text-[0.75rem] font-bold tracking-widest placeholder:text-secondary/30 uppercase w-48" placeholder="BUSCAR PERSONAL..." type="text" oninput="renderUs(this.value)"/>
      </div>
-     
+     <div class="flex items-center gap-2">
+      <button class="bg-surface-container-highest px-3 h-10 text-[0.65rem] uppercase font-bold tracking-widest text-[#ee3f4b] hover:bg-surface-bright transition-colors flex items-center gap-2 border border-[#ee3f4b]/20" onclick="exportPersonal('pdf')">
+       <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+       PDF
+      </button>
+      <button class="bg-surface-container-highest px-3 h-10 text-[0.65rem] uppercase font-bold tracking-widest text-[#22c55e] hover:bg-surface-bright transition-colors flex items-center gap-2 border border-[#22c55e]/20" onclick="exportPersonal('xlsx')">
+       <span class="material-symbols-outlined text-sm">table_chart</span>
+       EXCEL
+      </button>
+      <button class="bg-surface-container-highest px-3 h-10 text-[0.65rem] uppercase font-bold tracking-widest text-[#3b82f6] hover:bg-surface-bright transition-colors flex items-center gap-2 border border-[#3b82f6]/20" onclick="exportPersonal('docx')">
+       <span class="material-symbols-outlined text-sm">description</span>
+       WORD
+      </button>
+     </div>
     </div>
    </header>
    <!-- KPI Strip / Asymmetric Layout Element -->
@@ -224,6 +239,18 @@
              </div>
             </div>
         `).join('');
+    };
+
+    window.exportPersonal = async (format) => {
+        const q = (document.getElementById('search-personal')?.value || '').toLowerCase();
+        const filtered = window.all_us.filter(u => `${u.id} ${u.nombre} ${u.email} ${u.rol}`.toLowerCase().includes(q));
+        const headers = ['ID', 'Nombre', 'Email', 'Teléfono', 'Rol', 'Estado'];
+        const rows = filtered.map(u => [`#00${u.id}`, u.nombre, u.email, u.telefono || 'N/A', u.rol, 'Activo']);
+        const title = q ? `Reporte de Personal (filtro: "${q}")` : 'Reporte de Personal';
+        
+        if (format === 'pdf') await Reportes.generatePDF(title, headers, rows, 'personal_macuin');
+        else if (format === 'xlsx') await Reportes.generateXLSX(title, headers, rows, 'personal_macuin');
+        else if (format === 'docx') await Reportes.generateDOCX(title, headers, rows, 'personal_macuin');
     };
 
   </script>

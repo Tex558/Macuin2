@@ -39,7 +39,7 @@ def confirmacion():
 def pedidos():
     return render_template('pedidosCu.html')
 
-@app.route('/estatus')
+@app.route('/estatusPe')
 def estatus():
     return render_template('estatusPe.html')
 

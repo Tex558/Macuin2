@@ -169,32 +169,42 @@
         <div class="flex-1 h-px bg-outline-variant opacity-20">
         </div>
        </div>
-       <div class="grid grid-cols-3 gap-6">
-        <div class="flex flex-col gap-2">
-         <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
-          Modificar Estado
-         </label>
-         <select id="e-select" class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface appearance-none">
-          <option value="Pendiente">Pendiente</option>
-          <option value="Procesando">Procesando</option>
-          <option value="En Ruta">En Ruta</option>
-          <option value="Entregado">Entregado</option>
-          <option value="Cancelado">Cancelado</option>
-         </select>
+       <div class="grid grid-cols-4 gap-6">
+         <div class="flex flex-col gap-2">
+          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
+           Modificar Estado
+          </label>
+          <select id="e-select" class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface appearance-none">
+           <option value="Pendiente">Pendiente</option>
+           <option value="Procesando">Procesando</option>
+           <option value="En Ruta">En Ruta</option>
+           <option value="Entregado">Entregado</option>
+           <option value="Cancelado">Cancelado</option>
+          </select>
+         </div>
+         <div class="flex flex-col gap-2">
+          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
+           Prioridad
+          </label>
+          <select id="e-prioridad" class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface appearance-none">
+           <option value="Normal">Normal</option>
+           <option value="Alta">Alta</option>
+           <option value="Urgente">Urgente</option>
+          </select>
+         </div>
+         <div class="flex flex-col gap-2">
+          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
+           Transportista
+          </label>
+          <input class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface" type="text" value="MACUIN_FLEET_04"/>
+         </div>
+         <div class="flex flex-col gap-2">
+          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
+           Fecha Est. Entrega
+          </label>
+          <input class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface" type="date" value="2023-11-24"/>
+         </div>
         </div>
-        <div class="flex flex-col gap-2">
-         <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
-          Transportista
-         </label>
-         <input class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface" type="text" value="MACUIN_FLEET_04"/>
-        </div>
-        <div class="flex flex-col gap-2">
-         <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
-          Fecha Est. Entrega
-         </label>
-         <input class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface" type="date" value="2023-11-24"/>
-        </div>
-       </div>
       </section>
       <div class="col-span-12 flex justify-end mt-4">
        <button id="btn-save" class="bg-[#ffb3b1] hover:bg-[#ee3f4b] text-[#3c0006] font-black text-xs px-8 py-4 transition-all duration-150 uppercase tracking-widest">Guardar Cambios</button>
@@ -232,6 +242,15 @@
                         }
                     }
                 }
+
+                const selPri = document.getElementById('e-prioridad');
+                if(selPri && p.prioridad) {
+                    for(let opt of selPri.options) {
+                        if(opt.value === p.prioridad) {
+                            opt.selected = true;
+                        }
+                    }
+                }
             }
         } catch(e) { console.error('E:', e); }
         
@@ -240,11 +259,12 @@
             savebtn.addEventListener('click', async () => {
                 if(!confirm('¿Guardar cambios logísticos oficiales en servidor?')) return;
                 const nuevoEstado = document.getElementById('e-select').value;
+                const nuevaPrioridad = document.getElementById('e-prioridad').value;
                 try {
-                    await window.Api.actualizarPedido(pid, {estatus: nuevoEstado});
-                    alert('Pedido re-codificado con éxito.');
+                    await window.Api.actualizarPedido(pid, {estatus: nuevoEstado, prioridad: nuevaPrioridad});
+                    alert('Pedido actualizado con éxito.');
                     window.location.href = '/pedidos';
-                } catch(e) { alert('Error modificando estado...'); }
+                } catch(e) { alert('Error modificando pedido...'); }
             });
         }
     });
