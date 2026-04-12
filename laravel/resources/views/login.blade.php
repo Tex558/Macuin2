@@ -18,22 +18,6 @@
  </head>
  <body class="font-body selection:bg-on-primary-container selection:text-white">
   <main class="min-h-screen flex items-center justify-center p-6 bg-surface overflow-hidden relative">
-   <div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
-    <div class="grid grid-cols-12 h-full w-full">
-     <div class="col-span-1 border-r border-outline-variant"></div>
-     <div class="col-span-1 border-r border-outline-variant"></div>
-     <div class="col-span-1 border-r border-outline-variant"></div>
-     <div class="col-span-1 border-r border-outline-variant"></div>
-     <div class="col-span-1 border-r border-outline-variant"></div>
-     <div class="col-span-1 border-r border-outline-variant"></div>
-     <div class="col-span-1 border-r border-outline-variant"></div>
-     <div class="col-span-1 border-r border-outline-variant"></div>
-     <div class="col-span-1 border-r border-outline-variant"></div>
-     <div class="col-span-1 border-r border-outline-variant"></div>
-     <div class="col-span-1 border-r border-outline-variant"></div>
-     <div class="col-span-1"></div>
-    </div>
-   </div>
    <div class="relative z-10 w-full max-w-md">
     <div class="mb-12 text-center md:text-left">
      <h1 class="font-headline text-2xl font-black tracking-tighter text-primary uppercase">
