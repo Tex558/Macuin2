@@ -5,7 +5,6 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
   </script>
   <script src="/js/tailwind-config.js">
@@ -15,7 +14,6 @@
   </script>
  </head>
  <body class="bg-background text-on-surface flex overflow-hidden">
-  <!-- SideNavBar (Predicted Component) -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] w-64 border-r-0 z-50">
    <div class="px-6 mb-10">
     <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1]">
@@ -33,7 +31,7 @@
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="badge">
       badge
      </span>
-     Gestion de personal
+     Gestión de personal
     </a>
     <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="/registrar-admin">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="person_add">
@@ -45,7 +43,7 @@
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="inventory_2">
       inventory_2
      </span>
-     Gestion de productos
+     Gestión de productos
     </a>
     <a class="flex items-center px-6 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1]" href="/agregar-producto">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="add_box">
@@ -82,9 +80,7 @@
     <button class="w-full mt-4 bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-2" onclick="window.Api.logout()">Cerrar sesión</button>
    </div>
   </aside>
-  <!-- Main Content Area -->
   <main class="flex-1 ml-64 min-h-screen bg-surface flex flex-col">
-   <!-- Header -->
    <header class="h-16 flex items-center justify-between px-10 bg-surface-container-low">
     <div class="flex items-center gap-4">
      <h2 id="e-title" class="text-on-surface font-headline font-bold text-sm tracking-tight uppercase">Editar pedido</h2>
@@ -95,11 +91,8 @@
      </button>
     </div>
    </header>
-   <!-- Content Canvas -->
    <div class="p-10 flex-1 flex flex-col gap-10 overflow-y-auto">
-    <!-- Hero Stats Row (Bento Style) -->
     <div class="grid grid-cols-12 gap-6">
-     <!-- Status Card -->
      <div class="col-span-12 md:col-span-4 bg-surface-container-low p-8 flex flex-col justify-between">
       <span class="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-4">
        Estado Actual
@@ -110,32 +103,29 @@
        </div>
       </div>
       <p class="mt-4 text-[11px] text-secondary-fixed-dim leading-relaxed">
-       &Uacute;ltima actualizaci&oacute;n: 14:22 GMT-6
+       Última actualización: 14:22 GMT-6
        <br/>
        Operador: LOG_UNIT_A12
       </p>
      </div>
-     <!-- Quick Action/ID Card -->
      <div class="col-span-12 md:col-span-3 bg-surface-container-low border border-primary/20 p-8 flex flex-col">
       <span class="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-auto">
-       Control Cr&iacute;tico
+       Control Crítico
       </span>
-      <button class="w-full bg-[#ee3f4b] hover:bg-[#ffb3b1] text-on-primary font-black text-xs py-4 transition-all duration-150 uppercase tracking-widest flex items-center justify-center gap-2" onclick="return confirm('&iquest;Est&aacute;s seguro de que deseas cancelar este pedido?') &amp;&amp; confirm('&iquest;Totalmente seguro? Esta acci&oacute;n es irreversible.');">
+      <button class="w-full bg-[#ee3f4b] hover:bg-[#ffb3b1] text-on-primary font-black text-xs py-4 transition-all duration-150 uppercase tracking-widest flex items-center justify-center gap-2" onclick="return confirm('¿Estás seguro de que deseas cancelar este pedido?') && confirm('¿Totalmente seguro? Esta acción es irreversible.');">
        <span class="material-symbols-outlined text-sm" data-icon="cancel">
         cancel
        </span>
-       Cancel Order
+       Cancelar Pedido
       </button>
      </div>
     </div>
-    <!-- Configuration Form -->
     <div class="grid grid-cols-12 gap-10">
-     <!-- Main Form Section -->
      <div class="col-span-12 space-y-10">
       <section>
        <div class="flex items-center gap-4 mb-6">
         <span class="text-xs font-black text-on-surface uppercase tracking-widest">
-         Informaci&oacute;n de Destino
+         Información de Destino
         </span>
         <div class="flex-1 h-px bg-outline-variant opacity-20">
         </div>
@@ -143,7 +133,7 @@
        <div class="grid grid-cols-2 gap-6">
         <div class="flex flex-col gap-2">
          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
-          Cliente / Corporaci&oacute;n
+          Cliente / Corporación
          </label>
          <input class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface" type="text" id="e-cliente" readonly/>
         </div>
@@ -157,14 +147,14 @@
          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
           Instrucciones de Despacho
          </label>
-         <textarea class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface resize-none" rows="3">Requiere montacargas de 5 toneladas. Verificar sellos de seguridad t&eacute;rmicos a la llegada.</textarea>
+         <textarea class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface resize-none" rows="3">Requiere montacargas de 5 toneladas. Verificar sellos de seguridad térmicos a la llegada.</textarea>
         </div>
        </div>
       </section>
       <section>
        <div class="flex items-center gap-4 mb-6">
         <span class="text-xs font-black text-on-surface uppercase tracking-widest">
-         Gesti&oacute;n de Log&iacute;stica
+         Gestión de Logística
         </span>
         <div class="flex-1 h-px bg-outline-variant opacity-20">
         </div>
@@ -210,12 +200,9 @@
        <button id="btn-save" class="bg-[#ffb3b1] hover:bg-[#ee3f4b] text-[#3c0006] font-black text-xs px-8 py-4 transition-all duration-150 uppercase tracking-widest">Guardar Cambios</button>
       </div>
      </div>
-     </div>
-    <!-- Footer Action Bar -->
+    </div>
    </div>
   </main>
-  <!-- Contextual Decorative UI (Industrial Aesthetic) -->
- 
 <script>
     document.addEventListener("DOMContentLoaded", async () => {
         const params = new URLSearchParams(window.location.search);
@@ -269,6 +256,5 @@
         }
     });
 </script>
-
 </body>
 </html>

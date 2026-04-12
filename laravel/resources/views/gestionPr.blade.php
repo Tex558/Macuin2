@@ -4,12 +4,11 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>
-   MACUIN ADMIN - Gesti&oacute;n de Productos
+   MACUIN ADMIN - Gestión de Productos
   </title>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
   <script src="/js/tailwind-config.js">
   </script>
@@ -20,7 +19,6 @@
   </script>
  </head>
  <body class="antialiased overflow-hidden">
-  <!-- Sidebar Navigation Shell -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] dark:bg-[#041329] w-64 border-r-0 z-40">
    <div class="px-6 mb-10">
     <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1]">
@@ -38,7 +36,7 @@
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="badge">
       badge
      </span>
-     Gestion de personal
+     Gestión de personal
     </a>
     <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="/registrar-admin">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="person_add">
@@ -46,12 +44,11 @@
      </span>
      Registrar administrador
     </a>
-    <!-- Active Tab: Gestion de productos -->
     <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#ffb3b1] bg-[#1c2a41] border-l-4 border-[#ee3f4b] pl-3 transition-colors duration-150" href="/productos">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="inventory_2">
       inventory_2
      </span>
-     Gestion de productos
+     Gestión de productos
     </a>
     <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="/agregar-producto">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="add_box">
@@ -59,23 +56,19 @@
      </span>
      Agregar producto
     </a>
-    
     <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150 group" href="/pedidos">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="list_alt">
       list_alt
      </span>
      Ver pedidos
     </a>
-    
    </nav>
   </aside>
-  <!-- Main Content Canvas -->
   <main class="ml-64 min-h-screen bg-surface flex flex-col">
-   <!-- Header Section -->
    <header class="h-16 flex items-center justify-between px-8 bg-surface-container-low border-b-0">
     <div class="flex items-center gap-4">
      <h2 class="text-headline-sm font-black tracking-tight text-on-surface uppercase">
-      Gestion de productos
+      Gestión de productos
      </h2>
     </div>
     <div class="flex items-center gap-4">
@@ -101,50 +94,46 @@
      </div>
     </div>
    </header>
-   <!-- Product Dashboard Grid -->
    <div class="p-8 flex-1">
-    <!-- Summary Stats (Asymmetric layout) -->
     <div class="grid grid-cols-12 gap-6 mb-8">
-      <div class="col-span-12 bg-surface-container-low p-6 flex flex-col justify-between">
+     <div class="col-span-12 bg-surface-container-low p-6 flex flex-col justify-between">
+      <div>
+       <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-[0.2em] mb-2">
+        Inventario Total Bruto
+       </p>
+       <h3 id="kpi-inv-total" class="text-[3.5rem] font-black leading-none tracking-tighter text-on-surface">
+        0
+       </h3>
+      </div>
+      <div class="flex gap-12 mt-4">
        <div>
-        <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-[0.2em] mb-2">
-         Inventario Total Bruto
+        <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-widest">
+         Productos Registrados
         </p>
-        <h3 id="kpi-inv-total" class="text-[3.5rem] font-black leading-none tracking-tighter text-on-surface">
+        <p id="kpi-pr-count" class="text-xl font-bold">
          0
-        </h3>
+        </p>
        </div>
-       <div class="flex gap-12 mt-4">
-        <div>
-         <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-widest">
-          Productos Registrados
-         </p>
-         <p id="kpi-pr-count" class="text-xl font-bold">
-          0
-         </p>
-        </div>
-        <div>
-         <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-widest">
-          Bajo Stock (&le;10)
-         </p>
-         <p id="kpi-pr-low" class="text-xl font-bold text-on-primary-container">
-          0
-         </p>
-        </div>
-        <div>
-         <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-widest">
-          Sin Stock
-         </p>
-         <p id="kpi-pr-zero" class="text-xl font-bold text-[#ee3f4b]">
-          0
-         </p>
-        </div>
+       <div>
+        <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-widest">
+         Bajo Stock (≤10)
+        </p>
+        <p id="kpi-pr-low" class="text-xl font-bold text-on-primary-container">
+         0
+        </p>
+       </div>
+       <div>
+        <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-widest">
+         Sin Stock
+        </p>
+        <p id="kpi-pr-zero" class="text-xl font-bold text-[#ee3f4b]">
+         0
+        </p>
        </div>
       </div>
      </div>
-    <!-- Industrial Data Grid -->
+    </div>
     <div class="bg-surface-container-low">
-     <!-- Grid Header -->
      <div class="grid grid-cols-12 gap-4 px-6 py-4 bg-surface-container-highest border-b border-surface/20">
       <div class="col-span-1 text-[0.65rem] font-black text-secondary uppercase tracking-widest">
        SKU_ID
@@ -153,7 +142,7 @@
        NOMBRE DEL PRODUCTO
       </div>
       <div class="col-span-2 text-[0.65rem] font-black text-secondary uppercase tracking-widest">
-       CATEGOR&Iacute;A
+       CATEGORÍA
       </div>
       <div class="col-span-1 text-[0.65rem] font-black text-secondary uppercase tracking-widest text-right">
        PRECIO
@@ -168,51 +157,17 @@
        ACCIONES
       </div>
      </div>
-     <!-- Grid Rows -->
      <div class="divide-y divide-surface/10" id="productos_grid">
-     </div>
-     <!-- Grid Footer / Pagination -->
-     <div class="px-6 py-4 flex items-center justify-between bg-surface-container-lowest text-[0.7rem] font-bold tracking-widest text-secondary uppercase">
-      <div class="flex items-center gap-2">
-       <button class="p-2 hover:bg-surface-container-high text-on-surface disabled:opacity-20" disabled="">
-        <span class="material-symbols-outlined" data-icon="chevron_left">
-         chevron_left
-        </span>
-       </button>
-       <span class="px-4 py-2 bg-on-primary-container text-white">
-        1
-       </span>
-       <button class="px-4 py-2 hover:bg-surface-container-high transition-colors">
-        2
-       </button>
-       <button class="px-4 py-2 hover:bg-surface-container-high transition-colors">
-        3
-       </button>
-       <span class="px-2">
-        ...
-       </span>
-       <button class="px-4 py-2 hover:bg-surface-container-high transition-colors">
-        2857
-       </button>
-       <button class="p-2 hover:bg-surface-container-high text-on-surface">
-        <span class="material-symbols-outlined" data-icon="chevron_right">
-         chevron_right
-        </span>
-       </button>
-      </div>
      </div>
     </div>
    </div>
-   <!-- System Status Bar -->
   </main>
-  <!-- Contextual Floating Action Button -->
   <script>
-   
-   window.all_pr = [];
-   window.renderPr = (q) => {
-       const container = document.getElementById("productos_grid");
-       const filtered = window.all_pr.filter(p => `${p.id} ${p.nombre} ${p.fabricante}`.toLowerCase().includes(q.toLowerCase()));
-       container.innerHTML = filtered.map(p => `
+    window.all_pr = [];
+    window.renderPr = (q) => {
+        const container = document.getElementById("productos_grid");
+        const filtered = window.all_pr.filter(p => `${p.id} ${p.nombre} ${p.fabricante}`.toLowerCase().includes(q.toLowerCase()));
+        container.innerHTML = filtered.map(p => `
             <div class="grid grid-cols-12 gap-4 px-6 py-5 hover:bg-surface-bright transition-colors items-center group">
              <div class="col-span-1 font-mono text-[0.75rem] text-secondary">MAC-${p.id}</div>
              <div class="col-span-4"><p class="text-[0.875rem] font-bold text-on-surface uppercase">${p.nombre}</p></div>
@@ -229,15 +184,14 @@
               </button>
              </div>
             </div>
-       `).join('');
-   };
-   document.addEventListener("DOMContentLoaded", async () => {
+        `).join('');
+    };
+    document.addEventListener("DOMContentLoaded", async () => {
         try {
             const res = await window.Api.getProductos();
             window.all_pr = res.data || [];
             renderPr("");
 
-            // Dynamic inventory stats
             const prods = window.all_pr;
             const totalStock = prods.reduce((s, p) => s + (p.stock || 0), 0);
             document.getElementById('kpi-inv-total').innerText = totalStock.toLocaleString('es-MX');

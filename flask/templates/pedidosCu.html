@@ -10,7 +10,6 @@
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
   <script src="/static/js/tailwind-config.js">
   </script>
   <link href="/static/css/styles.css" rel="stylesheet"/>
@@ -24,31 +23,24 @@
      MACUIN INDUSTRIAL
     </span>
     <nav class="hidden md:flex items-center gap-6">
-     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="/catalogo">
+     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/catalogo">
       Catalogo
      </a>
      <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/carrito">
       Carrito
      </a>
-     <a class="text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150" href="/pedidos">
+     <a class="text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1" href="/pedidos">
       Pedidos en curso
      </a>
     </nav>
    </div>
    <div class="flex items-center gap-6">
-    <div class="hidden lg:flex items-center bg-surface-container-high px-3 py-1.5 border-b-2 border-outline-variant">
-     <span class="material-symbols-outlined text-secondary text-sm mr-2" data-icon="search">
-      search
-     </span>
-     <input class="bg-transparent border-none focus:ring-0 text-xs placeholder:text-outline p-0 w-48 uppercase tracking-widest" placeholder="BUSCAR SKU..." type="text" oninput="renderCat(this.value)"/>
-    </div>
     <button class="bg-[#1c2a41] text-[#c2c6d3] px-4 py-2 text-xs font-bold uppercase hover:bg-surface-bright transition-all duration-150" onclick="window.Api.logout()">
      Cerrar Sesi&oacute;n
     </button>
    </div>
   </header>
-  <main class="max-w-7xl mx-auto px-8 py-12">
-   <!-- Header Section -->
+  <main class="max-w-7xl mx-auto px-8 py-24">
    <header class="mb-12">
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
      <div>
@@ -59,27 +51,8 @@
        </span>
       </h1>
      </div>
-     <div class="flex gap-4">
-      <div class="bg-surface-container-low px-6 py-4 flex flex-col min-w-[140px]">
-       <span class="text-[0.65rem] text-secondary font-bold uppercase tracking-[0.2em]">
-        Activos
-       </span>
-       <span class="text-3xl font-black text-on-surface">
-        08
-       </span>
-      </div>
-      <div class="bg-surface-container-low px-6 py-4 flex flex-col min-w-[140px]">
-       <span class="text-[0.65rem] text-secondary font-bold uppercase tracking-[0.2em]">
-        Urgentes
-       </span>
-       <span class="text-3xl font-black text-primary">
-        02
-       </span>
-      </div>
-     </div>
     </div>
    </header>
-   <!-- Orders Grid -->
    <div class="space-y-4">
     <div class="grid grid-cols-12 gap-4 px-6 py-3 bg-surface-container-highest items-center">
      <div class="col-span-2 text-[0.7rem] font-bold text-secondary uppercase tracking-widest">
@@ -101,9 +74,7 @@
     <div class="space-y-4 pt-4" id="pedidos_user_grid">
     </div>
    </div>
-   <!-- Footer Pagination / Actions -->
   </main>
-  <!-- Contextual Decorative UI Element -->
   <script>
    document.addEventListener("DOMContentLoaded", async () => {
         const container = document.getElementById("pedidos_user_grid");
@@ -129,21 +100,5 @@
         }
     });
   </script>
- 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const path = window.location.pathname;
-        const links = document.querySelectorAll('header nav a');
-        links.forEach(l => {
-            const href = l.getAttribute('href');
-            if(path.includes(href) && href !== '/') {
-                l.className = "text-[#ffb3b1] border-b-2 border-[#ee3f4b] pb-1";
-            } else {
-                l.className = "text-[#c2c6d3] hover:text-[#ffb3b1] transition-all duration-150";
-            }
-        });
-    });
-</script>
-
-</body>
+ </body>
 </html>
