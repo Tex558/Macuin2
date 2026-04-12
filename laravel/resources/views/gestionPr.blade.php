@@ -19,7 +19,7 @@
   <script src="/js/reportes.js">
   </script>
  </head>
- <body class="antialiased overflow-hidden">
+ <body class="antialiased overflow-y-auto min-h-screen">
   <!-- Sidebar Navigation Shell -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] dark:bg-[#041329] w-64 border-r-0 z-40">
    <div class="px-6 mb-10">
@@ -218,8 +218,8 @@
              <div class="col-span-4"><p class="text-[0.875rem] font-bold text-on-surface uppercase">${p.nombre}</p></div>
              <div class="col-span-2"><span class="text-[0.75rem] text-secondary px-2 py-1 bg-surface-container-high border border-outline-variant/20 uppercase">${p.fabricante}</span></div>
              <div class="col-span-1 text-right font-mono text-[0.875rem]">$${p.precio}</div>
-             <div class="col-span-1 text-right font-mono text-[0.875rem]">${p.stock}</div>
-             <div class="col-span-1 flex justify-center"><div class="w-2 h-2 ${p.stock > 10 ? 'bg-green-500' : 'bg-on-primary-container animate-pulse'} rounded-full"></div></div>
+             <div class="col-span-1 text-right font-mono text-[0.875rem] ${p.stock <= 0 ? 'text-error font-black' : ''}">${p.stock}</div>
+             <div class="col-span-1 flex justify-center"><div class="w-2 h-2 ${p.stock > 10 ? 'bg-green-500' : p.stock > 0 ? 'bg-amber-500 animate-pulse' : 'bg-error animate-ping'} rounded-full"></div></div>
              <div class="col-span-2 flex justify-end gap-2 opacity-40 group-hover:opacity-100 transition-opacity">
               <a href="/editar-producto?id=${p.id}" class="p-2 hover:bg-primary-container text-secondary hover:text-on-primary-container transition-colors">
                <span class="material-symbols-outlined text-lg">edit_note</span>

@@ -115,15 +115,27 @@
                 container.innerHTML = '<p class="text-secondary p-8 text-center uppercase tracking-widest text-xs font-bold">No tienes pedidos en curso.</p>';
                 return;
             }
-            container.innerHTML = pedidos.map(p => `
-            <div class="grid grid-cols-12 gap-4 px-6 py-6 bg-surface-container-low items-center hover:bg-surface-bright transition-colors duration-150 group">
-             <div class="col-span-2 font-black text-on-surface tracking-tighter">#MAC-${p.id}</div>
-             <div class="col-span-4"><div class="text-sm font-bold text-on-surface uppercase">Orden de Transporte</div><div class="text-[0.7rem] text-secondary mt-1 tracking-tight">Destino: ${p.direccion}</div></div>
-             <div class="col-span-2 text-sm font-mono text-secondary">${new Date(p.creado_en).toLocaleDateString()}</div>
-             <div class="col-span-2"><span class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container text-on-secondary-container text-[0.65rem] font-black uppercase tracking-widest"><span class="material-symbols-outlined text-[1rem]">manufacturing</span>${p.estatus || p.estado || 'Procesando'}</span></div>
-             <div class="col-span-2 text-right"><a href="/estatusPe?id=${p.id}" class="text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined">visibility</span></a></div>
-            </div>
-            `).join('');
+             container.innerHTML = pedidos.map(p => {
+                 let statusColor = 'bg-surface-container-highest text-secondary';
+                 const status = (p.estatus || p.estado || 'Procesando').toLowerCase();
+                 if(status.includes('entregado')) statusColor = 'bg-success/20 text-success border border-success/30';
+                 else if(status.includes('cancelado')) statusColor = 'bg-error/20 text-error border border-error/30';
+                 else if(status.includes('ruta')) statusColor = 'bg-tertiary/20 text-on-tertiary-container border border-tertiary/30';
+                 else if(status.includes('pendiente') || status.includes('procesando')) statusColor = 'bg-warning/20 text-warning border border-warning/30';
+
+                 return `
+                 <div class="grid grid-cols-12 gap-4 px-6 py-6 bg-surface-container-low items-center hover:bg-surface-bright transition-colors duration-150 group">
+                  <div class="col-span-2 font-black text-on-surface tracking-tighter">#MAC-${p.id}</div>
+                  <div class="col-span-4"><div class="text-sm font-bold text-on-surface uppercase">Orden de Transporte</div><div class="text-[0.7rem] text-secondary mt-1 tracking-tight">Destino: ${p.direccion}</div></div>
+                  <div class="col-span-2 text-sm font-mono text-secondary">${new Date(p.creado_en).toLocaleDateString()}</div>
+                  <div class="col-span-2"><span class="inline-flex items-center gap-2 px-3 py-1 ${statusColor} text-[0.65rem] font-black uppercase tracking-widest"><span class="material-symbols-outlined text-[1rem]">manufacturing</span>${p.estatus || p.estado || 'Procesando'}</span></div>
+                  <div class="col-span-2 text-right flex justify-end gap-3">
+                    <a href="/estatusPe?id=${p.id}" class="text-secondary hover:text-primary transition-colors" title="Ver detalles"><span class="material-symbols-outlined">visibility</span></a>
+                    <a href="/cancelar?id=${p.id}" class="text-secondary hover:text-error transition-colors" title="Cancelar pedido"><span class="material-symbols-outlined">cancel</span></a>
+                  </div>
+                 </div>
+                 `;
+             }).join('');
         } catch (e) {
             container.innerHTML = '<p class="text-error p-8">Error cargando pedidos.</p>';
         }

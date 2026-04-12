@@ -14,7 +14,7 @@
   <script src="/js/api.js">
   </script>
  </head>
- <body class="bg-background text-on-surface flex overflow-hidden">
+ <body class="bg-background text-on-surface flex overflow-y-auto min-h-screen">
   <!-- SideNavBar (Predicted Component) -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] w-64 border-r-0 z-50">
    <div class="px-6 mb-10">
@@ -90,42 +90,34 @@
      <h2 id="e-title" class="text-on-surface font-headline font-bold text-sm tracking-tight uppercase">Editar pedido</h2>
     </div>
     <div class="flex gap-4">
-     <button class="bg-surface-container-highest px-4 py-2 text-[10px] font-black uppercase tracking-widest text-secondary hover:text-on-surface transition-colors border border-outline/10">
-      Sincronizar DB
-     </button>
     </div>
    </header>
    <!-- Content Canvas -->
    <div class="p-10 flex-1 flex flex-col gap-10 overflow-y-auto">
     <!-- Hero Stats Row (Bento Style) -->
     <div class="grid grid-cols-12 gap-6">
-     <!-- Status Card -->
-     <div class="col-span-12 md:col-span-4 bg-surface-container-low p-8 flex flex-col justify-between">
+     <!-- Status Card (Extended) -->
+     <div class="col-span-12 md:col-span-8 bg-surface-container-low p-8 flex flex-col justify-between">
       <span class="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-4">
-       Estado Actual
+       Estado Actual del Pedido
       </span>
       <div class="flex items-end gap-3">
        <span id="e-status-big" class="text-5xl font-black tracking-tighter text-on-surface leading-none uppercase">Cargando...</span>
-       <div class="w-3 h-3 bg-tertiary mb-1">
+       <div class="w-12 h-1 bg-tertiary mb-1">
        </div>
       </div>
       <p class="mt-4 text-[11px] text-secondary-fixed-dim leading-relaxed">
-       &Uacute;ltima actualizaci&oacute;n: 14:22 GMT-6
+       Controles log&iacute;sticos integrados. Para cancelar, use el selector de estado inferior.
        <br/>
-       Operador: LOG_UNIT_A12
+       ID de Rastreo: #MAC-UNIT-01
       </p>
      </div>
-     <!-- Quick Action/ID Card -->
-     <div class="col-span-12 md:col-span-3 bg-surface-container-low border border-primary/20 p-8 flex flex-col">
-      <span class="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-auto">
-       Control Cr&iacute;tico
+     <!-- Metric Summary -->
+     <div class="col-span-12 md:col-span-4 bg-surface-container-low border border-outline-variant/20 p-8 flex flex-col justify-center">
+      <span class="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-2">
+       Prioridad de Despacho
       </span>
-      <button class="w-full bg-[#ee3f4b] hover:bg-[#ffb3b1] text-on-primary font-black text-xs py-4 transition-all duration-150 uppercase tracking-widest flex items-center justify-center gap-2" onclick="return confirm('&iquest;Est&aacute;s seguro de que deseas cancelar este pedido?') &amp;&amp; confirm('&iquest;Totalmente seguro? Esta acci&oacute;n es irreversible.');">
-       <span class="material-symbols-outlined text-sm" data-icon="cancel">
-        cancel
-       </span>
-       Cancel Order
-      </button>
+      <span id="e-priority-label" class="text-2xl font-black text-primary uppercase">Calculando...</span>
      </div>
     </div>
     <!-- Configuration Form -->
@@ -225,11 +217,14 @@
         try {
             const [resP, resU] = await Promise.all([window.Api.getPedidos(), window.Api.getUsuarios()]);
             const p = resP.data.find(x => x.id == pid);
-            if(p) {
-                const u = resU.data.find(x => x.id == p.usuario_id);
-                document.getElementById('e-title').innerText = `Editar pedido / ID: #MAC-${p.id}`;
-                document.getElementById('e-status-big').innerText = p.estatus || p.estado || 'SIN ESTADO';
-                const iCli = document.getElementById('e-cliente');
+                if(p) {
+                    const u = resU.data.find(x => x.id == p.usuario_id);
+                    document.getElementById('e-title').innerText = `Editar pedido / ID: #MAC-${p.id}`;
+                    document.getElementById('e-status-big').innerText = p.estatus || p.estado || 'SIN ESTADO';
+                    const epLabel = document.getElementById('e-priority-label');
+                    if(epLabel) epLabel.innerText = p.prioridad || 'NORMAL';
+                    
+                    const iCli = document.getElementById('e-cliente');
                 if(iCli) iCli.value = u ? u.nombre : 'Desconocido';
                 const iDir = document.getElementById('e-dir');
                 if(iDir) iDir.value = p.direccion || 'Sin direccion';

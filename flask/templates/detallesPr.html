@@ -48,16 +48,16 @@
   </header>
   <main class="pt-24 pb-12 px-8 max-w-7xl mx-auto min-h-screen">
    <!-- Back Action -->
-   <div class="mb-12">
-    <a class="inline-flex items-center text-[#c2c6d3] hover:text-[#ffb3b1] transition-colors group" href="#">
-     <span class="material-symbols-outlined mr-2">
-      arrow_back
-     </span>
-     <span class="text-[0.75rem] font-bold uppercase tracking-widest">
-      Regresar al cat&aacute;logo
-     </span>
-    </a>
-   </div>
+    <div class="mb-12">
+     <a class="inline-flex items-center text-[#c2c6d3] hover:text-[#ffb3b1] transition-colors group" href="/catalogo">
+      <span class="material-symbols-outlined mr-2">
+       arrow_back
+      </span>
+      <span class="text-[0.75rem] font-bold uppercase tracking-widest">
+       Regresar al cat&aacute;logo
+      </span>
+     </a>
+    </div>
    <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 border-none">
     <!-- Left Side: Product Specifications (Technical Layout) -->
     <div class="lg:col-span-7 bg-[#0d1c32] p-12 flex flex-col justify-between">
@@ -70,13 +70,13 @@
        <span class="block text-[0.7rem] font-bold text-[#ffb3b1] uppercase tracking-[0.3em] mb-2">
         Fabricante
        </span>
-       <span id="p-fab" class="text-2xl font-bold text-[#d6e3ff] tracking-tight"></span>
+       <span id="p-fab" class="text-2xl font-bold text-[#d6e3ff] tracking-tight">Cargando...</span>
       </div>
       <div>
        <span class="block text-[0.7rem] font-bold text-[#ffb3b1] uppercase tracking-[0.3em] mb-2">
-        Categor&iacute;a
+        Disponibilidad
        </span>
-       <span id="p-cat" class="text-2xl font-bold text-[#d6e3ff] tracking-tight">---</span>
+       <span id="p-stock" class="text-2xl font-bold tracking-tight">---</span>
       </div>
      </div>
     </div>
@@ -90,7 +90,7 @@
        <div id="p-price" class="text-5xl font-mono font-bold text-[#d6e3ff] tracking-tighter">$0.00 <span class="text-sm font-sans text-[#c2c6d3] tracking-normal">USD</span></div>
       </div>
      </div>
-     <div class="space-y-4">
+     <div id="p-actions" class="space-y-4">
       <div class="flex items-center justify-between bg-[#0d1c32] p-4">
        <span class="text-[0.7rem] font-bold text-[#c2c6d3] uppercase tracking-widest">
         Cantidad
@@ -110,6 +110,12 @@
        </span>
       </button>
      </div>
+     <div id="p-out-of-stock" class="hidden bg-error/20 border border-error/30 p-8 text-center">
+        <span class="material-symbols-outlined text-error text-4xl mb-2">inventory_2</span>
+        <p class="text-error font-black uppercase tracking-widest">Producto Agotado</p>
+        <p class="text-[#c2c6d3] text-[0.65rem] mt-1">Este item no cuenta con existencias para despacho inmediato.</p>
+     </div>
+    </div>
     </div>
    </div>
    <!-- Technical Specs Grid -->
@@ -119,34 +125,67 @@
 <script>
     let curProdId = null;
     let qty = 1;
+
     window.modQty = function(d) {
-        qty = Math.max(1, qty + d);
+        qty = Math.max(1, Math.min(window.maxStock || 1, qty + d));
         document.getElementById('p-qty').innerText = qty;
     }
+
     document.addEventListener("DOMContentLoaded", async () => {
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get('id');
-        if(!id) return;
+        if(!id) {
+            alert("No se especificó un producto.");
+            window.location.href = '/catalogo';
+            return;
+        }
+
         try {
             const res = await window.Api.getProductos();
             const p = res.data.find(x => x.id == id);
             if(p) {
                 curProdId = p.id;
                 document.getElementById('p-name').innerText = p.nombre;
-                document.getElementById('p-desc').innerText = p.especificaciones || 'No specifications provided.';
+                document.getElementById('p-desc').innerText = p.especificaciones || 'Sin especificaciones disponibles.';
                 document.getElementById('p-fab').innerText = p.fabricante;
-                document.getElementById('p-price').innerHTML = `$${p.precio} <span class="text-sm font-sans text-[#c2c6d3] tracking-normal">USD</span>`;
+                
+                const stockEl = document.getElementById('p-stock');
+                if (p.stock > 0) {
+                    stockEl.innerText = `${p.stock} UNIDADES`;
+                    stockEl.className = "text-2xl font-bold text-[#d6e3ff] tracking-tight";
+                } else {
+                    stockEl.innerText = `SIN STOCK`;
+                    stockEl.className = "text-2xl font-bold text-error tracking-tight";
+                    document.getElementById('p-actions').classList.add('hidden');
+                    document.getElementById('p-out-of-stock').classList.remove('hidden');
+                }
+                
+                document.getElementById('p-price').innerHTML = `$${p.precio.toFixed(2)} <span class="text-sm font-sans text-[#c2c6d3] tracking-normal">USD</span>`;
+                window.maxStock = p.stock;
+            } else {
+                alert("Producto no encontrado.");
+                window.location.href = '/catalogo';
             }
-        } catch(e) { console.error(e); }
+        } catch(e) { 
+            console.error(e);
+            alert("Error al cargar los detalles del producto.");
+        }
         
         document.getElementById('btn-add').addEventListener('click', () => {
             if(!curProdId) return;
+            
             let cart = JSON.parse(localStorage.getItem('macuin_cart') || '[]');
-            let item = cart.find(x => x.id == curProdId);
-            if(item) item.qty += qty; else cart.push({id: curProdId, qty: qty});
+            let itemIndex = cart.findIndex(x => x.id == curProdId);
+            
+            if(itemIndex !== -1) {
+                cart[itemIndex].qty += qty;
+            } else {
+                cart.push({id: curProdId, qty: qty});
+            }
+            
             localStorage.setItem('macuin_cart', JSON.stringify(cart));
-            alert('Producto agregado al carrito!');
-            window.location.href='/carrito';
+            alert('Producto agregado al carrito exitosamente!');
+            window.location.href = '/carrito';
         });
     });
 </script>

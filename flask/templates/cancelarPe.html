@@ -70,9 +70,9 @@
        <p class="text-[0.7rem] uppercase text-secondary font-bold tracking-widest mb-1">
         Orden ID
        </p>
-       <p class="font-mono text-xl text-on-surface">
-        #MQ-99284-X
-       </p>
+        <p id="c-order-id" class="font-mono text-xl text-on-surface">
+         #MQ-PENDIENTE
+        </p>
       </div>
       <div class="col-span-2">
        <p class="text-[0.7rem] uppercase text-secondary font-bold tracking-widest mb-1">
@@ -81,14 +81,14 @@
        <div class="flex items-center gap-2">
         <span class="w-2 h-2 bg-tertiary">
         </span>
-        <p class="text-on-surface font-medium">
-         EN PROCESAMIENTO T&Eacute;CNICO
+        <p id="c-order-status" class="text-on-surface font-medium uppercase">
+         CARGANDO...
         </p>
        </div>
       </div>
      </div>
      <!-- Reason Form -->
-     <form action="#" class="space-y-8" onsubmit="return confirm('&iquest;Est&aacute;s seguro de que deseas cancelar este pedido?\n\nEsta acci&oacute;n no se puede deshacer.') &amp;&amp; confirm('&iquest;Totalmente seguro de cancelar el pedido definitivamente?');">
+     <form action="#" class="space-y-8">
       <div class="space-y-3">
        <label class="block text-[0.75rem] font-bold tracking-[0.1em] text-secondary uppercase" for="reason">
         Motivo de la cancelaci&oacute;n
@@ -97,9 +97,9 @@
       </div>
       <!-- Action Buttons -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-       <button class="w-full bg-surface-container-highest text-secondary font-bold text-[0.875rem] uppercase py-4 border border-outline/20 hover:bg-surface-bright transition-colors tracking-widest" type="button">
-        Mantener pedido
-       </button>
+        <button onclick="window.location.href='/pedidos'" class="w-full bg-surface-container-highest text-secondary font-bold text-[0.875rem] uppercase py-4 border border-outline/20 hover:bg-surface-bright transition-colors tracking-widest" type="button">
+         Mantener pedido
+        </button>
        <button class="w-full bg-on-primary-container text-white font-black text-[0.875rem] uppercase py-4 tracking-[0.15em] hover:bg-on-primary-fixed-variant active:scale-[0.98] transition-all shadow-[0_4px_20px_rgba(238,63,75,0.3)]" type="submit">
         Confirmar Cancelaci&oacute;n
        </button>
@@ -111,7 +111,37 @@
   <!-- Visual Background Element (Subtle grid/texture) -->
  
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", async () => {
+        const params = new URLSearchParams(window.location.search);
+        const pid = params.get('id');
+        if(!pid) return window.location.href = '/pedidos';
+
+        try {
+            const res = await window.Api.getPedidos();
+            const p = (res.data || []).find(x => x.id == pid);
+            if(p) {
+                document.getElementById('c-order-id').innerText = `#MAC-${p.id}`;
+                document.getElementById('c-order-status').innerText = p.estatus || p.estado || 'Procesando';
+            } else {
+                alert('Pedido no encontrado.');
+                window.location.href = '/pedidos';
+            }
+        } catch(e) { console.error(e); }
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!confirm('¿Estás totalmente seguro de cancelar el pedido definitivamente?')) return;
+            
+            try {
+                await window.Api.actualizarPedido(pid, {estatus: 'Cancelado'});
+                alert('Pedido cancelado con éxito.');
+                window.location.href = '/pedidos';
+            } catch(error) {
+                alert('Error al cancelar el pedido.');
+            }
+        });
+
         const path = window.location.pathname;
         const links = document.querySelectorAll('header nav a');
         links.forEach(l => {

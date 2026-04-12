@@ -13,8 +13,56 @@
   <link href="/css/app.css" rel="stylesheet"/>
   <script src="/js/api.js">
   </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        const params = new URLSearchParams(window.location.search);
+        const prodId = params.get('id');
+        if(!prodId) return;
+
+        try {
+            const res = await window.Api.getProductos();
+            const p = (res.data || []).find(x => x.id == prodId);
+            if(p) {
+                document.getElementById('edit-nombre').value = p.nombre;
+                document.getElementById('edit-fabricante').value = p.fabricante;
+                document.getElementById('edit-sku').value = `MAC-${p.id}`;
+                document.getElementById('edit-specs').value = p.especificaciones || '';
+                document.getElementById('edit-precio').value = p.precio;
+                document.getElementById('edit-stock').value = p.stock;
+            } else {
+                alert('Producto no encontrado.');
+                window.location.href = '/productos';
+            }
+        } catch(e) { console.error(e); }
+
+        document.getElementById('btn-save-prod').addEventListener('click', async () => {
+            if(!confirm('¿Confirmar cambios técnicos en el catálogo industrial?')) return;
+            const data = {
+                nombre: document.getElementById('edit-nombre').value,
+                fabricante: document.getElementById('edit-fabricante').value,
+                especificaciones: document.getElementById('edit-specs').value,
+                precio: parseFloat(document.getElementById('edit-precio').value),
+                stock: parseInt(document.getElementById('edit-stock').value)
+            };
+            try {
+                await window.Api.actualizarProducto(prodId, data);
+                alert('Producto actualizado con éxito.');
+                window.location.href = '/productos';
+            } catch(e) { alert('Error actualizando producto.'); }
+        });
+
+        document.getElementById('btn-delete-prod').addEventListener('click', async () => {
+             if(!confirm('¿ELIMINAR PRODUCTO PERMANENTEMENTE?')) return;
+             try {
+                await window.Api.eliminarProducto(prodId);
+                alert('Producto eliminado correctamente.');
+                window.location.href = '/productos';
+             } catch(e) { alert('Error al eliminar.'); }
+        });
+    });
+  </script>
  </head>
- <body class="bg-background text-on-surface font-body selection:bg-on-primary-container selection:text-white">
+ <body class="bg-background text-on-surface font-body selection:bg-on-primary-container selection:text-white overflow-y-auto min-h-screen">
   <!-- Sidebar Shell -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] dark:bg-[#041329] docked h-screen w-64 left-0 top-0 border-r-0 z-50">
    <div class="px-6 mb-10">
@@ -123,36 +171,28 @@
        </div>
        <div class="grid grid-cols-2 gap-x-8 gap-y-10">
         <!-- Product Name -->
-        <div class="col-span-2">
-         <label class="block text-[0.65rem] font-black uppercase tracking-widest text-secondary mb-2">
-          Product Identification Name
-         </label>
-         <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 px-4 text-on-surface font-medium focus:border-on-primary-container transition-all duration-150" type="text" value="Industrial Pneumatic Actuator - Series X"/>
+          <input id="edit-nombre" class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 px-4 text-on-surface font-medium focus:border-on-primary-container transition-all duration-150" type="text" value="Cargando..."/>
         </div>
         <!-- Manufacturer -->
         <div class="col-span-1">
          <label class="block text-[0.65rem] font-black uppercase tracking-widest text-secondary mb-2">
           Manufacturer
          </label>
-         <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 px-4 text-on-surface font-medium focus:border-on-primary-container transition-all duration-150" type="text" value="MACUIN PRECISION LTD"/>
+         <input id="edit-fabricante" class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 px-4 text-on-surface font-medium focus:border-on-primary-container transition-all duration-150" type="text" value="Cargando..."/>
         </div>
         <!-- SKU / ID -->
         <div class="col-span-1">
          <label class="block text-[0.65rem] font-black uppercase tracking-widest text-secondary mb-2">
           Internal SKU ID
          </label>
-         <input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant py-3 px-4 text-secondary font-mono text-sm cursor-not-allowed" readonly="" type="text" value="MC-99021-AX"/>
+         <input id="edit-sku" class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant py-3 px-4 text-secondary font-mono text-sm cursor-not-allowed" readonly="" type="text" value="PENDIENTE"/>
         </div>
         <!-- Specs Textarea -->
         <div class="col-span-2">
          <label class="block text-[0.65rem] font-black uppercase tracking-widest text-secondary mb-2">
           Technical Specifications
          </label>
-         <textarea class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 px-4 text-on-surface font-body text-sm focus:border-on-primary-container transition-all duration-150 resize-none" rows="6">Operating Pressure: 0.5 - 1.0 MPa
-Max Load: 4500N
-Stroke Length: 200mm
-Body Material: Hard-Anodized Aluminum 6061-T6
-Mounting Type: ISO 15552</textarea>
+         <textarea id="edit-specs" class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 px-4 text-on-surface font-body text-sm focus:border-on-primary-container transition-all duration-150 resize-none" rows="6">Cargando...</textarea>
         </div>
        </div>
       </div>
@@ -171,11 +211,7 @@ Mounting Type: ISO 15552</textarea>
          <label class="block text-[0.65rem] font-black uppercase tracking-widest text-secondary mb-2">
           Unit Price (USD)
          </label>
-         <div class="relative">
-          <span class="absolute left-4 top-1/2 -translate-y-1/2 font-black text-primary">
-           $
-          </span>
-          <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-4 pl-10 pr-4 text-3xl font-black tabular-nums tracking-tighter focus:border-on-primary-container transition-all duration-150" type="text" value="1,249.00"/>
+          <input id="edit-precio" class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-4 pl-10 pr-4 text-3xl font-black tabular-nums tracking-tighter focus:border-on-primary-container transition-all duration-150" type="text" value="0.00"/>
          </div>
         </div>
         <!-- Inventory Count -->
@@ -184,7 +220,7 @@ Mounting Type: ISO 15552</textarea>
           Current Stock Level
          </label>
          <div class="flex items-center gap-4">
-          <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-4 px-4 text-3xl font-black tabular-nums tracking-tighter focus:border-on-primary-container transition-all duration-150" type="number" value="142"/>
+          <input id="edit-stock" class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-4 px-4 text-3xl font-black tabular-nums tracking-tighter focus:border-on-primary-container transition-all duration-150" type="number" value="0"/>
           <div class="flex flex-col gap-1">
            <button class="bg-surface-container-highest p-2 hover:bg-surface-bright">
             <span class="material-symbols-outlined text-sm" data-icon="add">
@@ -217,20 +253,20 @@ Mounting Type: ISO 15552</textarea>
       </div>
       <!-- Action Panel -->
       <div class="space-y-4">
-       <button class="w-full py-6 bg-gradient-to-tr from-on-primary-container to-primary-container text-white font-black uppercase tracking-[0.2em] text-sm flex items-center justify-center gap-3 active:scale-[0.98] transition-all">
-        <span class="material-symbols-outlined" data-icon="save" data-weight="fill">
-         save
-        </span>
-        Save Changes
-       </button>
-       <div class="grid grid-cols-2 gap-4">
-        <button class="py-4 bg-surface-container-high border border-outline-variant/20 text-secondary font-bold uppercase tracking-widest text-[0.7rem] hover:bg-surface-bright transition-colors">
-         Duplicate SKU
+        <button id="btn-save-prod" class="w-full py-6 bg-gradient-to-tr from-on-primary-container to-primary-container text-white font-black uppercase tracking-[0.2em] text-sm flex items-center justify-center gap-3 active:scale-[0.98] transition-all">
+         <span class="material-symbols-outlined" data-icon="save" data-weight="fill">
+          save
+         </span>
+         Save Changes
         </button>
-        <button class="py-4 bg-surface-container-high border border-outline-variant/20 text-error font-bold uppercase tracking-widest text-[0.7rem] hover:bg-error-container hover:text-white transition-colors">
-         Delete Part
-        </button>
-       </div>
+        <div class="grid grid-cols-2 gap-4">
+         <button class="py-4 bg-surface-container-high border border-outline-variant/20 text-secondary font-bold uppercase tracking-widest text-[0.7rem] hover:bg-surface-bright transition-colors" onclick="alert('Funcionalidad de duplicado en mantenimiento.')">
+          Duplicate SKU
+         </button>
+         <button id="btn-delete-prod" class="py-4 bg-surface-container-high border border-outline-variant/20 text-error font-bold uppercase tracking-widest text-[0.7rem] hover:bg-error-container hover:text-white transition-colors">
+          Delete Part
+         </button>
+        </div>
       </div>
       <!-- Utility Info -->
      </div>

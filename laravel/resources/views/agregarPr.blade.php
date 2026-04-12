@@ -17,7 +17,7 @@
   <script src="/js/api.js">
   </script>
  </head>
- <body class="bg-surface text-on-surface antialiased overflow-hidden">
+ <body class="bg-surface text-on-surface antialiased overflow-y-auto min-h-screen">
   <!-- Sidebar Navigation -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] dark:bg-[#041329] w-64 border-r-0 z-50">
    <div class="px-6 mb-10">

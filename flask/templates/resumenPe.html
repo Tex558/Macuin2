@@ -233,12 +233,27 @@
                 usuario_id: parseInt(uid)
             };
             try {
+                // Discount stock for each item in cart
+                const stockUpdates = cart.map(item => {
+                    const p = prods.find(x => x.id == item.id);
+                    if (p) {
+                        const newStock = Math.max(0, p.stock - item.qty);
+                        return window.Api.actualizarProducto(p.id, { stock: newStock });
+                    }
+                    return Promise.resolve();
+                });
+                
+                await Promise.all(stockUpdates);
+                
                 await window.Api.crearPedido(packageData);
                 localStorage.removeItem('macuin_cart');
                 localStorage.removeItem('macuin_checkout_data');
-                alert('COMPRA FINALIZADA. El departamento logístico ha sido notificado.');
+                alert('COMPRA FINALIZADA. El departamento logístico ha sido notificado y el inventario actualizado.');
                 window.location.href = '/pedidos';
-            } catch(e) { alert('Verifica tus datos. Error transaccional del servidor SQL.'); console.error(e); }
+            } catch(e) { 
+                alert('Error en la transacción: No se pudo actualizar el inventario o crear el pedido.'); 
+                console.error(e); 
+            }
         });
     });
 </script>

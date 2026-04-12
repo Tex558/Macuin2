@@ -19,7 +19,7 @@
   <script src="/js/reportes.js">
   </script>
  </head>
- <body class="text-on-surface select-none">
+ <body class="text-on-surface select-none overflow-y-auto min-h-screen">
   <!-- SideNavBar Shell -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] dark:bg-[#041329] w-64 border-r-0 z-40">
    <div class="px-6 mb-10">

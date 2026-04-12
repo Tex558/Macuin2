@@ -51,6 +51,7 @@ const Api = {
     
     getProductos: () => apiCall('/productos'),
     crearProducto: (data) => apiCall('/productos', 'POST', data),
+    actualizarProducto: (id, data) => apiCall(`/productos/${id}`, 'PATCH', data),
     eliminarProducto: (id) => apiCall(`/productos/${id}`, 'DELETE'),
     
     getPedidos: () => apiCall('/pedidos'),
