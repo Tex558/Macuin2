@@ -110,9 +110,6 @@
       </div>
       <div class="space-y-4">
        <button id="btn-conf" class="w-full bg-on-primary-container hover:bg-on-primary-fixed-variant text-white font-black py-5 uppercase tracking-[0.2em] text-[1rem] transition-all active:scale-[0.98] shadow-lg shadow-on-primary-container/20">Confirmar Pedido</button>
-       <button class="w-full bg-surface-container-highest border border-outline/20 hover:border-outline/40 text-secondary font-bold py-4 uppercase tracking-[0.1em] text-[0.75rem] transition-colors" onclick="downloadQuotation()">
-        Descargar Cotizaci&oacute;n (PDF)
-       </button>
       </div>
      </div>
     </div>
@@ -223,56 +220,6 @@
                 alert('Error en la transacción: No se pudo actualizar el inventario o crear el pedido.'); 
             }
         });
-
-        window.downloadQuotation = async () => {
-            let headers = ['Item', 'Descripción', 'Cant', 'Unitario', 'Total'];
-            let rows = [];
-            let subtotal = 0;
-
-            cart.forEach(item => {
-                const p = prods.find(x => x.id == item.id);
-                if(p) {
-                    const lineTot = item.qty * p.precio;
-                    subtotal += lineTot;
-                    rows.push([
-                        `#MAC-${p.id}`,
-                        p.nombre,
-                        item.qty.toString(),
-                        p.precio.toLocaleString('es-MX',{style:'currency',currency:'MXN'}),
-                        lineTot.toLocaleString('es-MX',{style:'currency',currency:'MXN'})
-                    ]);
-                }
-            });
-
-            const iva = subtotal * 0.16;
-            const envio = 100.00;
-            const final = subtotal + iva + envio;
-
-            rows.push(['', '', '', 'SUBTOTAL', subtotal.toLocaleString('es-MX',{style:'currency',currency:'MXN'})]);
-            rows.push(['', '', '', 'IVA (16%)', iva.toLocaleString('es-MX',{style:'currency',currency:'MXN'})]);
-            rows.push(['', '', '', 'ENVÍO', envio.toLocaleString('es-MX',{style:'currency',currency:'MXN'})]);
-            rows.push(['', '', '', 'TOTAL MXN', final.toLocaleString('es-MX',{style:'currency',currency:'MXN'})]);
-
-            const payload = {
-                title: "COTIZACIÓN FORMAL DE SUMINISTROS INDUSTRIALES",
-                headers: headers,
-                rows: rows,
-                filename: "cotizacion_macuin"
-            };
-
-            const pdfRes = await fetch('http://127.0.0.1:8000/reportes/pdf', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            const blob = await pdfRes.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = "cotizacion_macuin.pdf";
-            a.click();
-        };
     });
 </script>
 </body>
