@@ -68,20 +68,10 @@
     </a>
     
    </nav>
-   <div class="px-6 mt-auto pt-6 border-t border-surface-container-high">
-    <div class="flex items-center gap-3">
-     <div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center">
-      <span class="material-symbols-outlined text-secondary text-sm">
-       admin_panel_settings
-      </span>
-     </div>
-     <div>
-      <p class="text-[0.75rem] font-bold text-on-surface uppercase leading-none" id="sidebar-name">Root_Admin</p>
-      <p class="text-[0.65rem] text-secondary" id="sidebar-email">Level 0 Access</p>
-     </div>
-    </div>
-   
-    <button class="w-full mt-4 bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-2" onclick="window.Api.logout()">Cerrar sesión</button>
+   <div class="mt-auto px-6 border-t border-outline-variant/10 pt-6">
+    <button class="w-full bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-3" onclick="window.Api.logout()">
+     Cerrar sesión
+    </button>
    </div>
   </aside>
   <!-- Main Content Canvas -->
@@ -117,32 +107,24 @@
     </div>
    </header>
    <!-- KPI Strip / Asymmetric Layout Element -->
-   <section class="grid grid-cols-4 gap-0 border-b border-surface-container-high bg-surface">
+   <section class="grid grid-cols-3 gap-0 border-b border-surface-container-high bg-surface">
     <div class="p-8 border-r border-surface-container-high">
      <p class="text-[0.65rem] font-black text-secondary uppercase tracking-[0.2em] mb-1">
-      Total Personal
+      Total de Personal
      </p>
      <p class="text-4xl font-black tracking-tighter text-on-surface" id="kpi-total">0</p>
     </div>
     <div class="p-8 border-r border-surface-container-high">
      <p class="text-[0.65rem] font-black text-secondary uppercase tracking-[0.2em] mb-1">
-      Activos
+      Usuarios Activos
      </p>
      <p class="text-4xl font-black tracking-tighter text-on-surface text-primary" id="kpi-activos">0</p>
     </div>
-    <div class="p-8 border-r border-surface-container-high">
-     <p class="text-[0.65rem] font-black text-secondary uppercase tracking-[0.2em] mb-1">
-      Admin Roles
-     </p>
-     <p class="text-4xl font-black tracking-tighter text-on-surface" id="kpi-admins">0</p>
-    </div>
     <div class="p-8">
      <p class="text-[0.65rem] font-black text-secondary uppercase tracking-[0.2em] mb-1">
-      Solicitudes
+      Administradores
      </p>
-     <p class="text-4xl font-black tracking-tighter text-secondary opacity-50">
-      0
-     </p>
+     <p class="text-4xl font-black tracking-tighter text-on-surface" id="kpi-admins">0</p>
     </div>
    </section>
    <!-- Industrial Data Grid -->
@@ -156,15 +138,15 @@
       <div class="col-span-3">
        Nombre Completo
       </div>
-      <div class="col-span-2">
-       Rol Operativo
-      </div>
-      <div class="col-span-2">
-       Departamento
-      </div>
-      <div class="col-span-2">
-       Estado
-      </div>
+       <div class="col-span-2">
+        Rol
+       </div>
+       <div class="col-span-2">
+        Email Institucional
+       </div>
+       <div class="col-span-2">
+        Estatus
+       </div>
       <div class="col-span-2 text-right">
        Acciones
       </div>
@@ -172,29 +154,9 @@
      <!-- Table Body -->
      <div class="divide-y divide-surface-container-high border-x border-surface-container-high" id="personal_grid">
      </div>
-     <!-- Footer / Pagination -->
-     <div class="mt-8 flex items-center bg-surface-container-low p-4">
-      <div class="flex gap-1">
-       <button class="w-8 h-8 flex items-center justify-center bg-surface-container-highest text-on-surface hover:bg-primary hover:text-on-primary transition-colors">
-        <span class="material-symbols-outlined text-sm">
-         chevron_left
-        </span>
-       </button>
-       <button class="w-8 h-8 flex items-center justify-center bg-on-primary-container text-white text-[0.7rem] font-black">
-        1
-       </button>
-       <button class="w-8 h-8 flex items-center justify-center bg-surface-container-highest text-on-surface text-[0.7rem] font-black hover:bg-surface-bright transition-colors">
-        2
-       </button>
-       <button class="w-8 h-8 flex items-center justify-center bg-surface-container-highest text-on-surface text-[0.7rem] font-black hover:bg-surface-bright transition-colors">
-        3
-       </button>
-       <button class="w-8 h-8 flex items-center justify-center bg-surface-container-highest text-on-surface hover:bg-primary hover:text-on-primary transition-colors">
-        <span class="material-symbols-outlined text-sm">
-         chevron_right
-        </span>
-       </button>
-      </div>
+     <div class="mt-8 flex items-center bg-surface-container-low p-4 justify-between">
+       <span class="text-[0.7rem] font-bold text-secondary uppercase tracking-widest">Fin de la lista de personal operativo</span>
+       <div class="h-2 w-24 bg-primary-container"></div>
      </div>
     </div>
    </section>
@@ -210,10 +172,8 @@
             document.getElementById('kpi-total').innerText = usuarios.length;
             document.getElementById('kpi-activos').innerText = usuarios.length;
             document.getElementById('kpi-admins').innerText = usuarios.filter(u => u.rol === 'admin').length;
-            document.getElementById('sidebar-name').innerText = localStorage.getItem('user_nombre') || 'Root_Admin';
-            document.getElementById('sidebar-email').innerText = localStorage.getItem('user_email') || 'N/A';
+            window.all_us = usuarios;
 
-                        window.all_us = usuarios;
             renderUs("");
         } catch (e) {
             document.getElementById("personal_grid").innerHTML = '<p class="text-error p-8">Error cargando usuarios.</p>';

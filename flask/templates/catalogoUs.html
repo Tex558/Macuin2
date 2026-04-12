@@ -56,16 +56,6 @@
       Cat&aacute;logo
      </h1>
     </div>
-    <div class="flex items-center gap-4 bg-surface-container-low p-1">
-     <button class="px-6 py-2 bg-surface-container-highest text-primary font-bold text-[0.7rem] uppercase tracking-widest">
-      Todos
-     </button>
-     <button class="px-6 py-2 text-secondary font-bold text-[0.7rem] uppercase tracking-widest hover:text-on-surface transition-colors">
-      Maquinaria
-     </button>
-     <button class="px-6 py-2 text-secondary font-bold text-[0.7rem] uppercase tracking-widest hover:text-on-surface transition-colors">
-      Herramientas
-     </button>
     </div>
    </div>
    <!-- Product Grid -->
@@ -106,8 +96,8 @@
              <div>
               <h3 class="text-xl font-bold text-on-surface leading-tight uppercase mb-2 tracking-tight">${p.nombre}</h3>
               <div class="flex items-baseline gap-2 mb-6">
-               <span class="text-2xl font-black text-on-surface tracking-tighter">$${p.precio}</span>
-               <span class="text-[0.65rem] text-secondary font-bold uppercase tracking-widest">USD / UNIT</span>
+               <span class="text-2xl font-black text-on-surface tracking-tighter">${parseFloat(p.precio).toLocaleString('es-MX',{style:'currency',currency:'MXN'})}</span>
+               <span class="text-[0.65rem] text-secondary font-bold uppercase tracking-widest">MXN / UNIDAD</span>
               </div>
                             <button onclick="window.location.href='/producto?id=${p.id}'" class="w-full bg-on-primary-container text-white py-3 font-black text-[0.75rem] uppercase tracking-widest transition-all active:scale-95 duration-100 flex items-center justify-center gap-2">
                                Ver detalles <span class="material-symbols-outlined text-sm">chevron_right</span>

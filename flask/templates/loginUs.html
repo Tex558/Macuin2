@@ -3,64 +3,51 @@
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
-  </script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-  <script src="/static/js/tailwind-config.js">
-  </script>
+  <script src="/static/js/tailwind-config.js"></script>
   <link href="/static/css/styles.css" rel="stylesheet"/>
-  <script src="/static/js/api.js">
-  </script>
+  <script src="/static/js/api.js"></script>
  </head>
  <body class="bg-background text-on-background font-body antialiased flex items-center justify-center min-h-screen p-6">
   <main class="w-full max-w-[440px] flex flex-col items-center">
    <header class="mb-12 text-center">
-    <h1 class="text-primary font-black tracking-tighter text-3xl mb-1">
-     MACUIN
-    </h1>
+    <h1 class="text-primary font-black tracking-tighter text-3xl mb-1">MACUIN</h1>
+    <p class="text-[0.65rem] font-bold text-secondary uppercase tracking-[0.4em]">Industrial Portal</p>
    </header>
    <section class="w-full bg-surface-container-low p-10 border-0">
     <form class="space-y-8" onsubmit="event.preventDefault(); window.Api.login(this.email.value, this.password.value);">
      <div class="space-y-2">
-      <label class="text-secondary font-label text-[0.7rem] uppercase font-bold tracking-wider" for="username">
-       Identification / Username
+      <label class="text-secondary font-label text-[0.7rem] uppercase font-bold tracking-wider" for="email">
+       Identificación de Usuario
       </label>
       <div class="relative group">
        <div class="absolute left-0 top-1/2 -translate-y-1/2 pl-0 text-secondary-fixed-dim">
-        <span class="material-symbols-outlined text-[1.25rem]" data-icon="person">
-         person
-        </span>
+        <span class="material-symbols-outlined text-[1.25rem]">person</span>
        </div>
-       <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 pl-8 text-on-surface font-label text-sm tracking-widest placeholder:text-secondary-fixed-dim/30 focus:border-on-primary-container transition-colors duration-150 rounded-none" id="email" name="email" placeholder="OPERATOR_ID" type="email"/>
+       <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 pl-8 text-on-surface font-label text-sm tracking-widest placeholder:text-secondary-fixed-dim/30 focus:border-on-primary-container transition-colors duration-200" id="email" name="email" placeholder="CORREO@MACUIN.COM" type="email" required/>
       </div>
      </div>
      <div class="space-y-2">
       <label class="text-secondary font-label text-[0.7rem] uppercase font-bold tracking-wider" for="password">
-       Access Protocol / Password
+       Clave de Acceso
       </label>
       <div class="relative group">
        <div class="absolute left-0 top-1/2 -translate-y-1/2 pl-0 text-secondary-fixed-dim">
-        <span class="material-symbols-outlined text-[1.25rem]" data-icon="lock">
-         lock
-        </span>
+        <span class="material-symbols-outlined text-[1.25rem]">lock</span>
        </div>
-       <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 pl-8 text-on-surface font-label text-sm tracking-widest placeholder:text-secondary-fixed-dim/30 focus:border-on-primary-container transition-colors duration-150 rounded-none" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password"/>
+       <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim py-3 pl-8 text-on-surface font-label text-sm tracking-widest placeholder:text-secondary-fixed-dim/30 focus:border-on-primary-container transition-colors duration-200" id="password" name="password" placeholder="••••••••" type="password" required/>
       </div>
      </div>
      <div class="pt-4 flex flex-col gap-4">
-      <button class="w-full bg-on-primary-container hover:bg-on-primary-container/90 text-on-primary font-black font-label text-[0.875rem] uppercase tracking-widest py-4 rounded-none transition-all duration-150 active:scale-[0.98] shadow-lg shadow-on-primary-container/10 flex items-center justify-center gap-2" type="submit">
-       Execute Login
-       <span class="material-symbols-outlined text-[1.25rem]" data-icon="terminal">
-        terminal
-       </span>
+      <button class="w-full bg-on-primary-container hover:bg-on-primary-container/90 text-on-primary font-black font-label text-[0.875rem] uppercase tracking-widest py-4 transition-all duration-150 active:scale-[0.98] shadow-lg flex items-center justify-center gap-2" type="submit">
+       Ingresar al Sistema
+       <span class="material-symbols-outlined text-[1.25rem]">login</span>
       </button>
-      <a href="/registro" class="w-full bg-surface-container-highest hover:bg-surface-container-highest/80 text-on-surface font-black font-label text-[0.875rem] uppercase tracking-widest py-4 rounded-none border border-secondary-fixed-dim transition-all duration-150 active:scale-[0.98] shadow-lg flex items-center justify-center gap-2 text-center">
+      <a href="/registro" class="w-full bg-surface-container-highest hover:bg-surface-container-highest/80 text-on-surface font-black font-label text-[0.875rem] uppercase tracking-widest py-4 border border-secondary-fixed-dim transition-all duration-150 active:scale-[0.98] shadow-lg flex items-center justify-center gap-2 text-center">
        Crear Cuenta
-       <span class="material-symbols-outlined text-[1.25rem]" data-icon="person_add">
-        person_add
-       </span>
+       <span class="material-symbols-outlined text-[1.25rem]">person_add</span>
       </a>
      </div>
     </form>

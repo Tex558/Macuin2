@@ -24,9 +24,6 @@
     <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1] uppercase">
      MACUIN ADMIN
     </h1>
-    <p class="text-[0.65rem] font-bold tracking-[0.2em] text-secondary opacity-60 uppercase">
-     Precision Control
-    </p>
    </div>
    <nav class="flex-1 space-y-1">
     <!-- Nav Item: General -->
@@ -88,35 +85,15 @@
     <!-- Nav Item: Editar pedido -->
     
    </nav>
+   <div class="mt-auto px-6 border-t border-outline-variant/10 pt-6">
+    <button class="w-full bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-3" onclick="window.Api.logout()">
+     Cerrar sesión
+    </button>
+   </div>
   </aside>
   <!-- Main Content Canvas -->
   <main class="ml-64 min-h-screen flex flex-col">
-   <!-- Top Bar -->
-   <header class="flex justify-between items-center w-full px-8 h-16 bg-[#041329] dark:bg-[#041329] font-['Inter'] text-[0.875rem] font-medium tracking-wide z-40">
-    <div class="flex items-center gap-8">
-     <span class="text-lg font-black tracking-tighter text-[#ffb3b1]">
-      MACUIN INDUSTRIAL
-     </span>
-     <div class="h-4 w-[1px] bg-outline-variant">
-     </div>
-     <div class="flex gap-6">
-      <a class="text-[#c2c6d3] hover:text-[#ffb3b1]" href="#">
-       Catalogo
-      </a>
-      <a class="text-[#c2c6d3] hover:text-[#ffb3b1]" href="#">
-       Carrito
-      </a>
-      <a class="text-[#c2c6d3] hover:text-[#ffb3b1]" href="#">
-       Pedidos en curso
-      </a>
-     </div>
-    </div>
-    <div class="flex items-center gap-6">
-     <button class="text-[#c2c6d3] font-bold text-xs uppercase tracking-widest hover:text-primary transition-all duration-150">
-      Cerrar Sesi&oacute;n
-     </button>
-    </div>
-   </header>
+
    <!-- Content Area: Registration Form -->
    <div class="flex-1 flex items-center justify-center p-12 bg-surface">
     <div class="w-full max-w-2xl bg-surface-container-low p-1 border-none relative overflow-hidden">
@@ -125,13 +102,10 @@
      </div>
      <div class="bg-surface-container-high p-12">
       <header class="mb-12">
-       <div class="flex items-center gap-2 mb-2">
-        <div class="w-6 h-[2px] bg-on-primary-container">
+        <div class="flex items-center gap-2 mb-2">
+         <div class="w-6 h-[2px] bg-on-primary-container">
+         </div>
         </div>
-        <span class="text-on-primary-container text-[10px] font-black uppercase tracking-[0.3em]">
-         Module: HR-ADM-01
-        </span>
-       </div>
        <h2 class="text-4xl font-extrabold tracking-tighter text-on-surface uppercase mb-2">
         Registrar administrador
        </h2>
@@ -141,37 +115,37 @@
         <!-- Field: Name -->
         <div class="flex flex-col gap-2">
          <label class="text-[10px] font-bold uppercase tracking-widest text-secondary-fixed-dim">
-          Full Name
-         </label>
-         <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" name="nombre" name="nombre" required placeholder="OPERATOR_NAME" type="text" required/>
-        </div>
-        <!-- Field: Company Email -->
-        <div class="flex flex-col gap-2">
-         <label class="text-[10px] font-bold uppercase tracking-widest text-secondary-fixed-dim">
-          Company Email
-         </label>
-         <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" name="email" name="email" required placeholder="ADMIN@MACUIN.INT" type="email" required/>
-        </div>
-        <!-- Field: Password -->
-        <div class="flex flex-col gap-2">
-         <label class="text-[10px] font-bold uppercase tracking-widest text-secondary-fixed-dim">
-          System Access Key
-         </label>
-         <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" name="password" name="password" required placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password" required/>
-        </div>
-        <!-- Field: Phone Number -->
-        <div class="flex flex-col gap-2">
-         <label class="text-[10px] font-bold uppercase tracking-widest text-secondary-fixed-dim">
-          Direct Line
-         </label>
-         <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" name="telefono" name="telefono" placeholder="+52 000 000 0000" type="tel"/>
+           Nombre Completo
+          </label>
+          <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" name="nombre" name="nombre" required placeholder="NOMBRE_OPERADOR" type="text" required/>
+         </div>
+         <!-- Field: Company Email -->
+         <div class="flex flex-col gap-2">
+          <label class="text-[10px] font-bold uppercase tracking-widest text-secondary-fixed-dim">
+           Correo Electrónico Institucional
+          </label>
+          <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" name="email" name="email" required placeholder="ADMIN@MACUIN.INT" type="email" required/>
+         </div>
+         <!-- Field: Password -->
+         <div class="flex flex-col gap-2">
+          <label class="text-[10px] font-bold uppercase tracking-widest text-secondary-fixed-dim">
+           Clave de Acceso al Sistema
+          </label>
+          <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" name="password" name="password" required placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password" required/>
+         </div>
+         <!-- Field: Phone Number -->
+         <div class="flex flex-col gap-2">
+          <label class="text-[10px] font-bold uppercase tracking-widest text-secondary-fixed-dim">
+           Línea Directa (Teléfono)
+          </label>
+          <input class="bg-surface-container-highest border-b-2 border-secondary-fixed-dim p-4 text-on-surface placeholder:text-outline/30 focus:border-on-primary-container transition-colors font-mono text-sm" name="telefono" name="telefono" placeholder="+52 123 456 7890" type="tel"/>
         </div>
        </div>
        <div class="pt-8 border-t border-outline-variant/10">
         <button class="w-full bg-on-primary-container text-white py-5 px-8 flex items-center justify-between group transition-all duration-150 active:scale-[0.98]" type="submit">
          <span class="text-sm font-black uppercase tracking-[0.2em]">
-          Authorize Registration
-         </span>
+           Autorizar Registro Industrial
+          </span>
          <span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="chevron_right">
           chevron_right
          </span>

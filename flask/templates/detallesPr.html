@@ -35,12 +35,6 @@
     </nav>
    </div>
    <div class="flex items-center gap-6">
-    <div class="hidden lg:flex items-center bg-surface-container-high px-3 py-1.5 border-b-2 border-outline-variant">
-     <span class="material-symbols-outlined text-secondary text-sm mr-2" data-icon="search">
-      search
-     </span>
-     <input class="bg-transparent border-none focus:ring-0 text-xs placeholder:text-outline p-0 w-48 uppercase tracking-widest" placeholder="BUSCAR SKU..." type="text" oninput="renderCat(this.value)"/>
-    </div>
     <button class="bg-[#1c2a41] text-[#c2c6d3] px-4 py-2 text-xs font-bold uppercase hover:bg-surface-bright transition-all duration-150" onclick="window.Api.logout()">
      Cerrar Sesi&oacute;n
     </button>
@@ -87,7 +81,7 @@
        <span class="block text-[0.7rem] font-bold text-[#c2c6d3] uppercase tracking-[0.3em] mb-2">
         Precio Unitario
        </span>
-       <div id="p-price" class="text-5xl font-mono font-bold text-[#d6e3ff] tracking-tighter">$0.00 <span class="text-sm font-sans text-[#c2c6d3] tracking-normal">USD</span></div>
+       <div id="p-price" class="text-5xl font-mono font-bold text-[#d6e3ff] tracking-tighter">$0.00 <span class="text-sm font-sans text-[#c2c6d3] tracking-normal">MXN</span></div>
       </div>
      </div>
      <div id="p-actions" class="space-y-4">
@@ -160,7 +154,7 @@
                     document.getElementById('p-out-of-stock').classList.remove('hidden');
                 }
                 
-                document.getElementById('p-price').innerHTML = `$${p.precio.toFixed(2)} <span class="text-sm font-sans text-[#c2c6d3] tracking-normal">USD</span>`;
+                document.getElementById('p-price').innerHTML = `${p.precio.toLocaleString('es-MX',{style:'currency',currency:'MXN'})} <span class="text-sm font-sans text-[#c2c6d3] tracking-normal">MXN</span>`;
                 window.maxStock = p.stock;
             } else {
                 alert("Producto no encontrado.");

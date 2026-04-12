@@ -45,15 +45,15 @@
      <form class="space-y-8" onsubmit="event.preventDefault(); window.Api.login(this.email.value, this.password.value);">
       <div class="space-y-2">
        <label class="block font-label text-[0.75rem] font-bold uppercase tracking-widest text-secondary" for="username">
-        System Identifier
+        Identificador de Sistema
        </label>
        <div class="relative">
-        <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim text-on-surface px-4 py-3 placeholder:text-secondary-container focus:ring-0 focus:border-on-primary-container transition-colors duration-200 font-label tracking-tight" id="email" name="email" placeholder="USERNAME" type="email"/>
+        <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim text-on-surface px-4 py-3 placeholder:text-secondary-container focus:ring-0 focus:border-on-primary-container transition-colors duration-200 font-label tracking-tight" id="email" name="email" placeholder="EMAIL@INSTITUCION.INT" type="email"/>
        </div>
       </div>
       <div class="space-y-2">
        <label class="block font-label text-[0.75rem] font-bold uppercase tracking-widest text-secondary" for="password">
-        Access Key
+        Clave de Acceso
        </label>
        <div class="relative">
         <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim text-on-surface px-4 py-3 placeholder:text-secondary-container focus:ring-0 focus:border-on-primary-container transition-colors duration-200 font-label tracking-tight" id="password" name="password" placeholder="••••••••" type="password"/>
@@ -62,7 +62,7 @@
       <div class="pt-4">
        <button class="group relative w-full bg-on-primary-container hover:bg-on-primary-fixed-variant text-on-primary font-black uppercase py-4 tracking-widest transition-all duration-150 active:scale-[0.98] flex items-center justify-center overflow-hidden" style="background: linear-gradient(45deg, #ee3f4b, #92001c);" type="submit">
         <span class="relative z-10">
-         Initialize Access
+         Iniciar Sesión
         </span>
         <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity"></div>
        </button>

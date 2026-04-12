@@ -19,7 +19,7 @@
  <body class="text-on-surface select-none">
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] dark:bg-[#041329] w-64 border-r-0 z-40">
    <div class="px-6 mb-10">
-    <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1]">
+    <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1] uppercase">
      MACUIN ADMIN
     </h1>
    </div>
@@ -63,20 +63,10 @@
     </a>
     
    </nav>
-   <div class="px-6 mt-auto pt-6 border-t border-surface-container-high">
-    <div class="flex items-center gap-3">
-     <div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center">
-      <span class="material-symbols-outlined text-secondary text-sm">
-       admin_panel_settings
-      </span>
-     </div>
-     <div>
-      <p class="text-[0.75rem] font-bold text-on-surface uppercase leading-none" id="sidebar-name">Administrador_Raíz</p>
-      <p class="text-[0.65rem] text-secondary" id="sidebar-email">Acceso Nivel 0</p>
-     </div>
-    </div>
-   
-    <button class="w-full mt-4 bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-2" onclick="window.Api.logout()">Cerrar sesión</button>
+   <div class="mt-auto px-6 border-t border-outline-variant/10 pt-6">
+    <button class="w-full bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-3" onclick="window.Api.logout()">
+     Cerrar sesión
+    </button>
    </div>
   </aside>
   <main class="ml-64 min-h-screen bg-surface flex flex-col">
@@ -106,8 +96,6 @@
   <script>
    document.addEventListener("DOMContentLoaded", async () => {
         try {
-            document.getElementById('sidebar-name').innerText = localStorage.getItem('user_nombre') || 'Administrador_Raíz';
-            document.getElementById('sidebar-email').innerText = localStorage.getItem('user_email') || 'Acceso Nivel 0';
             const [r_users, r_prods, r_peds] = await Promise.all([
                 window.Api.getUsuarios().catch(()=>({data:[]})),
                 window.Api.getProductos().catch(()=>({data:[]})),

@@ -18,7 +18,7 @@
   <!-- SideNavBar (Predicted Component) -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] w-64 border-r-0 z-50">
    <div class="px-6 mb-10">
-    <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1]">
+    <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1] uppercase">
      MACUIN ADMIN
     </h1>
    </div>
@@ -62,24 +62,10 @@
     </a>
     
    </nav>
-   <div class="mt-auto px-6 border-t border-outline-variant pt-6 opacity-40">
-    <div class="flex items-center gap-3">
-     <div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center">
-      <span class="material-symbols-outlined text-sm">
-       person
-      </span>
-     </div>
-     <div>
-      <p class="text-[10px] font-bold">
-       ADMIN_ROOT
-      </p>
-      <p class="text-[9px] text-secondary">
-       ID: 00-482-X
-      </p>
-     </div>
-    </div>
-   
-    <button class="w-full mt-4 bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-2" onclick="window.Api.logout()">Cerrar sesión</button>
+   <div class="mt-auto px-6 border-t border-outline-variant/10 pt-6">
+    <button class="w-full bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-3" onclick="window.Api.logout()">
+     Cerrar sesión
+    </button>
    </div>
   </aside>
   <!-- Main Content Area -->
@@ -107,7 +93,7 @@
        </div>
       </div>
       <p class="mt-4 text-[11px] text-secondary-fixed-dim leading-relaxed">
-       Controles log&iacute;sticos integrados. Para cancelar, use el selector de estado inferior.
+       Controles log&iacute;sticos integrados. Para actualizar el estado o la prioridad, use los selectores inferiores.
        <br/>
        ID de Rastreo: #MAC-UNIT-01
       </p>
@@ -145,14 +131,34 @@
          </label>
          <input class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface" type="text" id="e-dir" readonly/>
         </div>
-        <div class="col-span-2 flex flex-col gap-2">
-         <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
-          Instrucciones de Despacho
-         </label>
-         <textarea class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface resize-none" rows="3">Requiere montacargas de 5 toneladas. Verificar sellos de seguridad t&eacute;rmicos a la llegada.</textarea>
-        </div>
        </div>
       </section>
+
+      <section>
+       <div class="flex items-center gap-4 mb-6">
+        <span class="text-xs font-black text-on-surface uppercase tracking-widest">
+         PRODUCTOS DEL PEDIDO
+        </span>
+        <div class="flex-1 h-px bg-outline-variant opacity-20">
+        </div>
+       </div>
+       <div class="bg-surface-container-highest p-6">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="border-b border-outline-variant/30 text-[10px] uppercase font-black tracking-widest text-secondary">
+              <th class="pb-4">Descripción</th>
+              <th class="pb-4 text-center">Cant.</th>
+              <th class="pb-4 text-right">Unitario</th>
+              <th class="pb-4 text-right">Total</th>
+            </tr>
+          </thead>
+          <tbody id="e-prod-list" class="divide-y divide-outline-variant/10">
+            <!-- Render dinámico -->
+          </tbody>
+        </table>
+       </div>
+      </section>
+
       <section>
        <div class="flex items-center gap-4 mb-6">
         <span class="text-xs font-black text-on-surface uppercase tracking-widest">
@@ -161,7 +167,7 @@
         <div class="flex-1 h-px bg-outline-variant opacity-20">
         </div>
        </div>
-       <div class="grid grid-cols-4 gap-6">
+       <div class="grid grid-cols-3 gap-6">
          <div class="flex flex-col gap-2">
           <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
            Modificar Estado
@@ -186,15 +192,9 @@
          </div>
          <div class="flex flex-col gap-2">
           <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
-           Transportista
-          </label>
-          <input class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface" type="text" value="MACUIN_FLEET_04"/>
-         </div>
-         <div class="flex flex-col gap-2">
-          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
            Fecha Est. Entrega
           </label>
-          <input class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface" type="date" value="2023-11-24"/>
+          <input class="bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:ring-0 focus:border-on-primary-container text-sm py-3 px-4 text-on-surface" type="date" value="2024-11-28"/>
          </div>
         </div>
       </section>
@@ -203,10 +203,9 @@
       </div>
      </div>
      </div>
-    <!-- Footer Action Bar -->
-   </div>
+     </div>
+    </div>
   </main>
-  <!-- Contextual Decorative UI (Industrial Aesthetic) -->
  
 <script>
     document.addEventListener("DOMContentLoaded", async () => {
@@ -215,20 +214,55 @@
         if(!pid) return;
         
         try {
-            const [resP, resU] = await Promise.all([window.Api.getPedidos(), window.Api.getUsuarios()]);
+            const [resP, resU, resPr] = await Promise.all([
+                window.Api.getPedidos(), 
+                window.Api.getUsuarios(),
+                window.Api.getProductos()
+            ]);
+            
             const p = resP.data.find(x => x.id == pid);
-                if(p) {
-                    const u = resU.data.find(x => x.id == p.usuario_id);
-                    document.getElementById('e-title').innerText = `Editar pedido / ID: #MAC-${p.id}`;
-                    document.getElementById('e-status-big').innerText = p.estatus || p.estado || 'SIN ESTADO';
-                    const epLabel = document.getElementById('e-priority-label');
-                    if(epLabel) epLabel.innerText = p.prioridad || 'NORMAL';
-                    
-                    const iCli = document.getElementById('e-cliente');
+            const prods = resPr.data || [];
+
+            if(p) {
+                const u = resU.data.find(x => x.id == p.usuario_id);
+                document.getElementById('e-title').innerText = `Editar pedido / ID: #MAC-${p.id}`;
+                document.getElementById('e-status-big').innerText = p.estatus || p.estado || 'SIN ESTADO';
+                const epLabel = document.getElementById('e-priority-label');
+                if(epLabel) epLabel.innerText = p.prioridad || 'NORMAL';
+                
+                const iCli = document.getElementById('e-cliente');
                 if(iCli) iCli.value = u ? u.nombre : 'Desconocido';
                 const iDir = document.getElementById('e-dir');
                 if(iDir) iDir.value = p.direccion || 'Sin direccion';
                 
+                // Render products
+                const prodContainer = document.getElementById('e-prod-list');
+                if(p.productos) {
+                    try {
+                        const items = JSON.parse(p.productos);
+                        let html = '';
+                        items.forEach(item => {
+                            const detail = prods.find(x => x.id == item.id);
+                            const name = detail ? detail.nombre : `SKU: ${item.id}`;
+                            const price = detail ? detail.precio : 0;
+                            const total = price * item.qty;
+                            html += `
+                                <tr class="text-[0.75rem] text-on-surface">
+                                    <td class="py-4 font-bold uppercase">${name}</td>
+                                    <td class="py-4 text-center font-mono">${item.qty}</td>
+                                    <td class="py-4 text-right font-mono">${price.toLocaleString('es-MX',{style:'currency',currency:'MXN'})}</td>
+                                    <td class="py-4 text-right font-mono font-bold">${total.toLocaleString('es-MX',{style:'currency',currency:'MXN'})}</td>
+                                </tr>
+                            `;
+                        });
+                        prodContainer.innerHTML = html;
+                    } catch(e) {
+                        prodContainer.innerHTML = '<tr><td colspan="4" class="py-4 text-secondary italic">Error al procesar JSON de productos</td></tr>';
+                    }
+                } else {
+                    prodContainer.innerHTML = '<tr><td colspan="4" class="py-4 text-secondary italic">Informaci&oacute;n de productos no disponible para este pedido antiguo.</td></tr>';
+                }
+
                 const sel = document.getElementById('e-select');
                 if(sel) {
                     for(let opt of sel.options) {
@@ -238,7 +272,7 @@
                     }
                 }
 
-                const selPri = document.getElementById('e-prioridad');
+                const selPri = document.getElementById('e-priority-label' ? document.getElementById('e-prioridad') : null);
                 if(selPri && p.prioridad) {
                     for(let opt of selPri.options) {
                         if(opt.value === p.prioridad) {

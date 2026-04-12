@@ -23,7 +23,7 @@
   <!-- Sidebar Navigation Shell -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] dark:bg-[#041329] w-64 border-r-0 z-40">
    <div class="px-6 mb-10">
-    <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1]">
+    <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1] uppercase">
      MACUIN ADMIN
     </h1>
    </div>
@@ -68,6 +68,11 @@
     </a>
     
    </nav>
+   <div class="mt-auto px-6 border-t border-outline-variant/10 pt-6">
+    <button class="w-full bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-3" onclick="window.Api.logout()">
+     Cerrar sesión
+    </button>
+   </div>
   </aside>
   <!-- Main Content Canvas -->
   <main class="ml-64 min-h-screen bg-surface flex flex-col">
@@ -153,19 +158,19 @@
        NOMBRE DEL PRODUCTO
       </div>
       <div class="col-span-2 text-[0.65rem] font-black text-secondary uppercase tracking-widest">
-       CATEGOR&Iacute;A
+       FABRICANTE / MARCA
       </div>
       <div class="col-span-1 text-[0.65rem] font-black text-secondary uppercase tracking-widest text-right">
-       PRECIO
+       PRECIO (MXN)
       </div>
       <div class="col-span-1 text-[0.65rem] font-black text-secondary uppercase tracking-widest text-right">
-       STOCK
+       EXISTENCIAS
       </div>
       <div class="col-span-1 text-[0.65rem] font-black text-secondary uppercase tracking-widest text-center">
        ESTADO
       </div>
       <div class="col-span-2 text-[0.65rem] font-black text-secondary uppercase tracking-widest text-right">
-       ACCIONES
+       OPERACIONES
       </div>
      </div>
      <!-- Grid Rows -->
@@ -174,32 +179,9 @@
      <!-- Grid Footer / Pagination -->
      <div class="px-6 py-4 flex items-center justify-between bg-surface-container-lowest text-[0.7rem] font-bold tracking-widest text-secondary uppercase">
       <div class="flex items-center gap-2">
-       <button class="p-2 hover:bg-surface-container-high text-on-surface disabled:opacity-20" disabled="">
-        <span class="material-symbols-outlined" data-icon="chevron_left">
-         chevron_left
-        </span>
-       </button>
-       <span class="px-4 py-2 bg-on-primary-container text-white">
-        1
-       </span>
-       <button class="px-4 py-2 hover:bg-surface-container-high transition-colors">
-        2
-       </button>
-       <button class="px-4 py-2 hover:bg-surface-container-high transition-colors">
-        3
-       </button>
-       <span class="px-2">
-        ...
-       </span>
-       <button class="px-4 py-2 hover:bg-surface-container-high transition-colors">
-        2857
-       </button>
-       <button class="p-2 hover:bg-surface-container-high text-on-surface">
-        <span class="material-symbols-outlined" data-icon="chevron_right">
-         chevron_right
-        </span>
-       </button>
+       <span>Fin del catálogo de productos industriales</span>
       </div>
+      <div class="h-1 w-24 bg-primary-container"></div>
      </div>
     </div>
    </div>
@@ -217,7 +199,7 @@
              <div class="col-span-1 font-mono text-[0.75rem] text-secondary">MAC-${p.id}</div>
              <div class="col-span-4"><p class="text-[0.875rem] font-bold text-on-surface uppercase">${p.nombre}</p></div>
              <div class="col-span-2"><span class="text-[0.75rem] text-secondary px-2 py-1 bg-surface-container-high border border-outline-variant/20 uppercase">${p.fabricante}</span></div>
-             <div class="col-span-1 text-right font-mono text-[0.875rem]">$${p.precio}</div>
+             <div class="col-span-1 text-right font-mono font-bold text-on-surface">${parseFloat(p.precio).toLocaleString('es-MX',{style:'currency',currency:'MXN'})}</div>
              <div class="col-span-1 text-right font-mono text-[0.875rem] ${p.stock <= 0 ? 'text-error font-black' : ''}">${p.stock}</div>
              <div class="col-span-1 flex justify-center"><div class="w-2 h-2 ${p.stock > 10 ? 'bg-green-500' : p.stock > 0 ? 'bg-amber-500 animate-pulse' : 'bg-error animate-ping'} rounded-full"></div></div>
              <div class="col-span-2 flex justify-end gap-2 opacity-40 group-hover:opacity-100 transition-opacity">

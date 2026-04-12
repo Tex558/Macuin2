@@ -20,15 +20,11 @@
  <body class="bg-surface text-on-surface antialiased overflow-y-auto min-h-screen">
   <!-- Sidebar Navigation -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] dark:bg-[#041329] w-64 border-r-0 z-50">
-   <div class="px-6 mb-10">
-    <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1]">
-     MACUIN ADMIN
-    </h1>
-    <p class="text-[0.65rem] font-['Inter'] antialiased tracking-tight uppercase font-bold text-[#c2c6d3] opacity-60">
-     Precision Control
-    </p>
-   </div>
-   <nav class="flex-1 space-y-1">
+    <div class="px-6 mb-10">
+     <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1] uppercase">
+      MACUIN ADMIN
+     </h1>
+    </div>   <nav class="flex-1 space-y-1">
     <a class="flex items-center py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4 transition-colors duration-150" href="/dashboard">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="dashboard">
       dashboard
@@ -68,39 +64,14 @@
     </a>
     
    </nav>
-   <div class="px-6 mt-auto pt-6 border-t border-outline-variant/10">
-    <div class="flex items-center gap-3">
-     <div class="w-10 h-10 bg-surface-container-highest flex items-center justify-center">
-      <span class="material-symbols-outlined text-secondary" data-icon="account_circle">
-       account_circle
-      </span>
-     </div>
-     <div>
-      <p class="text-xs font-bold text-on-surface">
-       ADMIN_042
-      </p>
-      <p class="text-[10px] text-secondary">
-       System Root
-      </p>
-     </div>
+    <div class="mt-auto px-6 border-t border-outline-variant/10 pt-6">
+     <button class="w-full bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-3" onclick="window.Api.logout()">
+      Cerrar sesión
+     </button>
     </div>
-   
-    <button class="w-full mt-4 bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-2" onclick="window.Api.logout()">Cerrar sesión</button>
-   </div>
-  </aside>
-  <!-- Main Content -->
+   </aside>  <!-- Main Content -->
   <main class="ml-64 min-h-screen flex flex-col">
-   <!-- Header / Top Bar -->
-   <header class="h-16 flex items-center justify-between px-8 bg-surface-container-low">
-    <div class="flex items-center gap-2">
-     <span class="material-symbols-outlined text-primary text-sm" data-icon="precision_manufacturing">
-      precision_manufacturing
-     </span>
-     <span class="text-xs font-bold tracking-widest uppercase text-secondary">
-      Module: inventory_addition_unit
-     </span>
-    </div>
-   </header>
+
    <!-- Content Canvas -->
    <section class="flex-1 p-12 overflow-y-auto">
     <div class="max-w-4xl mx-auto">
@@ -121,18 +92,18 @@
         <span class="material-symbols-outlined text-sm" data-icon="fingerprint">
          fingerprint
         </span>
-        Basic Identification
+        Identificación Básica
        </h3>
        <div class="grid grid-cols-2 gap-6">
         <div class="space-y-1">
          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
-          Product Name
+          Nombre del Producto
          </label>
-         <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:border-on-primary-container focus:ring-0 text-on-surface text-sm placeholder:opacity-30" placeholder="Industrial Component X-100" type="text" name="nombre" required/>
+         <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:border-on-primary-container focus:ring-0 text-on-surface text-sm placeholder:opacity-30" placeholder="Componente Industrial X-100" type="text" name="nombre" required/>
         </div>
         <div class="space-y-1">
          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
-          Manufacturer
+          Fabricante / Marca
          </label>
          <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:border-on-primary-container focus:ring-0 text-on-surface text-sm placeholder:opacity-30" placeholder="Global Systems Corp" type="text" name="fabricante" required/>
         </div>
@@ -144,12 +115,12 @@
         <span class="material-symbols-outlined text-sm" data-icon="analytics">
          analytics
         </span>
-        Inventory &amp; Valuation
+        Inventario y Valoración
        </h3>
        <div class="grid grid-cols-2 gap-6">
         <div class="space-y-1">
          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
-          Unit Price (USD)
+          Precio Unitario (MXN)
          </label>
          <div class="relative">
           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-secondary-fixed-dim font-mono text-sm">
@@ -160,11 +131,11 @@
         </div>
         <div class="space-y-1">
          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
-          Stock Quantity
+          Cantidad en Stock
          </label>
          <div class="relative">
           <span class="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-fixed-dim text-[10px] font-bold uppercase tracking-wider">
-           Units
+           Unidades
           </span>
           <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:border-on-primary-container focus:ring-0 text-on-surface font-mono text-lg" placeholder="0" type="number" name="stock" required/>
          </div>
@@ -177,18 +148,18 @@
         <span class="material-symbols-outlined text-sm" data-icon="settings_input_component">
          settings_input_component
         </span>
-        Specifications
+        Especificaciones Técnicas
        </h3>
        <div class="space-y-4">
         <div class="space-y-1">
          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
-          Dimensions
+          Dimensiones
          </label>
          <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:border-on-primary-container focus:ring-0 text-on-surface text-xs" placeholder="100x200x50 mm" type="text" id="dim"/>
         </div>
         <div class="space-y-1">
          <label class="text-[10px] font-bold text-secondary uppercase tracking-wider">
-          Operational Weight
+          Peso Operativo
          </label>
          <input class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:border-on-primary-container focus:ring-0 text-on-surface text-xs" placeholder="12.5 kg" type="text" id="weight"/>
         </div>
@@ -200,22 +171,22 @@
         <span class="material-symbols-outlined text-sm" data-icon="description">
          description
         </span>
-        Technical Description &amp; Compliance
+        Descripción y Cumplimiento de Estándares
        </h3>
-       <textarea class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:border-on-primary-container focus:ring-0 text-on-surface text-sm p-4 placeholder:opacity-30 resize-none" placeholder="Enter detailed technical specifications, compliance standards, and usage constraints..." rows="4" id="desc"></textarea>
+       <textarea class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:border-on-primary-container focus:ring-0 text-on-surface text-sm p-4 placeholder:opacity-30 resize-none" placeholder="Ingrese especificaciones detalladas, normas de seguridad y restricciones de uso..." rows="4" id="desc"></textarea>
       </div>
       <!-- Action Bar -->
       <div class="col-span-12 flex items-center justify-between pt-8 border-t border-outline-variant/10">
        <div class="flex gap-4">
         <button class="px-8 py-3 text-[10px] font-bold uppercase tracking-widest text-secondary hover:text-on-surface transition-colors" type="reset">
-         Discard Changes
+         Descartar Cambios
         </button>
         <button class="group relative px-12 py-3 bg-gradient-to-br from-[#ffb3b1] to-[#ee3f4b] hover:from-[#ee3f4b] hover:to-[#ffb3b1] text-on-primary font-black uppercase tracking-[0.2em] transition-all duration-150" type="submit">
          <div class="flex items-center gap-2">
           <span class="material-symbols-outlined text-sm" data-icon="add">
            add
           </span>
-          Add Product
+          Registrar Producto
          </div>
         </button>
        </div>

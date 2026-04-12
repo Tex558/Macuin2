@@ -19,24 +19,11 @@
  <body class="antialiased overflow-y-auto min-h-screen">
   <!-- SideNavBar Shell -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] dark:bg-[#041329] w-64 border-r-0 z-50">
-   <div class="px-6 mb-10">
-    <div class="flex items-center gap-3">
-     <div class="w-10 h-10 bg-on-primary-container flex items-center justify-center">
-      <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">
-       precision_manufacturing
-      </span>
-     </div>
-     <div>
-      <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1]">
-       MACUIN ADMIN
-      </h1>
-      <p class="text-[0.65rem] uppercase tracking-[0.2em] text-secondary">
-       Precision Control
-      </p>
-     </div>
-    </div>
-   </div>
-   <nav class="flex-1 space-y-1">
+    <div class="px-6 mb-10">
+     <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1] uppercase">
+      MACUIN ADMIN
+     </h1>
+    </div>   <nav class="flex-1 space-y-1">
     <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#1c2a41] hover:text-[#ffb3b1] transition-colors duration-150 pl-4" href="/dashboard">
      <span class="material-symbols-outlined" data-icon="dashboard">
       dashboard
@@ -87,10 +74,13 @@
       Ver pedidos
      </span>
     </a>
-    
-   </nav>
-  </aside>
-  <!-- Main Content Shell -->
+       </nav>
+    <div class="mt-auto px-6 border-t border-outline-variant/10 pt-6">
+     <button class="w-full bg-[#1c2a41] text-[#c2c6d3] text-[0.7rem] font-bold uppercase hover:bg-surface-bright transition-all py-3" onclick="window.Api.logout()">
+      Cerrar sesión
+     </button>
+    </div>
+   </aside>  <!-- Main Content Shell -->
   <main class="ml-64 min-h-screen bg-surface flex flex-col">
    <!-- Header Section -->
    <header class="h-24 px-10 flex items-center justify-between bg-surface-container-low">
@@ -125,24 +115,20 @@
    <!-- Stats Plate (Industrial Grid) -->
    <section class="grid grid-cols-4 gap-0 border-b border-outline-variant/10">
     <div class="p-8 border-r border-outline-variant/10 bg-surface">
-     <p class="text-4xl font-black tracking-tighter text-on-surface">
-      1,482
-     </p>
+     <p class="text-[0.65rem] font-black text-secondary uppercase tracking-[0.2em] mb-1">Efectividad Operativa</p>
+     <p id="stat-efectividad" class="text-4xl font-black tracking-tighter text-primary">0.0%</p>
     </div>
     <div class="p-8 border-r border-outline-variant/10 bg-surface">
-     <p class="text-4xl font-black tracking-tighter text-on-primary-container">
-      24
-     </p>
+     <p class="text-[0.65rem] font-black text-secondary uppercase tracking-[0.2em] mb-1">Pedidos Activos</p>
+     <p id="stat-activos" class="text-4xl font-black tracking-tighter text-on-surface">0</p>
     </div>
     <div class="p-8 border-r border-outline-variant/10 bg-surface">
-     <p class="text-4xl font-black tracking-tighter text-on-surface">
-      156
-     </p>
+     <p class="text-[0.65rem] font-black text-secondary uppercase tracking-[0.2em] mb-1">Pendientes de Asignación</p>
+     <p id="stat-pendientes" class="text-4xl font-black tracking-tighter text-on-primary-container">0</p>
     </div>
     <div class="p-8 bg-surface">
-     <p class="text-4xl font-black tracking-tighter text-primary">
-      98.4%
-     </p>
+     <p class="text-[0.65rem] font-black text-secondary uppercase tracking-[0.2em] mb-1">Total Histórico</p>
+     <p id="stat-total" class="text-4xl font-black tracking-tighter text-on-surface">0</p>
     </div>
    </section>
    <!-- Industrial Data Table Container -->
@@ -152,19 +138,19 @@
       <thead>
        <tr class="bg-surface-container-highest">
         <th class="px-6 py-4 text-[0.65rem] uppercase font-black tracking-[0.2em] text-secondary">
-         Order ID
+         ID del Pedido
         </th>
         <th class="px-6 py-4 text-[0.65rem] uppercase font-black tracking-[0.2em] text-secondary">
-         Client / Entity
+         Cliente / Entidad
         </th>
         <th class="px-6 py-4 text-[0.65rem] uppercase font-black tracking-[0.2em] text-secondary">
-         Priority
+         Prioridad
         </th>
         <th class="px-6 py-4 text-[0.65rem] uppercase font-black tracking-[0.2em] text-secondary">
-         Status
+         Estado Logístico
         </th>
-        <th class="px-6 py-4 text-[0.65rem] uppercase font-black tracking-[0.2em] text-secondary text-center">
-         Actions
+        <th class="px-6 py-4 text-[0.65rem] uppercase font-black tracking-[0.2em] text-secondary text-right">
+         Operaciones
         </th>
        </tr>
       </thead>
@@ -172,33 +158,9 @@
       </tbody>
      </table>
     </div>
-    <!-- Pagination Utility -->
-    <div class="mt-6 flex items-center bg-surface-container-low p-4 justify-center">
-     <div class="flex gap-1">
-      <button class="w-10 h-10 bg-surface-container-highest flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary-fixed">
-       <span class="material-symbols-outlined">
-        chevron_left
-       </span>
-      </button>
-      <button class="w-10 h-10 bg-on-primary-container flex items-center justify-center text-white font-bold text-[0.75rem]">
-       1
-      </button>
-      <button class="w-10 h-10 bg-surface-container-highest flex items-center justify-center text-on-surface hover:bg-surface-bright font-bold text-[0.75rem]">
-       2
-      </button>
-      <button class="w-10 h-10 bg-surface-container-highest flex items-center justify-center text-on-surface hover:bg-surface-bright font-bold text-[0.75rem]">
-       3
-      </button>
-      <button class="w-10 h-10 bg-surface-container-highest flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary-fixed">
-       <span class="material-symbols-outlined">
-        chevron_right
-       </span>
-      </button>
-     </div>
     </div>
    </section>
   </main>
-  <!-- Contextual Details Panel (Side Preview) -->
   
 <script>
     window.all_pedidos = [];
@@ -223,7 +185,7 @@
              <td class="px-6 py-5"><div class="flex flex-col"><span class="text-[0.875rem] font-bold uppercase">${nombre}</span><span class="text-[0.65rem] text-secondary">ID: ${p.usuario_id}</span></div></td>
              <td class="px-6 py-5"><span class="px-2 py-0.5 text-[0.6rem] font-black ${priColor} uppercase tracking-tighter">${pri}</span></td>
              <td class="px-6 py-5"><div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full ${statusDot}"></div><span class="text-[0.75rem] font-bold uppercase tracking-tight text-secondary">${p.estatus || p.estado || 'Activo'}</span></div></td>
-             <td class="px-6 py-5 text-center"><a href="/editar-pedido?id=${p.id}" class="inline-flex items-center justify-center w-8 h-8 bg-surface-container-highest hover:bg-primary hover:text-on-primary-fixed transition-all"><span class="material-symbols-outlined text-[1.2rem]">edit_note</span></a></td>
+             <td class="px-6 py-5 text-right"><a href="/editar-pedido?id=${p.id}" class="inline-flex items-center justify-center w-8 h-8 bg-surface-container-highest hover:bg-primary hover:text-on-primary-fixed transition-all"><span class="material-symbols-outlined text-[1.2rem]">edit_note</span></a></td>
             </tr>
             `;
         }).join('');
@@ -231,12 +193,27 @@
 
     document.addEventListener("DOMContentLoaded", async () => {
         try {
-            const [resP, resU] = await Promise.all([window.Api.getPedidos(), window.Api.getUsuarios()]);
+            const res = await window.Api.getPedidos();
+            const resU = await window.Api.getUsuarios();
+            window.all_pedidos = res.data || [];
             window.all_ped_usuarios = resU.data || [];
-            window.all_pedidos = resP.data || [];
-            renderPedidos('');
+            
+            // Calc stats
+            const total = window.all_pedidos.length;
+            const pendientes = window.all_pedidos.filter(p => !p.estatus || p.estatus === 'Pendiente').length;
+            const entregados = window.all_pedidos.filter(p => p.estatus === 'Entregado').length;
+            const cancelados = window.all_pedidos.filter(p => p.estatus === 'Cancelado').length;
+            const activos = total - entregados - cancelados;
+            const efectividad = total > 0 ? ((entregados / total) * 100).toFixed(1) : "0.0";
+
+            document.getElementById('stat-total').innerText = total;
+            document.getElementById('stat-pendientes').innerText = pendientes;
+            document.getElementById('stat-activos').innerText = activos;
+            document.getElementById('stat-efectividad').innerText = `${efectividad}%`;
+
+            renderPedidos("");
         } catch (e) {
-            document.getElementById('pedidos_admin_grid').innerHTML = '<tr><td colspan="5" class="p-8 text-error">Error cargando matriz de pedidos.</td></tr>';
+            document.getElementById("pedidos_admin_grid").innerHTML = '<tr><td colspan="5" class="p-8 text-error">Error cargando pedidos.</td></tr>';
         }
     });
 

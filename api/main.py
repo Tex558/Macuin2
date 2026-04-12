@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from api.routers import usuarios, productos, pedidos, auth
+from api.routers import usuarios, productos, pedidos, auth, reportes
 from api.data.db import engine
 from api.data.models import Base
 
@@ -26,6 +26,7 @@ app.include_router(auth.router)
 app.include_router(usuarios.router)
 app.include_router(productos.router)
 app.include_router(pedidos.router)
+app.include_router(reportes.router)
 
 @app.get("/docs", include_in_schema=False)
 def override_docs():

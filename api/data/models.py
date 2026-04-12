@@ -35,6 +35,7 @@ class Pedido(Base):
     direccion = Column(String)
     estatus = Column(String, default="En curso") # En curso, entregado, cancelado
     prioridad = Column(String, default="Normal") # Normal, Alta, Urgente
+    productos = Column(String, nullable=True) # JSON con los productos del pedido
     motivo_cancelacion = Column(String, nullable=True)
     creado_en = Column(DateTime, default=datetime.utcnow)
 
