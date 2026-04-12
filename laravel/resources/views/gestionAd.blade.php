@@ -20,7 +20,6 @@
   </script>
  </head>
  <body class="text-on-surface select-none overflow-y-auto min-h-screen">
-  <!-- SideNavBar Shell -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] dark:bg-[#041329] w-64 border-r-0 z-40">
    <div class="px-6 mb-10">
     <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1]">
@@ -34,7 +33,6 @@
      </span>
      General
     </a>
-    <!-- Active State: Gestion de personal -->
     <a class="flex items-center py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#ffb3b1] bg-[#1c2a41] border-l-4 border-[#ee3f4b] pl-3" href="/personal">
      <span class="material-symbols-outlined mr-3" data-icon="badge">
       badge
@@ -74,9 +72,7 @@
     </button>
    </div>
   </aside>
-  <!-- Main Content Canvas -->
   <main class="ml-64 min-h-screen bg-surface flex flex-col">
-   <!-- Header Section -->
    <header class="h-20 flex items-center justify-between px-10 bg-surface-container-low">
     <div class="flex items-baseline gap-4">
      <h2 class="text-2xl font-black tracking-tight uppercase text-on-surface">
@@ -106,7 +102,6 @@
      </div>
     </div>
    </header>
-   <!-- KPI Strip / Asymmetric Layout Element -->
    <section class="grid grid-cols-3 gap-0 border-b border-surface-container-high bg-surface">
     <div class="p-8 border-r border-surface-container-high">
      <p class="text-[0.65rem] font-black text-secondary uppercase tracking-[0.2em] mb-1">
@@ -127,10 +122,8 @@
      <p class="text-4xl font-black tracking-tighter text-on-surface" id="kpi-admins">0</p>
     </div>
    </section>
-   <!-- Industrial Data Grid -->
    <section class="flex-1 p-10">
     <div class="w-full">
-     <!-- Table Header -->
      <div class="grid grid-cols-12 gap-4 px-6 py-3 bg-surface-container-highest text-[0.65rem] font-black uppercase tracking-widest text-secondary border-b-2 border-primary-container">
       <div class="col-span-1">
        ID
@@ -151,7 +144,6 @@
        Acciones
       </div>
      </div>
-     <!-- Table Body -->
      <div class="divide-y divide-surface-container-high border-x border-surface-container-high" id="personal_grid">
      </div>
      <div class="mt-8 flex items-center bg-surface-container-low p-4 justify-between">
@@ -160,7 +152,6 @@
      </div>
     </div>
    </section>
-   <!-- Bottom Safety Strip -->
   </main>
   <script>
    document.addEventListener("DOMContentLoaded", async () => {

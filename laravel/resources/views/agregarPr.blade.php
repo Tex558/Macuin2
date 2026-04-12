@@ -18,7 +18,6 @@
   </script>
  </head>
  <body class="bg-surface text-on-surface antialiased overflow-y-auto min-h-screen">
-  <!-- Sidebar Navigation -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] dark:bg-[#041329] w-64 border-r-0 z-50">
     <div class="px-6 mb-10">
      <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1] uppercase">
@@ -69,10 +68,8 @@
       Cerrar sesión
      </button>
     </div>
-   </aside>  <!-- Main Content -->
-  <main class="ml-64 min-h-screen flex flex-col">
+   </aside>  <main class="ml-64 min-h-screen flex flex-col">
 
-   <!-- Content Canvas -->
    <section class="flex-1 p-12 overflow-y-auto">
     <div class="max-w-4xl mx-auto">
      <div class="flex items-end justify-between mb-12">
@@ -84,9 +81,7 @@
        </div>
       </div>
      </div>
-     <!-- Form Section -->
      <form class="grid grid-cols-12 gap-8" onsubmit="event.preventDefault(); const p = {nombre: this.nombre.value, fabricante: this.fabricante.value, precio: parseFloat(this.precio.value), stock: parseInt(this.stock.value), especificaciones: 'Dim: ' + document.getElementById('dim').value + ' | Wgt: ' + document.getElementById('weight').value + ' | Desc: ' + document.getElementById('desc').value}; window.Api.crearProducto(p).then(()=>window.location.href='/productos').catch(e=>alert('Error'));">
-      <!-- Identity Block -->
       <div class="col-span-12 bg-surface-container-low p-8 border-l-2 border-primary">
        <h3 class="text-xs font-bold tracking-widest text-secondary uppercase mb-6 flex items-center gap-2">
         <span class="material-symbols-outlined text-sm" data-icon="fingerprint">
@@ -109,7 +104,6 @@
         </div>
        </div>
       </div>
-      <!-- Metrics Block (Bento Grid Style) -->
       <div class="col-span-7 bg-surface-container-high p-8">
        <h3 class="text-xs font-bold tracking-widest text-secondary uppercase mb-6 flex items-center gap-2">
         <span class="material-symbols-outlined text-sm" data-icon="analytics">
@@ -142,7 +136,6 @@
         </div>
        </div>
       </div>
-      <!-- Technical Specs Block -->
       <div class="col-span-5 bg-surface-container-low p-8">
        <h3 class="text-xs font-bold tracking-widest text-secondary uppercase mb-6 flex items-center gap-2">
         <span class="material-symbols-outlined text-sm" data-icon="settings_input_component">
@@ -165,7 +158,6 @@
         </div>
        </div>
       </div>
-      <!-- Technical Details (Full Width) -->
       <div class="col-span-12 bg-surface-container-high p-8">
        <h3 class="text-xs font-bold tracking-widest text-secondary uppercase mb-4 flex items-center gap-2">
         <span class="material-symbols-outlined text-sm" data-icon="description">
@@ -175,7 +167,6 @@
        </h3>
        <textarea class="w-full bg-surface-container-highest border-0 border-b-2 border-secondary-fixed-dim focus:border-on-primary-container focus:ring-0 text-on-surface text-sm p-4 placeholder:opacity-30 resize-none" placeholder="Ingrese especificaciones detalladas, normas de seguridad y restricciones de uso..." rows="4" id="desc"></textarea>
       </div>
-      <!-- Action Bar -->
       <div class="col-span-12 flex items-center justify-between pt-8 border-t border-outline-variant/10">
        <div class="flex gap-4">
         <button class="px-8 py-3 text-[10px] font-bold uppercase tracking-widest text-secondary hover:text-on-surface transition-colors" type="reset">
@@ -192,7 +183,6 @@
        </div>
       </div>
      </form>
-     <!-- Status Monitor -->
     </div>
    </section>
   </main>

@@ -32,12 +32,11 @@ const Api = {
         localStorage.setItem('user_nombre', data.nombre);
         alert(data.mensaje);
         
-        // Redirect logic based on role
         if (data.rol === 'admin' || data.rol === 'staff') {
             alert('Acceso denegado: El portal de usuarios es solo para clientes.');
             localStorage.clear();
         } else {
-            window.location.href = '/catalogo'; // Ajusta la ruta a tu tienda (Usuario)
+            window.location.href = '/catalogo'; 
         }
     },
     logout: () => {
@@ -60,5 +59,4 @@ const Api = {
     eliminarPedido: (id) => apiCall(`/pedidos/${id}`, 'DELETE')
 };
 
-// Auto-attach API instance
 window.Api = Api;

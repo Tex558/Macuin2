@@ -20,7 +20,6 @@
   </script>
  </head>
  <body class="antialiased overflow-y-auto min-h-screen">
-  <!-- Sidebar Navigation Shell -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] dark:bg-[#041329] w-64 border-r-0 z-40">
    <div class="px-6 mb-10">
     <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1] uppercase">
@@ -46,7 +45,6 @@
      </span>
      Registrar administrador
     </a>
-    <!-- Active Tab: Gestion de productos -->
     <a class="flex items-center px-6 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#ffb3b1] bg-[#1c2a41] border-l-4 border-[#ee3f4b] pl-3 transition-colors duration-150" href="/productos">
      <span class="material-symbols-outlined mr-3 text-lg" data-icon="inventory_2">
       inventory_2
@@ -74,9 +72,7 @@
     </button>
    </div>
   </aside>
-  <!-- Main Content Canvas -->
   <main class="ml-64 min-h-screen bg-surface flex flex-col">
-   <!-- Header Section -->
    <header class="h-16 flex items-center justify-between px-8 bg-surface-container-low border-b-0">
     <div class="flex items-center gap-4">
      <h2 class="text-headline-sm font-black tracking-tight text-on-surface uppercase">
@@ -106,9 +102,7 @@
      </div>
     </div>
    </header>
-   <!-- Product Dashboard Grid -->
    <div class="p-8 flex-1">
-    <!-- Summary Stats (Asymmetric layout) -->
     <div class="grid grid-cols-12 gap-6 mb-8">
       <div class="col-span-12 bg-surface-container-low p-6 flex flex-col justify-between">
        <div>
@@ -147,9 +141,7 @@
        </div>
       </div>
      </div>
-    <!-- Industrial Data Grid -->
     <div class="bg-surface-container-low">
-     <!-- Grid Header -->
      <div class="grid grid-cols-12 gap-4 px-6 py-4 bg-surface-container-highest border-b border-surface/20">
       <div class="col-span-1 text-[0.65rem] font-black text-secondary uppercase tracking-widest">
        SKU_ID
@@ -173,10 +165,8 @@
        OPERACIONES
       </div>
      </div>
-     <!-- Grid Rows -->
      <div class="divide-y divide-surface/10" id="productos_grid">
      </div>
-     <!-- Grid Footer / Pagination -->
      <div class="px-6 py-4 flex items-center justify-between bg-surface-container-lowest text-[0.7rem] font-bold tracking-widest text-secondary uppercase">
       <div class="flex items-center gap-2">
        <span>Fin del catálogo de productos industriales</span>
@@ -185,9 +175,7 @@
      </div>
     </div>
    </div>
-   <!-- System Status Bar -->
   </main>
-  <!-- Contextual Floating Action Button -->
   <script>
    
    window.all_pr = [];
@@ -219,7 +207,6 @@
             window.all_pr = res.data || [];
             renderPr("");
 
-            // Dynamic inventory stats
             const prods = window.all_pr;
             const totalStock = prods.reduce((s, p) => s + (p.stock || 0), 0);
             document.getElementById('kpi-inv-total').innerText = totalStock.toLocaleString('es-MX');

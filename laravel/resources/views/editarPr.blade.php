@@ -63,14 +63,12 @@
   </script>
  </head>
  <body class="bg-background text-on-surface font-body selection:bg-on-primary-container selection:text-white overflow-y-auto min-h-screen">
-  <!-- Sidebar Shell -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] dark:bg-[#041329] docked h-screen w-64 left-0 top-0 border-r-0 z-50">
     <div class="px-6 mb-10">
      <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1] uppercase">
       MACUIN ADMIN
      </h1>
     </div>   <nav class="flex-1 space-y-1 overflow-y-auto">
-    <!-- General -->
     <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/dashboard">
      <span class="material-symbols-outlined text-lg" data-icon="dashboard">
       dashboard
@@ -79,7 +77,6 @@
       General
      </span>
     </a>
-    <!-- Gestion de personal -->
     <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/personal">
      <span class="material-symbols-outlined text-lg" data-icon="badge">
       badge
@@ -88,7 +85,6 @@
       Gestion de personal
      </span>
     </a>
-    <!-- Registrar administrador -->
     <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/registrar-admin">
      <span class="material-symbols-outlined text-lg" data-icon="person_add">
       person_add
@@ -97,7 +93,6 @@
       Registrar administrador
      </span>
     </a>
-    <!-- Gestion de productos -->
     <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/productos">
      <span class="material-symbols-outlined text-lg" data-icon="inventory_2">
       inventory_2
@@ -106,7 +101,6 @@
       Gestion de productos
      </span>
     </a>
-    <!-- Agregar producto -->
     <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/agregar-producto">
      <span class="material-symbols-outlined text-lg" data-icon="add_box">
       add_box
@@ -115,9 +109,7 @@
       Agregar producto
      </span>
     </a>
-    <!-- Editar producto (ACTIVE) -->
     
-    <!-- Ver pedidos -->
     <a class="flex items-center gap-3 px-4 py-3 transition-colors duration-150 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#c2c6d3] hover:bg-[#0d1c32] pl-4" href="/pedidos">
      <span class="material-symbols-outlined text-lg" data-icon="list_alt">
       list_alt
@@ -126,7 +118,6 @@
       Ver pedidos
      </span>
     </a>
-    <!-- Editar pedido -->
     
    </nav>
     <div class="mt-auto px-6 border-t border-outline-variant/10 pt-6">
@@ -134,9 +125,7 @@
       Cerrar sesión
      </button>
     </div>
-   </aside>  <!-- Main Content Canvas -->
-  <main class="ml-64 min-h-screen flex flex-col">
-   <!-- Header Section -->
+   </aside>  <main class="ml-64 min-h-screen flex flex-col">
    <header class="h-32 flex items-end px-12 pb-8 bg-surface">
     <div class="flex flex-col">
      <h2 class="text-4xl font-black tracking-tight uppercase">
@@ -144,12 +133,9 @@
      </h2>
     </div>
    </header>
-   <!-- Product Interface Grid -->
    <section class="flex-1 px-12 py-8 bg-surface-container-low">
     <div class="grid grid-cols-12 gap-8 max-w-7xl">
-     <!-- Left Column: Primary Details -->
      <div class="col-span-12 lg:col-span-8 space-y-8">
-      <!-- Core Form Plate -->
       <div class="bg-surface-container-high p-8 shadow-none border-0">
        <h3 class="text-xs font-bold tracking-widest text-[#ffb3b1] uppercase mb-10 flex items-center gap-2">
         <span class="material-symbols-outlined text-sm">precision_manufacturing</span>
@@ -180,9 +166,7 @@
        </div>
       </div>
      </div>
-     <!-- Right Column: Critical Metrics & Controls -->
      <div class="col-span-12 lg:col-span-4 space-y-8">
-      <!-- Metrics Block -->
       <div class="bg-surface-container-high p-8 border-l-4 border-on-primary-container">
        <h3 class="text-sm font-bold uppercase tracking-wider text-secondary mb-8">
         Stock y Valoraci&oacute;n
@@ -196,7 +180,6 @@
          <label class="text-[10px] font-black uppercase tracking-[0.2em] text-[#c2c6d3]">Lote en Almacén (Cant.)</label>
          <input id="edit-stock" class="bg-transparent border-0 border-b-2 border-[#1c2a41] p-4 text-4xl font-black text-[#d6e3ff] focus:ring-0 focus:border-[#ee3f4b] transition-all font-mono" type="number" value="0"/>
         </div>
-        <!-- Status Toggle -->
         <div>
          <label class="block text-[0.65rem] font-black uppercase tracking-widest text-secondary mb-2">
           Visibilidad en Catálogo
@@ -217,11 +200,9 @@
          </button>
         </div>
       </div>
-      <!-- Utility Info -->
      </div>
     </div>
    </section>
-   <!-- Footer System Status -->
   </main>
  </body>
 </html>

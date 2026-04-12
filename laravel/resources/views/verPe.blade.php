@@ -17,7 +17,6 @@
   </script>
  </head>
  <body class="antialiased overflow-y-auto min-h-screen">
-  <!-- SideNavBar Shell -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] dark:bg-[#041329] w-64 border-r-0 z-50">
     <div class="px-6 mb-10">
      <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1] uppercase">
@@ -65,7 +64,6 @@
      </span>
     </a>
     
-    <!-- Active State: Ver pedidos -->
     <a class="flex items-center gap-3 py-3 font-['Inter'] antialiased tracking-tight text-[0.875rem] uppercase font-bold text-[#ffb3b1] bg-[#1c2a41] border-l-4 border-[#ee3f4b] pl-3 transition-colors duration-150" href="/pedidos">
      <span class="material-symbols-outlined" data-icon="list_alt">
       list_alt
@@ -80,9 +78,7 @@
       Cerrar sesión
      </button>
     </div>
-   </aside>  <!-- Main Content Shell -->
-  <main class="ml-64 min-h-screen bg-surface flex flex-col">
-   <!-- Header Section -->
+   </aside>  <main class="ml-64 min-h-screen bg-surface flex flex-col">
    <header class="h-24 px-10 flex items-center justify-between bg-surface-container-low">
     <div class="flex flex-col">
      <h2 class="text-3xl font-black tracking-tight text-on-surface uppercase">
@@ -112,7 +108,6 @@
      </div>
     </div>
    </header>
-   <!-- Stats Plate (Industrial Grid) -->
    <section class="grid grid-cols-4 gap-0 border-b border-outline-variant/10">
     <div class="p-8 border-r border-outline-variant/10 bg-surface">
      <p class="text-[0.65rem] font-black text-secondary uppercase tracking-[0.2em] mb-1">Efectividad Operativa</p>
@@ -131,7 +126,6 @@
      <p id="stat-total" class="text-4xl font-black tracking-tighter text-on-surface">0</p>
     </div>
    </section>
-   <!-- Industrial Data Table Container -->
    <section class="flex-1 p-10 overflow-auto">
     <div class="bg-surface-container-low">
      <table class="w-full text-left border-collapse">
@@ -198,7 +192,6 @@
             window.all_pedidos = res.data || [];
             window.all_ped_usuarios = resU.data || [];
             
-            // Calc stats
             const total = window.all_pedidos.length;
             const pendientes = window.all_pedidos.filter(p => !p.estatus || p.estatus === 'Pendiente').length;
             const entregados = window.all_pedidos.filter(p => p.estatus === 'Entregado').length;

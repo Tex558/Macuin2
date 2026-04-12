@@ -1,10 +1,5 @@
-/**
- * MACUIN ADMIN — Report Generation Module (Backend-Delegated)
- * Sends filtered table data to FastAPI endpoints to generate PDF, XLSX, and DOCX files.
- */
 
 const Reportes = (() => {
-    // API base URL is handled by window.Api.url if available, else relative
     const API_BASE = (window.Api && window.Api.url) ? window.Api.url : 'http://localhost:8000';
 
     async function generateReport(format, title, headers, rows, filename) {
@@ -36,30 +31,18 @@ const Reportes = (() => {
         }
     }
 
-    /**
-     * Generate PDF report
-     */
     async function generatePDF(title, headers, rows, filename) {
         await generateReport('pdf', title, headers, rows, filename);
     }
 
-    /**
-     * Generate XLSX report
-     */
     async function generateXLSX(title, headers, rows, filename) {
         await generateReport('xlsx', title, headers, rows, filename);
     }
 
-    /**
-     * Generate DOCX report
-     */
     async function generateDOCX(title, headers, rows, filename) {
         await generateReport('docx', title, headers, rows, filename);
     }
 
-    /**
-     * Show export format picker dropdown (Legacy support if needed)
-     */
     function showFormatPicker(button, exportFn) {
         document.querySelectorAll('.macuin-export-dropdown').forEach(d => d.remove());
 

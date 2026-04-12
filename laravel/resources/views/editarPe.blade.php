@@ -15,7 +15,6 @@
   </script>
  </head>
  <body class="bg-background text-on-surface flex overflow-y-auto min-h-screen">
-  <!-- SideNavBar (Predicted Component) -->
   <aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-[#041329] w-64 border-r-0 z-50">
    <div class="px-6 mb-10">
     <h1 class="text-xl font-black tracking-tighter text-[#ffb3b1] uppercase">
@@ -68,9 +67,7 @@
     </button>
    </div>
   </aside>
-  <!-- Main Content Area -->
   <main class="flex-1 ml-64 min-h-screen bg-surface flex flex-col">
-   <!-- Header -->
    <header class="h-16 flex items-center justify-between px-10 bg-surface-container-low">
     <div class="flex items-center gap-4">
      <h2 id="e-title" class="text-on-surface font-headline font-bold text-sm tracking-tight uppercase">Editar pedido</h2>
@@ -78,11 +75,8 @@
     <div class="flex gap-4">
     </div>
    </header>
-   <!-- Content Canvas -->
    <div class="p-10 flex-1 flex flex-col gap-10 overflow-y-auto">
-    <!-- Hero Stats Row (Bento Style) -->
     <div class="grid grid-cols-12 gap-6">
-     <!-- Status Card (Extended) -->
      <div class="col-span-12 md:col-span-8 bg-surface-container-low p-8 flex flex-col justify-between">
       <span class="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-4">
        Estado Actual del Pedido
@@ -98,7 +92,6 @@
        ID de Rastreo: #MAC-UNIT-01
       </p>
      </div>
-     <!-- Metric Summary -->
      <div class="col-span-12 md:col-span-4 bg-surface-container-low border border-outline-variant/20 p-8 flex flex-col justify-center">
       <span class="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-2">
        Prioridad de Despacho
@@ -106,9 +99,7 @@
       <span id="e-priority-label" class="text-2xl font-black text-primary uppercase">Calculando...</span>
      </div>
     </div>
-    <!-- Configuration Form -->
     <div class="grid grid-cols-12 gap-10">
-     <!-- Main Form Section -->
      <div class="col-span-12 space-y-10">
       <section>
        <div class="flex items-center gap-4 mb-6">
@@ -153,7 +144,6 @@
             </tr>
           </thead>
           <tbody id="e-prod-list" class="divide-y divide-outline-variant/10">
-            <!-- Render dinámico -->
           </tbody>
         </table>
        </div>
@@ -235,7 +225,6 @@
                 const iDir = document.getElementById('e-dir');
                 if(iDir) iDir.value = p.direccion || 'Sin direccion';
                 
-                // Render products
                 const prodContainer = document.getElementById('e-prod-list');
                 if(p.productos) {
                     try {
